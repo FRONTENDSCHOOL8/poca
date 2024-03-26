@@ -16,7 +16,7 @@ export default function ImageLink({ type }) {
   const bannerData = banners[type];
   const { src, alt, to } = bannerData;
   return (
-    <Link to={to} className="mb-10 cursor-pointer overflow-hidden bg-pink-300">
+    <Link to={to} className="mb-10 cursor-pointer overflow-hidden">
       <img
         src={src}
         alt={alt}
