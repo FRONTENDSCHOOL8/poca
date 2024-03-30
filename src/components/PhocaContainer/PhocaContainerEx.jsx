@@ -7,26 +7,6 @@ import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 import { searchStore, sorting } from '@/store/store';
 
-/**
- * @param {{
- *  phocaImgSrc?: string,
- *  logoImgSrc?: string,
- *  groupName?: string,
- *  memberName?: string,
- *  imgClass?: string,
- *  infoClass?: string,
- *  groupClass?: string,
- *  memberClass?: string,
- *  title?: string,
- *  titleClass?: string,
- *  likeCount?: number,
- *  linkClass?: string,
- *  logoImgClass?: string,
- *  biasData?: Array,
- * }} props
- * @returns
- */
-
 export default function PhocaContainerEx({
   phocaImgSrc,
   logoImgSrc,

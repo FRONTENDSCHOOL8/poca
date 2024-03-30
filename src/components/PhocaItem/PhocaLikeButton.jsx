@@ -55,7 +55,7 @@ export default function PhocaLikeButton({ phocaId }) {
 
   return (
     <button
-      className={`hover:text-red-500 focus:outline-none ${isLiked ? 'text-red-500' : 'text-white'}`}
+      className={`hover:text-red-500 ${isLiked ? 'text-red-500' : 'text-white'} button-focus-visible`}
       onClick={handleClick}
     >
       <GoHeartFill

@@ -12,13 +12,13 @@ import { NavLink } from 'react-router-dom';
 
 export default function NavBarItem({ togo, label, icon: Icon }) {
   return (
-    <li className="cursor-pointer text-contentTertiary hover:text-primary">
+    <li className="w-2/12 cursor-pointer text-contentTertiary hover:text-primary">
       <NavLink
         to={togo}
         className={({ isActive }) =>
           isActive
-            ? 'flex flex-col items-center px-10 text-primary'
-            : 'flex flex-col items-center px-10'
+            ? 'flex flex-col items-center  text-primary'
+            : 'flex flex-col items-center '
         }
       >
         <Icon className="h-8 w-22pxr" />

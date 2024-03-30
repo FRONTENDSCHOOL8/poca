@@ -31,7 +31,7 @@ export default function PhocaContainer({
   likeCount,
   imgClass = 'mb-3 w-44 h-260pxr relative',
   infoClass = 'flex flex-col items-start',
-  groupClass = 'text-m04 font-m04 text-contentSecondary',
+  groupClass = 'text-m04 font-m04 text-contentSecondary whitespace-nowrap',
   memberClass = 'text-r01 font-r01 text-contentSecondary',
   titleClass = 'w-44 overflow-hidden whitespace-nowrap truncate text-sb03 font-sb03 text-gray600 mb-1 mt-1',
   linkClass = 'flex flex-col items-center cursor-pointer hover:scale-95 transition-transform duration-300 w-186pxr rounded-xl',

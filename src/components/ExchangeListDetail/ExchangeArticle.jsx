@@ -2,20 +2,6 @@ import pb from '@/api/pocketbase';
 import { useState } from 'react';
 import { GoTrash, GoPencil } from 'react-icons/go';
 
-/**
- * 교환 글 목록을 표시하고 관리하는 컴포넌트입니다. 사용자는 이 컴포넌트를 통해 교환 글을 수정하거나 삭제할 수 있습니다.
- * 각 교환 글은 작성자의 정보와 함께 표시됩니다. 로그인한 사용자가 교환 글의 작성자인 경우, 수정 및 삭제 아이콘이 표시됩니다.
- *
- * @param {Object} props 컴포넌트 props
- * @param {Boolean} props.loginStatus
- * @param {Object} props.loginUser
- * @param {Object[]} props.exchangeListData 교환 글 데이터의 배열. 각 객체는 교환 글의 정보를 포함합니다.
- * @param {Function} props.setExchangeListData 교환 글 데이터를 업데이트하는 함수.
- * @param {Object[]} props.users 사용자 정보의 배열. 각 객체는 사용자의 상세 정보를 포함합니다.
- *
- * @returns {React.ReactNode} 교환 글 목록을 표시하는 React 컴포넌트.
- */
-
 export default function ExchangeArticle({
   exchangeListData,
   setExchangeListData,
@@ -27,7 +13,6 @@ export default function ExchangeArticle({
   const [editingContent, setEditingContent] = useState('');
   let loggedInUserId = '';
   if (loginStatus === true) loggedInUserId = loginUser.user.id || null;
-
   // 수정
   const handleEdit = (exchangeData) => {
     setIsEditing(exchangeData.id);
@@ -91,7 +76,6 @@ export default function ExchangeArticle({
   // 날짜 차이를 계산하는 함수
   function timeSince(dateToObject) {
     const date = new Date(Date.parse(dateToObject));
-    // @ts-ignore
     const seconds = Math.floor((new Date() - date) / 1000);
 
     let interval = seconds / 31536000;
@@ -120,13 +104,17 @@ export default function ExchangeArticle({
   return (
     <ul className="mt-5">
       {exchangeListData.map((exchangeData) => {
+        let isUserTheWriter = '';
         const user = usersById[exchangeData.writer];
-        const isUserTheWriter = exchangeData.writer === loggedInUserId;
         const timeSinceUpdated = timeSince(exchangeData.updated);
+        if (
+          exchangeData.writer === loggedInUserId ||
+          loginUser.user.username === 'admin'
+        )
+          isUserTheWriter = exchangeData.writer;
         if (!user) {
           return null;
         }
-
         return (
           <li
             key={exchangeData.id}
@@ -192,7 +180,10 @@ export default function ExchangeArticle({
                 <p className="text-gray-700">{exchangeData.description}</p>
               </div>
             )}
-            <div className="mt-4 flex justify-end">
+            <div className="mt-4 flex items-center justify-between">
+              <div className="rounded-3xl border border-gray-700 px-2 py-1 text-xs text-gray-700">
+                {exchangeData.status}
+              </div>
               <button
                 type="button"
                 className="rounded bg-primary px-4 py-1 text-white hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none"

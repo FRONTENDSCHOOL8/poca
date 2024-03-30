@@ -1,18 +1,3 @@
-/**
- *
- * @param {{
- *    alt?:string
- *    src?:string
- *    style?:string
- *    value?:string
- *    groupName?:string
- *    children?: string
- *    fakeRef?:import('react').MutableRefObject
- *    handle?:import('react').MouseEventHandler
- * }} props
- * @returns
- */
-
 export default function Bias({
   alt = '내 최애 로고',
   src = '/myBias.jpg',
@@ -22,11 +7,18 @@ export default function Bias({
   handle,
   fakeRef,
   children,
+  tabIndex,
 }) {
   return (
     <>
       <figure>
-        <button type="button" value={value} onClick={handle} id={groupName}>
+        <button
+          tabIndex={tabIndex}
+          type="button"
+          value={value}
+          onClick={handle}
+          id={groupName}
+        >
           <img
             ref={fakeRef}
             className={style}

@@ -27,15 +27,16 @@ export default function CollectBook() {
                       className="h-full w-full rounded object-cover"
                       src={`https://shoong.pockethost.io/api/files/collectBook/${item.id}/${item.thumbNail}`}
                       alt="콜렉트북 커버 사진"
+                      title={item.title}
                     />
                   </Link>
                 </li>
               );
             })
           : null}
-        <li className="flex h-135pxr w-100pxr cursor-pointer items-center justify-center rounded-[5px] bg-gray-200">
-          <Link to="/profile">
-            <FaPlus className="text-zinc-500" />
+        <li className="flex h-135pxr w-100pxr items-center justify-center rounded-[5px] bg-zinc-300">
+          <Link to="/collectBook/collectBookAdd" className="h-full w-full">
+            <FaPlus size={25} className="mx-auto mt-[50%] text-zinc-500" />
           </Link>
         </li>
       </ul>

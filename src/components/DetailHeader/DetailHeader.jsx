@@ -26,7 +26,7 @@ export default function DetailHeader({
         className={`fixed top-0 flex h-12 w-full items-center shadow ${flexLayout} z-10 bg-white px-5`}
       >
         <div className={`w-30pxr ${absolute}`}>
-          <LeftArrow onClick={() => navigate(-1)} />
+          <LeftArrow onClick={() => navigate(-1)} className="cursor-pointer" />
         </div>
         <div className="font-bold text-neutral-800">{title}</div>
         <div ref={button} hidden={!isBottomSheet}>

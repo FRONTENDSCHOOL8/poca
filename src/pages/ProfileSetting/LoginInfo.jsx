@@ -95,12 +95,16 @@ export default function LoginInfo() {
           onClose={() => setIsLogoutModalOpen(false)}
           onConfirm={handleLogout}
           message="정말로 로그아웃하시겠습니까?"
+          cancelButtonText="아니오"
+          confirmButtonText="예"
         />
         <ConfirmationModal
           isOpen={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
           onConfirm={handleDeleteAccount}
-          message="정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+          message="정말로 계정을 삭제하시겠습니까? 🥲"
+          cancelButtonText="아니오"
+          confirmButtonText="예"
         />
       </div>
     </div>

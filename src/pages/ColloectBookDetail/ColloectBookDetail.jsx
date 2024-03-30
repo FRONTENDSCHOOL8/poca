@@ -110,6 +110,7 @@ export default function ColloectBookDetail() {
       <div className="draggable relative h-[100%]">
         <Toaster />
 
+        {/* 자세히 대신 콜렉트북 이름 넣기 */}
         <DetailHeader title="자세히" />
         <ToggleButton />
 
