@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import SortingBar from '../SortingBar/SortingBar';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
-import { sorting } from '@/store/store';
+import { searchStore, sorting } from '@/store/store';
 
 /**
  * @param {{
@@ -47,7 +47,15 @@ export default function PhocaContainerEx({
   const [phoca, SetPhoca] = useState(biasData);
   const [phocaNumber, setPhocaNumber] = useState(12);
   const { change } = sorting();
-
+  const { search } = searchStore();
+  const searchText = search?.toLowerCase();
+  const searchResult = searchText
+    ? phoca.filter((data) => {
+        const lowerdData = JSON.stringify(data).toLowerCase();
+        console.log(lowerdData);
+        return lowerdData.includes(searchText);
+      })
+    : phoca;
   const handleMore = () => {
     if (phocaNumber >= phoca.length) {
       moreRef.current.style.display = 'none';
@@ -69,7 +77,7 @@ export default function PhocaContainerEx({
 
       <div className="mb-7 mt-1 flex justify-center">
         <ul className="col-gap-8 grid h-400pxr grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-6">
-          {phoca.map((group, index) => {
+          {searchResult.map((group, index) => {
             if (index < phocaNumber) {
               return (
                 <li key={group.id} className="relative m-0 w-44 list-none p-0">
