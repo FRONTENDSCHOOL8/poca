@@ -23,7 +23,7 @@ export default function MeetUpItem({ info }) {
   return (
     <li
       id={info.id}
-      className={`h-auto min-h-120pxr w-[150%] min-w-300pxr max-w-none rounded-xl ${bgColor} px-20pxr py-15pxr shadow`}
+      className={`min-h-120pxr min-w-300pxr max-w-full rounded-xl ${bgColor} snap-center px-20pxr py-15pxr shadow-meetUp`}
     >
       <Link to={`/meetupDetail/${info.id}`}>
         <div
