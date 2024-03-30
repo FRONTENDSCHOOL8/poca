@@ -25,7 +25,7 @@ export default function VerticalCarousel() {
         const records = await pb.collection('MeetUps').getFullList();
         setMeetups(records);
       } catch (error) {
-        console.log('Error getting meetup data:', error);
+        // console.log('Error getting meetup data:', error);
       }
     };
     getMeetupData();

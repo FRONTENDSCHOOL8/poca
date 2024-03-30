@@ -9,7 +9,7 @@ export default async function exchangeDetailData({ params }) {
 
     return { photoCardData };
   } catch (error) {
-    console.error('Error Loading Data:', error);
+    // console.error('Error Loading Data:', error);
 
     throw error;
   }

@@ -24,7 +24,7 @@ export default function LoginInfo() {
         id: auth.user.id,
       });
     } catch (error) {
-      console.error('Parsing authData error:', error);
+      // console.error('Parsing authData error:', error);
     }
   }, []);
 
@@ -50,7 +50,7 @@ export default function LoginInfo() {
       await pb.collection('users').delete(user.id);
       handleLogout(); // 로그아웃 처리
     } catch (error) {
-      console.error('Error deleting user account:', error);
+      // console.error('Error deleting user account:', error);
     }
   };
 
@@ -95,12 +95,16 @@ export default function LoginInfo() {
           onClose={() => setIsLogoutModalOpen(false)}
           onConfirm={handleLogout}
           message="정말로 로그아웃하시겠습니까?"
+          cancelButtonText="아니오"
+          confirmButtonText="예"
         />
         <ConfirmationModal
           isOpen={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
           onConfirm={handleDeleteAccount}
-          message="정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다."
+          message="정말로 계정을 삭제하시겠습니까? 🥲"
+          cancelButtonText="아니오"
+          confirmButtonText="예"
         />
       </div>
     </div>

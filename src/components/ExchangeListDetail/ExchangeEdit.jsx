@@ -78,7 +78,7 @@ export default function ExchangeEdit({
       setComment(''); // 코멘트 초기화
       alert('교환 글이 성공적으로 저장되었습니다.');
     } catch (error) {
-      console.error('데이터를 저장하는 중 에러가 발생했습니다:', error);
+      // console.error('데이터를 저장하는 중 에러가 발생했습니다:', error);
       alert('데이터를 저장하는 데 실패했습니다.');
     }
   };
@@ -120,14 +120,14 @@ export default function ExchangeEdit({
               <div className="flex space-x-2">
                 <button
                   type="submit"
-                  className="rounded bg-primary px-4 py-1 text-white transition duration-300  hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none"
+                  className="buttonStyle hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none"
                 >
                   저장
                 </button>
                 <button
                   type="button"
                   onClick={handleCancel}
-                  className="rounded bg-gray400 px-4 py-1 text-white transition duration-300 hover:bg-gray-500"
+                  className="buttonStyle hover:bg-gray-500"
                 >
                   취소
                 </button>

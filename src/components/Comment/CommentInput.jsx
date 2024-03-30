@@ -24,7 +24,7 @@ export default function CommentInput({ id }) {
         const url = `https://shoong.pockethost.io/api/files/users/${userId}/${record.avatar}`;
         setProfileImage(url);
       } catch (error) {
-        console.error('Error fetching profile image:', error);
+        // console.error('Error fetching profile image:', error);
       }
     };
     fetchProfileImage();
@@ -54,9 +54,9 @@ export default function CommentInput({ id }) {
 
   useEffect(() => {
     pb.collection('comments').subscribe('*', (e) => {
-      console.log(e.action);
-      console.log(e.record);
-      console.log(comments);
+      // console.log(e.action);
+      // console.log(e.record);
+      // console.log(comments);
       if (e.action === 'update') {
         setComments([...comments, e.record]);
       }

@@ -30,7 +30,7 @@ export default function LikeDetail() {
         // 상태 업데이트
         setLikedPhotoCards(matchedCards);
       } catch (error) {
-        console.error('Error fetching liked photo cards:', error);
+        // console.error('Error fetching liked photo cards:', error);
       }
     }
 
@@ -47,7 +47,7 @@ export default function LikeDetail() {
           bgStyle="bg-white"
         />
       </div>
-      <div className="ml-4">
+      <div>
         <PhocaContainerEx biasData={likedPhotoCards} />
       </div>
     </div>

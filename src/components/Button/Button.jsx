@@ -7,6 +7,7 @@ export default function Button({
   textColorClassName = '',
   customClassNames = '',
   children,
+  onClick,
 }) {
   let width, height, fontWeight, backgroundColor, textColor;
   if (isSmall) {
@@ -28,7 +29,7 @@ export default function Button({
     `${textColor} ${backgroundColor} ${customClassNames} ${defaultClassNames}`.trim();
 
   return (
-    <button type={type} className={classNames}>
+    <button type={type} className={classNames} onClick={onClick}>
       {children}
     </button>
   );

@@ -15,7 +15,7 @@ export default function ProfileItemContainer({ title, children }) {
       <div className="h-50 mx-20pxr flex flex-col rounded-[10px] bg-white bg-opacity-70 pb-10pxr shadow-lg">
         <div className="flex items-center gap-1 p-3 text-18pxr font-m01 text-gray-700">
           <FaRegAddressBook />
-          <span className="">{title}</span>
+          <span>{title}</span>
           <FaAngleRight className="ml-auto" />
         </div>
 

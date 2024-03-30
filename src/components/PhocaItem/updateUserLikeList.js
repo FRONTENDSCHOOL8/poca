@@ -15,8 +15,8 @@ export async function updateUserLikeList(userId) {
 
   try {
     const record = await pb.collection('users').update(userId, data);
-    console.log('Update Success:', record);
+    // console.log('Update Success:', record);
   } catch (error) {
-    console.error('Update Failed:', error);
+    // console.error('Update Failed:', error);
   }
 }

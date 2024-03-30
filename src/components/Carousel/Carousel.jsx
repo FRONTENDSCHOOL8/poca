@@ -82,15 +82,15 @@ export default function Carousel() {
 const slides = [
   {
     order: '1',
-    alt: '뉴진스 신상 카드',
+    alt: '블랙핑크 럭키드로우',
   },
   {
     order: '2',
-    alt: '아이유 시즌그리팅',
+    alt: '2023 아이유 시즌그리팅',
   },
   {
     order: '3',
-    alt: '블랙핑크 럭키드로우',
+    alt: '뉴진스 신상 카드',
   },
   {
     order: '4',

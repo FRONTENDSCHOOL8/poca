@@ -24,6 +24,8 @@ import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import LoginInfo from './pages/ProfileSetting/LoginInfo';
 import MyBias from './pages/MyBias/MyBias';
 import NotFound from './pages/NotFound/NotFound';
+import Register from './pages/Register/Register';
+import CollectBookAdd from './pages/CollectBookAdd/CollectBookAdd';
 
 const router = createBrowserRouter([
   {
@@ -76,6 +78,11 @@ const router = createBrowserRouter([
         loader: phocaData,
       },
       {
+        path: '/collectBook/collectBookAdd',
+        element: <CollectBookAdd />,
+        loader: phocaData,
+      },
+      {
         path: '/myBias',
         element: <MyBias />,
         loader: phocaData,
@@ -87,6 +94,11 @@ const router = createBrowserRouter([
       {
         path: '/Login',
         element: <Login />,
+      },
+      {
+        path: '/register',
+        element: <Register />,
+        loader: userData,
       },
     ],
   },

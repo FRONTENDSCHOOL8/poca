@@ -27,7 +27,7 @@ export default function Home() {
       >
         <PhocaContainer phocaData={phocaDataByCreated} />
       </MainCardContainer>
-      <ImageLink type="like" />
+      <ImageLink type="collectBook" />
       <MainCardContainer
         title="가장 많이 찜한 포카"
         subTitle="갖.고.싶.다 🥰  너두? 야 나두!"
