@@ -7,11 +7,11 @@ export default function MeetUp() {
   const meetUpData = useLoaderData();
 
   return (
-    <div className="relative top-55pxr h-screen-nav">
+    <div className="relative top-55pxr h-screen-nav w-full">
       <SearchBar
         name={'mapSearch'}
         placeholder={'장소,아티스트 이름'}
-        bgStyle={'absolute top-2 left-4 z-20 bg-white px-4 py-3 shadow-meetUp'}
+        bgStyle={'absolute top-2 left-5 z-20 bg-white py-3 shadow-meetUp '}
       />
       <MeetUpMap meetUpData={meetUpData} />
       <MeetUpItemContainer

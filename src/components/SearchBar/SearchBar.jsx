@@ -17,15 +17,16 @@ export default function SearchBar({ name, placeholder, bgStyle }) {
   // console.log(search);
   return (
     <form
-      className={`${bgStyle} mx-3 inline-flex w-3/4 flex-row items-start justify-start gap-2 rounded-[30px] px-4 py-1.5`}
+      className={`${bgStyle} mx-4 inline-flex w-4/5 flex-row items-start justify-start gap-2 rounded-[30px] px-4 py-1.5`}
     >
-      <BsSearch className="h-6" />
-      <label htmlFor={name}></label>
+      <label htmlFor={name}>
+        <BsSearch className="h-6" />
+      </label>
       <input
-        type="text"
+        type="search"
         id={name}
         placeholder={placeholder}
-        className="bg-transparent"
+        className="w-full bg-transparent"
         onChange={debounce(handleSearch, 500)}
         defaultValue={search}
       />
