@@ -14,17 +14,19 @@ export default function CollectBook() {
 
   return (
     <>
-      <ul className="flex h-145pxr min-w-700pxr gap-2">
+      <ul className="flex h-145pxr min-w-500pxr gap-2">
         {book.length !== 0
           ? book.map((item) => {
               return (
                 <li
                   key={item.id}
-                  className="flex h-135pxr w-100pxr cursor-pointer items-center justify-center overflow-hidden rounded-[5px] bg-zinc-300"
+                  className="flex max-h-135pxr min-h-135pxr min-w-100pxr max-w-100pxr cursor-pointer items-center justify-center overflow-hidden rounded-[5px] bg-zinc-300"
                 >
-                  <Link to={`/collectBook/${item.group}/${item.id}`}>
+                  <Link
+                    to={`/collectBook/${item.group}/${item.id}/${item.title}`}
+                  >
                     <img
-                      className="h-full w-full rounded object-cover"
+                      className="h-full w-full rounded object-contain"
                       src={`https://shoong.pockethost.io/api/files/collectBook/${item.id}/${item.thumbNail}`}
                       alt="콜렉트북 커버 사진"
                       title={item.title}
@@ -34,7 +36,7 @@ export default function CollectBook() {
               );
             })
           : null}
-        <li className="flex h-135pxr w-100pxr items-center justify-center rounded-[5px] bg-zinc-300">
+        <li className="flex max-h-135pxr min-h-135pxr min-w-100pxr max-w-100pxr items-center justify-center rounded-[5px] bg-zinc-300">
           <Link to="/collectBook/collectBookAdd" className="h-full w-full">
             <FaPlus size={25} className="mx-auto mt-[50%] text-zinc-500" />
           </Link>
