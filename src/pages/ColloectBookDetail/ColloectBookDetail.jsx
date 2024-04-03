@@ -15,7 +15,7 @@ import { useLoaderData } from 'react-router';
 
 export default function ColloectBookDetail() {
   const data = useLoaderData();
-  const { group, id } = useParams();
+  const { group, id, title } = useParams();
   const editButton = useRef(null);
   const [phocaInfo, setPhocaInfo] = useState([]);
   const [phocaId, setPhocaId] = useState([]);
@@ -69,16 +69,22 @@ export default function ColloectBookDetail() {
     pb.collection('collectBook').subscribe(
       id,
       function (e) {
-        const secondPocaInfo = e.record.expand.cardInfo.map((item) => {
-          return item;
-        });
-        setPhocaInfo(secondPocaInfo);
+        if (e.record.expand) {
+          const secondPocaInfo = e.record.expand.cardInfo.map((item) => {
+            return item;
+          });
+          setPhocaInfo(secondPocaInfo);
 
-        const secondPocaID = secondPocaInfo.map((item) => {
-          return item.id;
-        });
-        setPhocaId(secondPocaID);
-        setEditId(secondPocaID);
+          const secondPocaID = secondPocaInfo.map((item) => {
+            return item.id;
+          });
+          setPhocaId(secondPocaID);
+          setEditId(secondPocaID);
+        } else {
+          setPhocaInfo('');
+          setPhocaId('');
+          setEditId('');
+        }
       },
       { expand: 'cardInfo' }
     );
@@ -89,18 +95,22 @@ export default function ColloectBookDetail() {
       .getOne(id, { expand: 'cardInfo' });
     pb.autoCancellation(false);
 
-    pbData.then((res) => {
-      const firstPocaInfo = res.expand.cardInfo.map((item) => {
-        return item;
-      });
-      setPhocaInfo(firstPocaInfo);
+    pbData
+      .then((res) => {
+        const firstPocaInfo = res.expand.cardInfo.map((item) => {
+          return item;
+        });
+        setPhocaInfo(firstPocaInfo);
 
-      const firstPocaID = firstPocaInfo.map((item) => {
-        return item.id;
+        const firstPocaID = firstPocaInfo.map((item) => {
+          return item.id;
+        });
+        setPhocaId(firstPocaID);
+        setEditId(firstPocaID);
+      })
+      .catch((error) => {
+        console.log('보유 중인 포카 없음', error);
       });
-      setPhocaId(firstPocaID);
-      setEditId(firstPocaID);
-    });
 
     return () => pb.collection('collectBook').unsubscribe(id);
   }, [id]);
@@ -110,8 +120,7 @@ export default function ColloectBookDetail() {
       <div className="draggable relative h-[100%]">
         <Toaster />
 
-        {/* 자세히 대신 콜렉트북 이름 넣기 */}
-        <DetailHeader title="자세히" />
+        <DetailHeader title={title} />
         <ToggleButton />
 
         <DragonSphere

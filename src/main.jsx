@@ -73,7 +73,7 @@ const router = createBrowserRouter([
         loader: userData,
       },
       {
-        path: '/collectBook/:group/:id',
+        path: '/collectBook/:group/:id/:title',
         element: <ColloectBookDetail />,
         loader: phocaData,
       },
