@@ -4,7 +4,12 @@
   font-family:
     SUIT Variable,
     sans-serif;
-  background-image: linear-gradient(180deg, #E8E7FF 0%, #FDFDFF 50%, #FFFFFF 100%);
+  background-image: linear-gradient(
+    180deg,
+    #e8e7ff 0%,
+    #fdfdff 50%,
+    #ffffff 100%
+  );
 }
 
 .biasContainer {
@@ -20,9 +25,32 @@
   display: none;
 }
 
+/* 스크롤바의 전체 모양 설정 */
+.showScrollbar::-webkit-scrollbar {
+  display: block;
+  width: 10px; /* 스크롤바의 너비 */
+}
+
+/* 스크롤바의 Track(배경) 설정 */
+.showScrollbar::-webkit-scrollbar-track {
+  background: #fafaff; /* 박스의 배경색과 일치 */
+}
+
+/* 스크롤바의 Thumb(스크롤바 버튼) 설정 */
+.showScrollbar::-webkit-scrollbar-thumb {
+  background: rgba(101, 98, 201, 0.747); /* 민트 그린 색상 */
+  border-radius: 8px; /* 버튼의 모서리를 둥글게 */
+}
+
 .draggable {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.collectBookThumbNail:checked + label {
+  border: 4px solid rgba(102, 98, 201, 1);
+  border-radius: 15px;
+  line-height: 0px;
 }
