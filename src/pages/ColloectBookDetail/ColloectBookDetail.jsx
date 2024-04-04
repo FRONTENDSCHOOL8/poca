@@ -2,6 +2,7 @@
 
 import pb from '@/api/pocketbase';
 import CollectBookItemContainer from '@/components/CollectBookItemContainer/CollectBookItemContainer';
+import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import DragonSphere from '@/components/DragonSphere/DragonSphere';
 import ToastAlert from '@/components/ToastAlert/ToastAlert';
@@ -21,22 +22,21 @@ export default function ColloectBookDetail() {
   const [phocaId, setPhocaId] = useState([]);
   const [editId, setEditId] = useState([]);
   const userName = JSON.parse(localStorage.getItem('auth')).user.name;
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
   const logoImage = data.filter((item) => {
     if (item.groupName === group) return true;
   });
 
   // 선택한 카드 저장
-  const handleSave = () => {
-    editButton.current.disabled = true;
+  const handleOpenModal = () => setIsSaveModalOpen(true);
 
-    toast(
-      <ToastAlert ref={editButton} phocaId={phocaId} editId={editId} id={id} />,
-      {
-        duration: Infinity,
-        position: 'bottom-center',
-      }
-    );
+  const handleSave = () => {
+    const data = {
+      cardInfo: [...editId],
+    };
+    pb.collection('collectBook').update(id, data);
+    setIsSaveModalOpen(false);
   };
 
   // 카드 클릭 시 색상 변화
@@ -54,9 +54,9 @@ export default function ColloectBookDetail() {
       setEditId(copy);
     }
 
-    editButton.current.disabled = false;
-    editButton.current.className =
-      'flex h-7 w-64pxr items-center justify-center rounded-md bg-zinc-400 text-sm font-semibold text-white hover:bg-primary hover:text-white duration-200';
+    // editButton.current.disabled = false;
+    // editButton.current.className =
+    //   'flex h-7 w-64pxr items-center justify-center rounded-md bg-red-400 text-sm font-semibold text-white hover:bg-primary hover:text-white duration-200';
   };
 
   const collectBook = data.filter((item) => {
@@ -118,6 +118,15 @@ export default function ColloectBookDetail() {
   return (
     <>
       <div className="draggable relative h-[100%]">
+        <ConfirmationModal
+          isOpen={isSaveModalOpen}
+          onClose={() => setIsSaveModalOpen(false)}
+          onConfirm={handleSave}
+          message="저장하시겠습니까?"
+          cancelButtonText="취소"
+          confirmButtonText="저장"
+        />
+
         <Toaster />
 
         <DetailHeader title={title} />
@@ -127,7 +136,7 @@ export default function ColloectBookDetail() {
           group={group}
           phocaData={phocaData}
           phocaInfo={phocaInfo}
-          handleSave={handleSave}
+          handleOpenModal={handleOpenModal}
           fakeRef={editButton}
           logoImage={logoImage[0].logoImage}
           groupId={logoImage[0].id}
