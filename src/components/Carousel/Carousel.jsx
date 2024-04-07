@@ -1,15 +1,15 @@
 import Slider from 'react-slick';
-import './slick-theme.css';
-import 'slick-carousel/slick/slick.css';
+// import './slick-theme.css';
+// import 'slick-carousel/slick/slick.css';
 import { GrPrevious, GrNext } from 'react-icons/gr';
 
 const Prev = (props) => {
-  const { className, style, onClick } = props;
+  const { className, onClick } = props;
   return (
-    <div
+    <button
+      type="button"
       className={className}
       style={{
-        ...style,
         display: 'block',
         position: 'absolute',
         left: '2px',
@@ -20,20 +20,20 @@ const Prev = (props) => {
       onClick={onClick}
     >
       <GrPrevious />
-    </div>
+    </button>
   );
 };
 
 const Next = (props) => {
-  const { className, style, onClick } = props;
+  const { className, onClick } = props;
   return (
-    <div
+    <button
+      type="button"
       className={className}
       style={{
-        ...style,
         display: 'block',
         position: 'absolute',
-        right: '20px',
+        right: '2px',
         zIndex: 10,
         fontSize: '40px',
         color: 'white',
@@ -41,7 +41,7 @@ const Next = (props) => {
       onClick={onClick}
     >
       <GrNext />
-    </div>
+    </button>
   );
 };
 
@@ -51,7 +51,6 @@ export default function Carousel() {
     nextArrow: <Next />,
     prevArrow: <Prev />,
     dots: true,
-    // dotsClass: `slick-dots`,
     infinite: true,
     speed: 1000,
     slidesToShow: 1,
@@ -63,7 +62,7 @@ export default function Carousel() {
   };
 
   return (
-    <div className="mx-auto h-360pxr w-full">
+    <div className="mx-auto h-360pxr w-full outline">
       <Slider {...settings}>
         {slides.map(({ order, alt }) => (
           <div key={order}>
