@@ -14,7 +14,7 @@ export default function WaterMark() {
   return (
     <>
       {isLoaded && (
-        <div className="pointer-events-none absolute top-0 size-full bg-[url('../public/shoong_watermark.webp')] bg-cover opacity-30"></div>
+        <div className="pointer-events-none absolute top-0 size-full bg-[url('/shoong_watermark.webp')] bg-cover opacity-30"></div>
       )}
     </>
   );
