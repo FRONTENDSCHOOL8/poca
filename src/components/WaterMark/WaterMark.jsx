@@ -1,5 +1,21 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
+
 export default function WaterMark() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const img = new Image();
+    img.onload = () => {
+      setIsLoaded(true);
+    };
+    img.src = '/shoong_watermark.webp';
+  }, []);
   return (
-    <div className="absolute left-0 top-0 size-full bg-[url('../public/shoong_watermark.webp')] opacity-70"></div>
+    <>
+      {isLoaded && (
+        <div className="pointer-events-none absolute top-0 size-full bg-[url('../public/shoong_watermark.webp')] bg-cover opacity-30"></div>
+      )}
+    </>
   );
 }
