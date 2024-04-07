@@ -4,6 +4,9 @@ import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
 import pb from '../../api/pocketbase';
 import { isLogin } from '@/store/store';
+import KakaoLogin from './KakaoLogin';
+import NaverLogin from './NaverLogin';
+import InstaLogin from './InstaLogin';
 
 export default function Login() {
   const { login, collectBookInfo } = isLogin();
@@ -53,11 +56,8 @@ export default function Login() {
 
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-tertiary">
-      <Link to="/">
-        <img
-          className="mb-72pxr h-51pxr w-143pxr"
-          src="/icons/shoongLogoLogin.svg"
-        />
+      <Link to="/" className="mb-72pxr">
+        <img className=" h-51pxr w-143pxr" src="/icons/shoongLogoLogin.svg" />
       </Link>
 
       <form onSubmit={handleSubmit}>
@@ -76,7 +76,10 @@ export default function Login() {
           placeholder="비밀번호"
           mt={2}
         />
-        <Button type="submit" customClassNames="mt-26pxr">
+        <Button
+          type="submit"
+          customClassNames="mt-26pxr focus-visible:outline outline-4 outline-white"
+        >
           로그인
         </Button>
       </form>
@@ -96,9 +99,9 @@ export default function Login() {
       </div>
 
       <div className="mt-6pxr flex gap-32pxr">
-        <img src="/icons/kakao.svg" />
-        <img src="/icons/naver.svg" />
-        <img src="/icons/instagram.svg" />
+        <KakaoLogin />
+        <NaverLogin />
+        <InstaLogin />
       </div>
 
       <span className="mt-52pxr text-xs font-extrabold text-white underline">

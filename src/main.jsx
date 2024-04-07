@@ -26,6 +26,9 @@ import MyBias from './pages/MyBias/MyBias';
 import NotFound from './pages/NotFound/NotFound';
 import Register from './pages/Register/Register';
 import CollectBookAdd from './pages/CollectBookAdd/CollectBookAdd';
+import KakaoRedirect from './pages/Login/KakaoRedirect';
+import NaverRedirect from './pages/Login/NaverRedirect';
+import InstaRedirect from './pages/Login/InstaRedirect';
 
 const router = createBrowserRouter([
   {
@@ -99,6 +102,18 @@ const router = createBrowserRouter([
         path: '/register',
         element: <Register />,
         loader: userData,
+      },
+      {
+        path: '/api/oauth2-redirect',
+        element: <KakaoRedirect />,
+      },
+      {
+        path: '/authNaver',
+        element: <NaverRedirect />,
+      },
+      {
+        path: '/api/oauth2-redirect',
+        element: <InstaRedirect />,
       },
     ],
   },

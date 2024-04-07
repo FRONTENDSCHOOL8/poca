@@ -34,7 +34,7 @@ export default function ExchangeList({ photoCardData }) {
 
           setUsers(usersData);
         } catch (error) {
-          console.error('Error fetching users data:', error);
+          // console.error('Error fetching users data:', error);
         }
       };
       fetchUsersData();
