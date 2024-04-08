@@ -23,7 +23,7 @@ export default function Profile() {
             className=" mt-10 border-b-2 border-t-4 border-gray-200"
           />
           <NavigationTile
-            to="/"
+            to="/informUs"
             text="제보하기"
             className=" border-b-4 border-gray-200 "
           />

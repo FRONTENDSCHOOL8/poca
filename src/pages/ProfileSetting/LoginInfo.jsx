@@ -59,7 +59,22 @@ export default function LoginInfo() {
       <DetailHeader title="로그인 정보" />
       <div className="flex  flex-col">
         <div className="flex flex-col items-start space-y-4 p-6">
-          {/* 기존 내용 생략 */}
+          <div className="text-gray-700">
+            <p className="pb-2 pt-16 text-m04 font-sb01 text-gray-700">
+              이메일 주소
+            </p>
+            <p className="text-b04 font-m04 text-gray300">{user.email}</p>
+          </div>
+          <div className="text-gray-700">
+            <p className="pb-2 pt-2 text-m04 font-sb01 text-gray-700">
+              고유 닉네임
+            </p>
+            <p className="pb-2 text-b04 font-m04 text-gray300">
+              {user.username}
+            </p>
+          </div>
+          <div className="my-4 w-full border-t border-gray500"></div>
+          <p className="pt-2 text-m04 font-sb01 text-gray-700">소셜 로그인</p>
         </div>
         <div className="flex flex-col items-center justify-center gap-5 p-6">
           <button

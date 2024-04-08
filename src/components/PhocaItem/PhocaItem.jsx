@@ -36,7 +36,7 @@ export default function PhocaItem({
 
   return (
     <div
-      className={`${linkClass} relative mx-1 my-1  py-1  focus:ring-2  `}
+      className={`${linkClass} relative mx-1 my-1 py-1`}
       onClick={handleNavigate}
       onKeyDown={handleNavigate}
       aria-label={`${title} 카드 디테일 페이지로 이동`}
@@ -49,7 +49,7 @@ export default function PhocaItem({
         imgClass={imgClass}
       />
 
-      <div className="flex flex-row items-start justify-start gap-2 bg-blue-200  ">
+      <div className="flex w-full flex-row items-start justify-start gap-2 ">
         <ArtistLogo
           logoImgSrc={logoImgSrc}
           groupName={groupName}

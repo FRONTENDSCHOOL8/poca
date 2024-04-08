@@ -5,7 +5,7 @@ export function usePhocaDataByLikeCount() {
   return phoca
     .reduce((acc, group) => acc.concat(group.expand.photoCards), [])
     .sort((a, b) => b.likeCount - a.likeCount)
-    .slice(0, 10);
+    .slice(0, 20);
 }
 
 export function usePhocaDataByCreated() {
@@ -13,5 +13,5 @@ export function usePhocaDataByCreated() {
   return phoca
     .reduce((acc, group) => acc.concat(group.expand.photoCards), [])
     .sort((a, b) => new Date(b.created) - new Date(a.created))
-    .slice(0, 10);
+    .slice(0, 20);
 }

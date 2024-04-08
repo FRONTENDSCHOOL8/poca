@@ -7,6 +7,10 @@ import debounce from '@/utils/debounce';
 import { Link } from 'react-router-dom';
 
 export default function Register() {
+  /* -------------------------------------------------------------------------- */
+  /*                                   텍스트 인풋                                 */
+  /* -------------------------------------------------------------------------- */
+
   /* --------------------------------- 인풋 컨트롤 --------------------------------- */
 
   const [formData, setFormData] = useState({
@@ -23,7 +27,7 @@ export default function Register() {
 
     setFormData((formData) => ({ ...formData, [name]: value }));
 
-    activateRegisterButton();
+    // activateRegisterButton();
   };
 
   //email 인풋은 중복확인 때문에 따로 처리해줘야 함 : 사용자가 중복확인 통과 후(즉 중복확인 버튼 비활성화 후) 다시 이메일 인풋박스에 입력하면 중복확인 버튼 활성화되게.
@@ -34,65 +38,20 @@ export default function Register() {
 
     setIsEmailCheckButtonDisabled(false);
 
-    activateRegisterButton();
+    // activateRegisterButton();
   };
 
   //phone 인풋은 번호만 입력되게 따로 처리해줘야 함.
   const handlePhoneInputChange = (e) => {
     const { name, value } = e.target;
 
-    setFormData((formData) => ({ ...formData, [name]: value }));
-    // setFormData((formData) => ({
-    //   ...formData,
-    //   [name]: value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1'),
-    // }));
+    // setFormData((formData) => ({ ...formData, [name]: value }));
+    setFormData((formData) => ({
+      ...formData,
+      [name]: value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1'),
+    }));
 
-    activateRegisterButton();
-  };
-
-  /* ----------------------------------- 제출 ----------------------------------- */
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const data = {
-      email: formData.email,
-      password: formData.pwd,
-      passwordConfirm: formData.pwdConfirm,
-      birth: formData.birth,
-      phoneNumber: formData.phone,
-      name: formData.name,
-      collectBook: ['9mbahw8twzvbrwr'],
-    };
-
-    try {
-      await pb.collection('users').create(data);
-    } catch (error) {
-      alert('입력사항을 다시 확인해주세요.');
-    }
-  };
-
-  /* ---------------------------------- 체크리스트 --------------------------------- */
-
-  const checkList = [
-    'agreeOverFourteen',
-    'agreeService',
-    'agreePersonalInfo',
-    'agreeMarketing',
-  ];
-  const [checkedList, setCheckedList] = useState([]);
-
-  const handleCheckboxChange = (e) => {
-    // checkedList.includes(e.target.name)와 console.log(e.target.checked)는 반대되는 값임에 주의
-    // 가령 맨 처음 상태에서 아무것도 체크 안했을 때 체크박스 하나를 체크해서 이 handleCheckboxChange 발동하는 순간, 전자는 false인 반면 후자는 true임.
-
-    const newCheckedList = checkedList.includes(e.target.name)
-      ? checkedList.filter((name) => name !== e.target.name)
-      : [...checkedList, e.target.name];
-
-    setCheckedList((checkedList) => newCheckedList);
-
-    activateRegisterButton();
+    // activateRegisterButton();
   };
 
   /* --------------------------------- 중복확인 버튼 -------------------------------- */
@@ -113,7 +72,44 @@ export default function Register() {
       setIsEmailCheckButtonDisabled(true);
     }
 
-    activateRegisterButton();
+    // activateRegisterButton();
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                                    체크박스                                   */
+  /* -------------------------------------------------------------------------- */
+
+  /* -------------------------------- 체크박스 컨트롤 -------------------------------- */
+
+  const checkList = [
+    'agreeOverFourteen',
+    'agreeService',
+    'agreePersonalInfo',
+    'agreeMarketing',
+  ];
+  const [checkedList, setCheckedList] = useState([]);
+
+  const handleCheckboxChange = (e) => {
+    // checkedList.includes(e.target.name)와 console.log(e.target.checked)는 반대되는 값임에 주의
+    // 가령 맨 처음 상태에서 아무것도 체크 안했을 때 체크박스 하나를 체크해서 이 handleCheckboxChange 발동하는 순간, 전자는 false인 반면 후자는 true임.
+
+    const newCheckedList = checkedList.includes(e.target.name)
+      ? checkedList.filter((name) => name !== e.target.name)
+      : [...checkedList, e.target.name];
+
+    setCheckedList((checkedList) => newCheckedList);
+
+    newCheckedList.length === checkList.length
+      ? setAgreeAllButtonStyle({
+          bg: 'bg-primary',
+          text: 'text-white',
+        })
+      : setAgreeAllButtonStyle({
+          bg: 'bg-gray-100',
+          text: 'text-contentTertiary',
+        });
+
+    // activateRegisterButton();
   };
 
   /* --------------------------------- 모두동의 버튼 -------------------------------- */
@@ -140,13 +136,17 @@ export default function Register() {
 
     setIsRegisterButtonDisabled(!isRegisterButtonDisabled);
 
-    activateRegisterButton();
+    // activateRegisterButton();
   };
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     제출                                     */
+  /* -------------------------------------------------------------------------- */
 
   /* --------------------------------- 회원가입 버튼 -------------------------------- */
 
   const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
-    useState(true);
+    useState(false);
 
   //회원가입 버튼 활성화
   function activateRegisterButton() {
@@ -160,7 +160,33 @@ export default function Register() {
       : setIsRegisterButtonDisabled(true);
   }
 
-  /* ----------------------------------- 마크업 ---------------------------------- */
+  /* ----------------------------------- 제출 ----------------------------------- */
+
+  const handleSubmit = async (e) => {
+    console.log('this is handleSubmit');
+    e.preventDefault();
+
+    const data = {
+      email: formData.email,
+      password: formData.pwd,
+      passwordConfirm: formData.pwdConfirm,
+      birth: formData.birth,
+      phoneNumber: formData.phone,
+      name: formData.name,
+      collectBook: ['9mbahw8twzvbrwr'],
+    };
+
+    try {
+      await pb.collection('users').create(data);
+      console.log('success!!!!!!!');
+    } catch (error) {
+      alert('입력사항을 다시 확인해주세요.');
+    }
+  };
+
+  /* -------------------------------------------------------------------------- */
+  /*                                     마크업                                    */
+  /* -------------------------------------------------------------------------- */
 
   return (
     <div className="flex flex-col items-center justify-center bg-white py-35pxr">
@@ -230,7 +256,8 @@ export default function Register() {
 
         <Input
           name="phone"
-          defaultValue={formData.phone}
+          value={formData.phone}
+          //debounce 적용하려면 value 대신 defaultValue 써야 되는데 그렇게 되면 숫자만 입력되게 만들지를 못함..
           onChange={handlePhoneInputChange}
           type="text"
           placeholder="숫자만 입력해주세요"
@@ -253,7 +280,7 @@ export default function Register() {
           label="생년월일"
         />
 
-        <div className="flex w-full flex-col">
+        <div className="mb-4 flex w-full flex-col">
           <div className="self-start text-xs font-extrabold text-neutral-700">
             이용 약관 동의
           </div>
@@ -303,15 +330,9 @@ export default function Register() {
           </div>
         </div>
 
-        <Link to="/">
-          <Button
-            type="submit"
-            isDisabled={isRegisterButtonDisabled}
-            customClassNames="mt-4"
-          >
-            가입하기
-          </Button>
-        </Link>
+        <Button type="submit" isDisabled={isRegisterButtonDisabled}>
+          가입하기
+        </Button>
       </form>
     </div>
   );

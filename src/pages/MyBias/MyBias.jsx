@@ -1,41 +1,52 @@
-import DetailHeader from '@/components/DetailHeader/DetailHeader';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import { useLoaderData } from 'react-router';
 import React, { useEffect, useState } from 'react';
 import PocketBase from 'pocketbase';
+import DetailHeader from '@/components/DetailHeader/DetailHeader';
+import SearchBar from '@/components/SearchBar/SearchBar';
+import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
+import { useLoaderData } from 'react-router';
+import { globalState } from '@/store/store';
 
 const pb = new PocketBase('https://shoong.pockethost.io');
 
-export default function MyBias({ items }) {
+export default function PickMyBias() {
   const group = useLoaderData();
   const [userId, setUserId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedGroupName, setSelectedGroupName] = useState('');
+  const [selectedGroupId, setSelectedGroupId] = useState('');
 
   useEffect(() => {
     const authDataString = localStorage.getItem('auth');
-    if (!authDataString) return; // 조건 불충족 시 조기 리턴
+    if (!authDataString) return;
     try {
       const authData = JSON.parse(authDataString);
-      if (!authData.user || !authData.user.id) return; // 조건 불충족 시 조기 리턴
-
-      setUserId(authData.user.id); // 조건 충족 시 상태 업데이트
+      if (!authData.user || !authData.user.id) return;
+      setUserId(authData.user.id);
     } catch (error) {
       console.error('Parsing authData error:', error);
     }
   }, []);
 
-  const handleClick = async (groupName) => {
-    localStorage.setItem('bias', JSON.stringify({ init: groupName }));
+  const toggleModal = (groupName, groupId) => {
+    setSelectedGroupName(groupName);
+    setSelectedGroupId(groupId);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirm = async () => {
+    setIsModalOpen(false);
+    // Zustand 스토어를 사용하여 전역 상태 업데이트
+    globalState.getState().change(selectedGroupName);
+
     if (!userId) {
       console.error('User ID is missing');
       return;
     }
 
-    // 사용자의 biasGroup 필드 업데이트
     try {
       await pb.collection('users').update(userId, {
-        biasGroup: groupName,
+        biasGroup: selectedGroupName,
       });
-
       console.log('biasGroup updated successfully');
     } catch (error) {
       console.error('Failed to update biasGroup', error);
@@ -51,29 +62,45 @@ export default function MyBias({ items }) {
         bgStyle="bg-white mt-16 mb-10"
       />
       <div className="mx-auto max-w-6xl">
-        <ul className="mb-16 grid grid-cols-3 gap-1">
+        <ul className="mb-16 grid grid-cols-3 gap-12">
           {group.map((item, index) => (
             <li
               key={index}
-              className="flex flex-col items-center justify-center p-4"
+              className="flex flex-col items-center justify-center"
             >
-              <button
-                onClick={() => handleClick(item.groupName)}
-                className="flex flex-col items-center justify-center gap-2 text-center transition-transform duration-150 hover:scale-95"
+              <div
+                onClick={() => toggleModal(item.groupName, item.id)}
+                className={`flex h-[68px] w-[68px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 ${selectedGroupId === item.id ? 'bg-gradient-to-b from-red-400 to-indigo-500 p-1' : 'bg-gray-200 p-1'}`}
               >
                 <img
                   src={`https://shoong.pockethost.io/api/files/groups/${item.id}/${item.logoImage}`}
                   alt={item.groupName}
-                  className="h-68pxr rounded-full border-4 object-cover"
+                  className="h-full w-full rounded-full object-cover"
                 />
-                <span className="whitespace-nowrap text-sb02 font-sb02 text-contentSecondary">
-                  {item.groupName}
-                </span>
-              </button>
+              </div>
+              <span className="mt-2 text-sm font-medium text-gray-700">
+                {item.groupName}
+              </span>
             </li>
           ))}
         </ul>
       </div>
+      {isModalOpen && (
+        <ConfirmationModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onConfirm={handleConfirm}
+          message={`'${selectedGroupName}'(을)를 최애 그룹으로 선택하시겠습니까?`}
+          cancelButtonText="취소"
+          confirmButtonText="확인"
+          useNotification={true}
+          buttonStyles={{
+            cancel: 'rounded bg-gray-200 px-4 py-2 hover:bg-gray-300',
+            confirm:
+              'rounded bg-primary px-4 py-2 text-white hover:bg-indigo-700',
+          }}
+        />
+      )}
     </div>
   );
 }
