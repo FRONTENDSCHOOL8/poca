@@ -5,7 +5,8 @@ export default function CollectBookItemContainer({
   state,
   phocaData,
   phocaId,
-  handleCard,
+  handleClickCard,
+  handlePressCard,
   imgFilter,
   pb,
 }) {
@@ -22,7 +23,8 @@ export default function CollectBookItemContainer({
               <CollectBookItem
                 key={item.id}
                 item={item}
-                handleCard={handleCard}
+                handleClickCard={handleClickCard}
+                handlePressCard={handlePressCard}
                 filter={imgFilter}
               />
             );

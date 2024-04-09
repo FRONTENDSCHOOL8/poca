@@ -1,8 +1,14 @@
-export default function CollectBookItem({ item, handleCard, filter }) {
+export default function CollectBookItem({
+  item,
+  handleClickCard,
+  handlePressCard,
+  filter,
+}) {
   return (
     <li key={item.id}>
       <button
-        onClick={handleCard}
+        onClick={handleClickCard}
+        onKeyDown={handlePressCard}
         type="button"
         className="h-112pxr w-72pxr rounded-xl"
       >

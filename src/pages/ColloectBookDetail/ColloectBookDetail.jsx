@@ -39,24 +39,48 @@ export default function ColloectBookDetail() {
     setIsSaveModalOpen(false);
   };
 
-  // 카드 클릭 시 색상 변화
-  const handleCard = (e) => {
-    const pocaIdExtraction = e.target.src.split('/')[6];
+  // 카드 클릭 시 색상 변화 (키보드 조작 시 엔터 or 스페이스바)
+  const handlePressCard = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const pocaIdExtraction = e.target.querySelector('img').src.split('/')[6];
 
-    if (e.target.className.includes('grayscale')) {
-      e.target.className = 'h-full w-full object-cover rounded-xl';
-      setEditId([...editId, pocaIdExtraction]);
-    } else {
-      e.target.className = 'h-full w-full object-cover rounded-xl grayscale';
-      const copy = [...editId];
-      const index = copy.indexOf(pocaIdExtraction);
-      if (index !== -1) copy.splice(index, 1);
-      setEditId(copy);
+      if (e.target.querySelector('img').className.includes('grayscale')) {
+        e.target.querySelector('img').className =
+          'h-full w-full object-cover rounded-xl';
+        setEditId([...editId, pocaIdExtraction]);
+      } else {
+        e.target.querySelector('img').className =
+          'h-full w-full object-cover rounded-xl grayscale';
+        const copy = [...editId];
+        const index = copy.indexOf(pocaIdExtraction);
+
+        // eslint-disable-next-line max-depth
+        if (index !== -1) copy.splice(index, 1);
+
+        setEditId(copy);
+      }
     }
+  };
 
-    // editButton.current.disabled = false;
-    // editButton.current.className =
-    //   'flex h-7 w-64pxr items-center justify-center rounded-md bg-red-400 text-sm font-semibold text-white hover:bg-primary hover:text-white duration-200';
+  // 카드 클릭 시 색상 변화 (마우스 클릭)
+  const handleClickCard = (e) => {
+    if (e.target.src) {
+      const pocaIdExtraction = e.target.src.split('/')[6];
+
+      if (e.target.className.includes('grayscale')) {
+        e.target.className = 'h-full w-full object-cover rounded-xl';
+        setEditId([...editId, pocaIdExtraction]);
+      } else {
+        e.target.className = 'h-full w-full object-cover rounded-xl grayscale';
+        const copy = [...editId];
+        const index = copy.indexOf(pocaIdExtraction);
+
+        // eslint-disable-next-line max-depth
+        if (index !== -1) copy.splice(index, 1);
+
+        setEditId(copy);
+      }
+    }
   };
 
   const collectBook = data.filter((item) => {
@@ -147,7 +171,8 @@ export default function ColloectBookDetail() {
           state={true}
           phocaData={phocaData}
           phocaId={phocaId}
-          handleCard={handleCard}
+          handleClickCard={handleClickCard}
+          handlePressCard={handlePressCard}
           imgFilter="h-full w-full object-cover rounded-xl"
           pb="pb-50pxr"
         />
@@ -156,7 +181,8 @@ export default function ColloectBookDetail() {
           state={false}
           phocaData={phocaData}
           phocaId={phocaId}
-          handleCard={handleCard}
+          handleClickCard={handleClickCard}
+          handlePressCard={handlePressCard}
           imgFilter="h-full w-full object-cover rounded-xl grayscale"
           pb="pb-10pxr"
         />
