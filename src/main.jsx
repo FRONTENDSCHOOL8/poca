@@ -94,21 +94,6 @@ const router = createBrowserRouter([
         loader: userData,
       },
       {
-        path: '/informUs/photoCardSubmit',
-        element: <PhotoCardSubmit />,
-        loader: phocaData,
-      },
-      {
-        path: '/informUs/meetUpSubmit',
-        element: <MeetUpSubmit />,
-        loader: phocaData,
-      },
-      {
-        path: '/informUs',
-        element: <InformUs />,
-        loader: userData,
-      },
-      {
         path: '/collectBook/:group/:id/:title',
         element: <ColloectBookDetail />,
         loader: phocaData,
