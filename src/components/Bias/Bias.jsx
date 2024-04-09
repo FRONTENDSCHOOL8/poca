@@ -8,11 +8,13 @@ export default function Bias({
   fakeRef,
   children,
   tabIndex,
+  disabled,
 }) {
   return (
     <>
       <figure>
         <button
+          disabled={disabled}
           tabIndex={tabIndex}
           type="button"
           value={value}
