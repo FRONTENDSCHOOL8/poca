@@ -184,7 +184,6 @@ export default function CollectBookAdd() {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       fileRef.current.click();
-                      console.log('누름');
                       e.preventDefault();
                     }
                   }}
@@ -196,7 +195,6 @@ export default function CollectBookAdd() {
                   onKeyDown={(e) => {
                     if (e.key === 'Enter' || e.key === ' ') {
                       fileRef.current.click();
-                      console.log('누름');
                       e.preventDefault();
                     }
                   }}
@@ -257,11 +255,8 @@ export default function CollectBookAdd() {
                 test.current.style.transform = `translateX(-200%)`;
 
                 const formData = new FormData();
-                console.log(formData);
-
                 const thumbNailImage = fileRef.current.files[0];
 
-                console.log('저장: ', thumbNailImage);
                 formData.append(
                   'users',
                   JSON.parse(localStorage.getItem('auth')).user.id
@@ -270,20 +265,7 @@ export default function CollectBookAdd() {
                 formData.append('group', select);
                 formData.append('thumbNail', thumbNailImage);
 
-                // console.log('함수 외부');
-                // console.log('------------------------------------');
-                // console.log(formData.get('title'));
-                // console.log(formData.get('group'));
-                // console.log(formData.get('thumbNail'));
-                // console.log('------------------------------------\n\n');
-
                 try {
-                  // console.log('함수 내부');
-                  // console.log('------------------------------------');
-                  // console.log(formData.get('title'));
-                  // console.log(formData.get('group'));
-                  // console.log(formData.get('thumbNail'));
-                  // console.log('------------------------------------\n\n');
                   pb.collection('collectBook')
                     .create(formData)
                     .then((collectBookData) => {
@@ -292,7 +274,6 @@ export default function CollectBookAdd() {
                           JSON.parse(localStorage.getItem('auth')).user.id
                         )
                         .then((usersData) => {
-                          console.log('usersData: ', usersData);
                           usersData.collectBook.push(collectBookData.id);
 
                           pb.collection('users').update(
