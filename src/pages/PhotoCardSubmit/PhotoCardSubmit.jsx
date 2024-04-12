@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import pb from '@/api/pocketbase';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
@@ -7,7 +7,6 @@ import { useLoaderData } from 'react-router';
 
 export default function PhotoCardSubmit() {
   const groups = useLoaderData();
-  // console.log('groups ', groups);
   const [image, setImage] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState('');
   const [memberName, setMemberName] = useState('');
@@ -18,16 +17,30 @@ export default function PhotoCardSubmit() {
   const [modalType, setModalType] = useState('confirm');
   const navigate = useNavigate();
 
+  const memberNameInputRef = useRef(null);
+  const cardNameInputRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedGroup) {
+      memberNameInputRef.current.focus();
+    }
+  }, [selectedGroup]);
+
+  useEffect(() => {
+    if (cardType) {
+      cardNameInputRef.current.focus();
+    }
+  }, [cardType]);
+
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
   };
 
   const handleGroupSelect = (group) => {
     setSelectedGroup(group.id);
-    // console.log('selected group', group.id);
   };
 
-  const handleCardTypeSelect = (type) => {
+  const handleCardTypeSelect = (type, e) => {
     setCardType(type);
   };
 
@@ -70,7 +83,7 @@ export default function PhotoCardSubmit() {
   return (
     <div className="flex w-full flex-col pb-24 pt-6">
       <DetailHeader title="제보하기" />
-      <h1 className="mx-auto  mb-8 pb-4 pl-20pxr pt-16 text-2xl font-b03 text-gray600">
+      <h1 className="mx-auto mb-8 pb-4 pl-20pxr pt-16 text-2xl font-b03 text-gray600">
         포토카드를 등록해 주세요 ✍️
       </h1>
       <div className="mb-8 flex justify-center">
@@ -150,6 +163,7 @@ export default function PhotoCardSubmit() {
             </h2>
             <input
               type="text"
+              ref={memberNameInputRef}
               placeholder="멤버 이름"
               value={memberName}
               onChange={(e) => setMemberName(e.target.value)}
@@ -164,22 +178,20 @@ export default function PhotoCardSubmit() {
             <h2 className="mb-4 pb-2 pt-8 text-start text-xl font-sb03">
               카드 종류를 알려주세요!
             </h2>
-            <div className="mb-8 flex justify-center space-x-4 whitespace-nowrap">
-              <div className="mb-4 flex w-352pxr gap-4 overflow-x-auto ">
-                {['앨범', '특전', '팬싸', '시즌그리팅', '기타'].map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => handleCardTypeSelect(type)}
-                    className={`rounded-full border ${
-                      cardType === type
-                        ? 'bg-secondary text-white'
-                        : 'border-primary bg-white text-primary'
-                    } px-4 py-2`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
+            <div className="card-type-container mb-8 flex justify-center space-x-4 whitespace-nowrap">
+              {['앨범', '특전', '팬싸', '시즌그리팅', '기타'].map((type) => (
+                <button
+                  key={type}
+                  onClick={(e) => handleCardTypeSelect(type, e)}
+                  className={`rounded-full border ${
+                    cardType === type
+                      ? 'bg-secondary text-white'
+                      : 'border-primary bg-white text-primary'
+                  } px-4 py-2`}
+                >
+                  {type}
+                </button>
+              ))}
             </div>
           </div>
         </>
@@ -192,6 +204,7 @@ export default function PhotoCardSubmit() {
             </h2>
             <input
               type="text"
+              ref={cardNameInputRef}
               placeholder="ex) New Jeans 2023 SEASON's GREETINGS"
               value={cardName}
               onChange={(e) => setCardName(e.target.value)}
