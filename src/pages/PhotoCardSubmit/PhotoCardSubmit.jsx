@@ -83,7 +83,7 @@ export default function PhotoCardSubmit() {
   return (
     <div className="flex w-full flex-col pb-24 pt-6">
       <DetailHeader title="제보하기" />
-      <h1 className="mx-auto mb-8 pb-4 pl-20pxr pt-16 text-2xl font-b03 text-gray600">
+      <h1 className="mx-auto mb-8 pb-4 pt-16 text-2xl font-b03 text-indigo-800">
         포토카드를 등록해 주세요 ✍️
       </h1>
       <div className="mb-8 flex justify-center">
@@ -121,7 +121,7 @@ export default function PhotoCardSubmit() {
       {image && (
         <>
           <div className="mx-auto">
-            <h2 className="mb-4 pb-2 pt-8 text-start text-xl font-sb03">
+            <h2 className="mb-4 pb-2 pt-8 text-start text-2xl font-b02 text-gray600">
               어떤 그룹인가요?
             </h2>
 
@@ -131,7 +131,7 @@ export default function PhotoCardSubmit() {
                   <li key={index} className="flex flex-col items-center">
                     <button
                       onClick={() => handleGroupSelect(item)}
-                      className={`flex h-[56px] w-[56px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 ${
+                      className={`flex h-[54px] w-[54px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 ${
                         selectedGroup === item.id
                           ? 'bg-gradient-to-b from-red-400 to-indigo-500 p-1'
                           : 'bg-gray-200 p-0.5'
@@ -158,7 +158,7 @@ export default function PhotoCardSubmit() {
       {selectedGroup && (
         <>
           <div className="mx-auto">
-            <h2 className="mb-4 pb-2 pt-8 text-start text-xl font-sb03 ">
+            <h2 className="mb-4 pb-2 pt-8 text-start text-2xl font-b02 text-gray600">
               어떤 멤버인가요?
             </h2>
             <input
@@ -167,23 +167,23 @@ export default function PhotoCardSubmit() {
               placeholder="멤버 이름"
               value={memberName}
               onChange={(e) => setMemberName(e.target.value)}
-              className="mx-auto mb-8 w-352pxr border-b-2 border-gray-300 bg-transparent p-2"
+              className="text-md mx-auto mb-8 w-352pxr border-b-2 border-gray-300 bg-transparent p-1"
             />
           </div>
         </>
       )}
       {memberName && (
         <>
-          <div className="mx-auto">
-            <h2 className="mb-4 pb-2 pt-8 text-start text-xl font-sb03">
+          <div className="mx-auto w-352pxr">
+            <h2 className="mb-4 pb-2 pt-8 text-start text-2xl font-b02 text-gray600">
               카드 종류를 알려주세요!
             </h2>
-            <div className="card-type-container mb-8 flex justify-center space-x-4 whitespace-nowrap">
+            <div className="card-type-container mb-6 flex w-352pxr space-x-4 overflow-x-auto whitespace-nowrap">
               {['앨범', '특전', '팬싸', '시즌그리팅', '기타'].map((type) => (
                 <button
                   key={type}
                   onClick={(e) => handleCardTypeSelect(type, e)}
-                  className={`rounded-full border ${
+                  className={`rounded-full border hover:bg-secondary hover:text-white ${
                     cardType === type
                       ? 'bg-secondary text-white'
                       : 'border-primary bg-white text-primary'
@@ -199,7 +199,7 @@ export default function PhotoCardSubmit() {
       {cardType && (
         <>
           <div className="mx-auto">
-            <h2 className="mb-4 pb-2 pt-4 text-start text-xl font-sb03">
+            <h2 className="mb-4 pb-2 pt-8 text-start text-2xl font-b02 text-gray600">
               카드 이름을 아시나요?
             </h2>
             <input
@@ -208,7 +208,7 @@ export default function PhotoCardSubmit() {
               placeholder="ex) New Jeans 2023 SEASON's GREETINGS"
               value={cardName}
               onChange={(e) => setCardName(e.target.value)}
-              className="mx-auto mb-12 w-352pxr border-b-2 border-gray-300 bg-transparent p-2"
+              className="mx-auto mb-16 w-352pxr border-b-2 border-gray-300 bg-transparent p-1"
             />
           </div>
         </>
@@ -217,7 +217,7 @@ export default function PhotoCardSubmit() {
         {isSubmitEnabled && (
           <button
             type="submit"
-            className="mx-auto rounded-lg bg-primary px-4 py-2 text-white hover:bg-indigo-800 focus:outline-none focus:ring focus:ring-indigo-300"
+            className="mx-auto rounded-lg bg-primary px-6 py-2 text-lg text-white hover:bg-indigo-800 focus:outline-none focus:ring focus:ring-indigo-300"
           >
             제보하기
           </button>

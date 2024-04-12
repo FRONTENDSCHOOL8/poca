@@ -284,7 +284,7 @@ export default function MeetUpSubmit() {
         {isSubmitEnabled && (
           <button
             type="submit"
-            className="mx-auto rounded-lg bg-primary px-4 py-2 text-white hover:bg-indigo-800 focus:outline-none focus:ring focus:ring-indigo-300"
+            className="mx-auto rounded-lg bg-primary px-6 py-2 text-lg text-white hover:bg-indigo-800 focus:outline-none focus:ring focus:ring-indigo-300"
           >
             제보하기
           </button>
