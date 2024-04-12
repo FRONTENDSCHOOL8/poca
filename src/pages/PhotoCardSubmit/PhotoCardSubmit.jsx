@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import pb from '@/api/pocketbase';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
@@ -15,6 +16,7 @@ export default function PhotoCardSubmit() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [modalType, setModalType] = useState('confirm');
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
@@ -48,7 +50,7 @@ export default function PhotoCardSubmit() {
       const response = await pb.collection('informUs').create(formData);
       console.log('Response:', response);
 
-      setModalMessage('포토카드가 성공적으로 등록되었습니다.');
+      setModalMessage('포토카드 제보가 성공적으로 등록되었습니다.');
       setModalType('confirm');
       setIsModalOpen(true);
     } catch (error) {
@@ -57,6 +59,12 @@ export default function PhotoCardSubmit() {
       setModalType('error');
       setIsModalOpen(true);
     }
+  };
+
+  const redirectToInformUs = () => {
+    setTimeout(() => {
+      navigate('/informUs');
+    }, 50);
   };
 
   return (
@@ -68,11 +76,11 @@ export default function PhotoCardSubmit() {
       <div className="mb-8 flex justify-center">
         <label
           className="flex h-96 w-64 cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-200 text-center leading-normal"
-          tabIndex="0" // tabIndex 추가
+          tabIndex="0"
           onKeyDown={(e) => {
             if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault(); // 폼 제출 방지
-              document.getElementById('file-input').click(); // 파일 입력 클릭 이벤트 발동
+              e.preventDefault();
+              document.getElementById('file-input').click();
             }
           }}
         >
@@ -206,9 +214,12 @@ export default function PhotoCardSubmit() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         message={modalMessage}
-        confirmButtonText="확인"
-        onConfirm={() => setIsModalOpen(false)}
+        onConfirm={() => {
+          setIsModalOpen(false);
+          redirectToInformUs();
+        }}
         showCancelButton={false}
+        title="✔️"
       />
     </div>
   );
