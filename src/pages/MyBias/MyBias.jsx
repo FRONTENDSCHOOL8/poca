@@ -93,7 +93,7 @@ export default function PickMyBias() {
           message={`'${selectedGroupName}'(을)를 최애 그룹으로 선택하시겠습니까?`}
           cancelButtonText="취소"
           confirmButtonText="확인"
-          useNotification={true}
+          useNotification={false}
           buttonStyles={{
             cancel: 'rounded bg-gray-200 px-4 py-2 hover:bg-gray-300',
             confirm:
