@@ -4,7 +4,7 @@ export default function DragonSphere({
   phocaInfo,
   phocaData,
   group,
-  handleSave,
+  handleOpenModal,
   fakeRef,
   logoImage,
   groupId,
@@ -42,7 +42,7 @@ export default function DragonSphere({
 
           <button
             ref={fakeRef}
-            onClick={handleSave}
+            onClick={handleOpenModal}
             className="'flex duration-200'; h-7 w-64pxr items-center justify-center rounded-md bg-zinc-400 text-sm font-semibold text-white hover:bg-primary hover:text-white"
             // className="flex h-7 w-64pxr items-center justify-center rounded-md bg-zinc-400 text-sm font-semibold text-white"
             // disabled

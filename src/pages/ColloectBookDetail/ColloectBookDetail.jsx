@@ -2,6 +2,7 @@
 
 import pb from '@/api/pocketbase';
 import CollectBookItemContainer from '@/components/CollectBookItemContainer/CollectBookItemContainer';
+import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import DragonSphere from '@/components/DragonSphere/DragonSphere';
 import ToastAlert from '@/components/ToastAlert/ToastAlert';
@@ -15,48 +16,71 @@ import { useLoaderData } from 'react-router';
 
 export default function ColloectBookDetail() {
   const data = useLoaderData();
-  const { group, id } = useParams();
+  const { group, id, title } = useParams();
   const editButton = useRef(null);
   const [phocaInfo, setPhocaInfo] = useState([]);
   const [phocaId, setPhocaId] = useState([]);
   const [editId, setEditId] = useState([]);
   const userName = JSON.parse(localStorage.getItem('auth')).user.name;
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
 
   const logoImage = data.filter((item) => {
     if (item.groupName === group) return true;
   });
 
   // 선택한 카드 저장
-  const handleSave = () => {
-    editButton.current.disabled = true;
+  const handleOpenModal = () => setIsSaveModalOpen(true);
 
-    toast(
-      <ToastAlert ref={editButton} phocaId={phocaId} editId={editId} id={id} />,
-      {
-        duration: Infinity,
-        position: 'bottom-center',
-      }
-    );
+  const handleSave = () => {
+    const data = {
+      cardInfo: [...editId],
+    };
+    pb.collection('collectBook').update(id, data);
+    setIsSaveModalOpen(false);
   };
 
-  // 카드 클릭 시 색상 변화
-  const handleCard = (e) => {
-    const pocaIdExtraction = e.target.src.split('/')[6];
+  // 카드 클릭 시 색상 변화 (키보드 조작 시 엔터 or 스페이스바)
+  const handlePressCard = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const pocaIdExtraction = e.target.querySelector('img').src.split('/')[6];
 
-    if (e.target.className.includes('grayscale')) {
-      e.target.className = 'h-full w-full object-cover rounded-xl';
-      setEditId([...editId, pocaIdExtraction]);
-    } else {
-      e.target.className = 'h-full w-full object-cover rounded-xl grayscale';
-      const copy = [...editId];
-      const index = copy.indexOf(pocaIdExtraction);
-      if (index !== -1) copy.splice(index, 1);
-      setEditId(copy);
+      if (e.target.querySelector('img').className.includes('grayscale')) {
+        e.target.querySelector('img').className =
+          'h-full w-full object-cover rounded-xl';
+        setEditId([...editId, pocaIdExtraction]);
+      } else {
+        e.target.querySelector('img').className =
+          'h-full w-full object-cover rounded-xl grayscale';
+        const copy = [...editId];
+        const index = copy.indexOf(pocaIdExtraction);
+
+        // eslint-disable-next-line max-depth
+        if (index !== -1) copy.splice(index, 1);
+
+        setEditId(copy);
+      }
     }
+  };
 
-    editButton.current.disabled = false;
-    editButton.current.className =
-      'flex h-7 w-64pxr items-center justify-center rounded-md bg-zinc-400 text-sm font-semibold text-white hover:bg-primary hover:text-white duration-200';
+  // 카드 클릭 시 색상 변화 (마우스 클릭)
+  const handleClickCard = (e) => {
+    if (e.target.src) {
+      const pocaIdExtraction = e.target.src.split('/')[6];
+
+      if (e.target.className.includes('grayscale')) {
+        e.target.className = 'h-full w-full object-cover rounded-xl';
+        setEditId([...editId, pocaIdExtraction]);
+      } else {
+        e.target.className = 'h-full w-full object-cover rounded-xl grayscale';
+        const copy = [...editId];
+        const index = copy.indexOf(pocaIdExtraction);
+
+        // eslint-disable-next-line max-depth
+        if (index !== -1) copy.splice(index, 1);
+
+        setEditId(copy);
+      }
+    }
   };
 
   const collectBook = data.filter((item) => {
@@ -69,16 +93,22 @@ export default function ColloectBookDetail() {
     pb.collection('collectBook').subscribe(
       id,
       function (e) {
-        const secondPocaInfo = e.record.expand.cardInfo.map((item) => {
-          return item;
-        });
-        setPhocaInfo(secondPocaInfo);
+        if (e.record.expand) {
+          const secondPocaInfo = e.record.expand.cardInfo.map((item) => {
+            return item;
+          });
+          setPhocaInfo(secondPocaInfo);
 
-        const secondPocaID = secondPocaInfo.map((item) => {
-          return item.id;
-        });
-        setPhocaId(secondPocaID);
-        setEditId(secondPocaID);
+          const secondPocaID = secondPocaInfo.map((item) => {
+            return item.id;
+          });
+          setPhocaId(secondPocaID);
+          setEditId(secondPocaID);
+        } else {
+          setPhocaInfo('');
+          setPhocaId('');
+          setEditId('');
+        }
       },
       { expand: 'cardInfo' }
     );
@@ -89,18 +119,22 @@ export default function ColloectBookDetail() {
       .getOne(id, { expand: 'cardInfo' });
     pb.autoCancellation(false);
 
-    pbData.then((res) => {
-      const firstPocaInfo = res.expand.cardInfo.map((item) => {
-        return item;
-      });
-      setPhocaInfo(firstPocaInfo);
+    pbData
+      .then((res) => {
+        const firstPocaInfo = res.expand.cardInfo.map((item) => {
+          return item;
+        });
+        setPhocaInfo(firstPocaInfo);
 
-      const firstPocaID = firstPocaInfo.map((item) => {
-        return item.id;
+        const firstPocaID = firstPocaInfo.map((item) => {
+          return item.id;
+        });
+        setPhocaId(firstPocaID);
+        setEditId(firstPocaID);
+      })
+      .catch((error) => {
+        console.log('보유 중인 포카 없음', error);
       });
-      setPhocaId(firstPocaID);
-      setEditId(firstPocaID);
-    });
 
     return () => pb.collection('collectBook').unsubscribe(id);
   }, [id]);
@@ -108,17 +142,25 @@ export default function ColloectBookDetail() {
   return (
     <>
       <div className="draggable relative h-[100%]">
+        <ConfirmationModal
+          isOpen={isSaveModalOpen}
+          onClose={() => setIsSaveModalOpen(false)}
+          onConfirm={handleSave}
+          message="저장하시겠습니까?"
+          cancelButtonText="취소"
+          confirmButtonText="저장"
+        />
+
         <Toaster />
 
-        {/* 자세히 대신 콜렉트북 이름 넣기 */}
-        <DetailHeader title="자세히" />
+        <DetailHeader title={title} />
         <ToggleButton />
 
         <DragonSphere
           group={group}
           phocaData={phocaData}
           phocaInfo={phocaInfo}
-          handleSave={handleSave}
+          handleOpenModal={handleOpenModal}
           fakeRef={editButton}
           logoImage={logoImage[0].logoImage}
           groupId={logoImage[0].id}
@@ -129,7 +171,8 @@ export default function ColloectBookDetail() {
           state={true}
           phocaData={phocaData}
           phocaId={phocaId}
-          handleCard={handleCard}
+          handleClickCard={handleClickCard}
+          handlePressCard={handlePressCard}
           imgFilter="h-full w-full object-cover rounded-xl"
           pb="pb-50pxr"
         />
@@ -138,7 +181,8 @@ export default function ColloectBookDetail() {
           state={false}
           phocaData={phocaData}
           phocaId={phocaId}
-          handleCard={handleCard}
+          handleClickCard={handleClickCard}
+          handlePressCard={handlePressCard}
           imgFilter="h-full w-full object-cover rounded-xl grayscale"
           pb="pb-10pxr"
         />
