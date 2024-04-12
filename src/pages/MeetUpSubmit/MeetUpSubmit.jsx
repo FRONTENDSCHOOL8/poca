@@ -22,11 +22,11 @@ export default function MeetUpSubmit() {
   const elementWrap = useRef(null);
 
   const memberNameInputRef = useRef(null);
-  // const cardNameInputRef = useRef(null);
+  const cafeNameInputRef = useRef(null);
 
   useEffect(() => {
     if (selectedGroup) {
-      memberNameInputRef.current.focus();
+      cafeNameInputRef.current.focus();
     }
   }, [selectedGroup]);
 
@@ -160,7 +160,7 @@ export default function MeetUpSubmit() {
           </div>
         </>
       )}
-      {selectedGroup && (
+      {memberName && (
         <>
           <div className="mx-auto mb-4">
             <h2 className="mb-4 pb-2 pt-6 text-start text-2xl font-b02 text-gray600">
@@ -198,7 +198,7 @@ export default function MeetUpSubmit() {
         </>
       )}
 
-      {memberName && (
+      {selectedGroup && (
         <>
           <div className="mx-auto">
             <h2 className="mb-4 pb-3 pt-2 text-start text-2xl font-b02 text-gray600">
@@ -206,6 +206,7 @@ export default function MeetUpSubmit() {
             </h2>
             <input
               type="text"
+              ref={cafeNameInputRef}
               placeholder="카페 이름"
               value={cafeName}
               onChange={(e) => setCafeName(e.target.value)}
