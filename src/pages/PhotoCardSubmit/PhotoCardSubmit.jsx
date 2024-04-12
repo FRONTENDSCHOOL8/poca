@@ -88,46 +88,31 @@ export default function PhotoCardSubmit() {
             어떤 그룹인가요?
           </h2>
           <div className="mb-8 flex w-80 overflow-x-auto ">
-            <div className="mx-auto max-w-6xl">
-              <ul className="mb-16 grid grid-cols-3 gap-12">
-                {groups.map((item, index) => (
-                  <li
-                    key={index}
-                    className="flex flex-col items-center justify-center"
+            <ul className="mx-auto flex gap-6">
+              {groups.map((item, index) => (
+                <li key={index} className="flex flex-col items-center">
+                  <button
+                    onClick={() => handleGroupSelect(item)}
+                    className={`flex h-[56px] w-[56px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 ${
+                      selectedGroup === item.id
+                        ? 'bg-gradient-to-b from-red-400 to-indigo-500 p-1'
+                        : 'bg-gray-200 p-0.5'
+                    }`}
                   >
-                    <button
-                      // key={groups}
-                      onClick={() => handleGroupSelect(item)}
-                      className={`flex h-[68px] w-[68px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 `}
-                    >
-                      <img
-                        src={`https://shoong.pockethost.io/api/files/groups/${item.id}/${item.logoImage}`}
-                        alt={item.groupName}
-                        className="h-full w-full rounded-full object-cover"
-                      />
-                    </button>
-                    <span className="mt-2 text-sm font-medium text-gray-700">
-                      {item.groupName}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {/* <div className="flex flex-nowrap whitespace-nowrap">
-              {groups.map((group) => (
-                <button
-                  key={group}
-                  onClick={() => handleGroupSelect(group)}
-                  className={`mx-2 rounded-full border ${
-                    selectedGroup === group
-                      ? 'whitespace-nowrap bg-secondary text-white'
-                      : 'whitespace-nowrap border-primary bg-white text-primary'
-                  } px-4 py-2`}
-                >
-                  {group}
-                </button>
+                    <img
+                      src={`https://shoong.pockethost.io/api/files/groups/${item.id}/${item.logoImage}`}
+                      alt={item.groupName}
+                      className="h-full w-full rounded-full object-cover"
+                    />
+                  </button>
+                  <span
+                    className={`${selectedGroup === item.id ? 'font-black' : 'font-semibold'} mt-2 whitespace-nowrap text-sm text-gray-700`}
+                  >
+                    {item.groupName}
+                  </span>
+                </li>
               ))}
-            </div> */}
+            </ul>
           </div>
         </>
       )}
