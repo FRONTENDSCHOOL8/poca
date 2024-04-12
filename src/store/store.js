@@ -16,6 +16,7 @@ export const globalState = create(
 export const searchStore = create((set) => ({
   search: '',
   setSearch: (text) => set({ search: text }),
+  resetSearch: () => set({ search: '' }),
 }));
 
 // 새 교환 글이 추가
