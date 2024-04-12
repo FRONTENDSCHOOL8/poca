@@ -60,12 +60,12 @@ export default function PhotoCardSubmit() {
   };
 
   return (
-    <div className="flex w-full flex-col items-center pb-24 pt-6">
+    <div className="flex w-full flex-col pb-24 pt-6">
       <DetailHeader title="제보하기" />
-      <h1 className="mb-8 pb-4 pt-16 text-center text-xl font-b03 text-gray600">
-        포토카드를 등록해 주세요!
+      <h1 className="mb-8  pb-4 pl-20pxr pt-16 text-center text-2xl font-b03 text-gray600">
+        포토카드를 등록해 주세요 ✍️
       </h1>
-      <div className="mb-8">
+      <div className="mb-8 flex justify-center">
         <label className="flex h-96 w-64 cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-200 text-center leading-normal">
           {image ? (
             <img
@@ -84,10 +84,10 @@ export default function PhotoCardSubmit() {
       </div>
       {image && (
         <>
-          <h2 className="mb-4 pb-4 pt-8 text-center text-sb03 font-sb03">
+          <h2 className="mb-4 pb-2 pl-22pxr pt-8 text-start text-xl font-sb03">
             어떤 그룹인가요?
           </h2>
-          <div className="mb-8 flex w-80 overflow-x-auto ">
+          <div className="mx-auto mb-8 w-352pxr overflow-x-auto ">
             <ul className="mx-auto flex gap-6">
               {groups.map((item, index) => (
                 <li key={index} className="flex flex-col items-center">
@@ -118,7 +118,7 @@ export default function PhotoCardSubmit() {
       )}
       {selectedGroup && (
         <>
-          <h2 className="mb-4 pb-4 pt-8 text-center text-sb03 font-sb03">
+          <h2 className="mb-4 pb-2 pl-22pxr pt-8 text-start text-xl font-sb03 ">
             어떤 멤버인가요?
           </h2>
           <input
@@ -126,17 +126,17 @@ export default function PhotoCardSubmit() {
             placeholder="멤버 이름"
             value={memberName}
             onChange={(e) => setMemberName(e.target.value)}
-            className="mb-8 w-80 border-b-2 border-gray-300 bg-white p-2"
+            className="mx-auto mb-8 w-352pxr border-b-2 border-gray-300 bg-transparent p-2"
           />
         </>
       )}
       {memberName && (
         <>
-          <h2 className="mb-4 pb-4 pt-8 text-center text-sb03 font-sb03">
+          <h2 className="mb-4 pb-2 pl-22pxr pt-8 text-start text-xl font-sb03">
             카드 종류를 알려주세요!
           </h2>
           <div className="mb-8 flex justify-center space-x-4 whitespace-nowrap">
-            <div className="mb-8 flex w-80 gap-4 overflow-x-auto ">
+            <div className="mb-4 flex w-352pxr gap-4 overflow-x-auto ">
               {['앨범', '특전', '팬싸', '시즌그리팅', '기타'].map((type) => (
                 <button
                   key={type}
@@ -156,23 +156,23 @@ export default function PhotoCardSubmit() {
       )}
       {cardType && (
         <>
-          <h2 className="mb-4 pb-4 pt-8 text-center text-sb03 font-sb03">
-            이 포토카드의 이름을 알려주세요!
+          <h2 className="mb-4 pb-2 pl-22pxr pt-4 text-start text-xl font-sb03">
+            카드 이름을 아시나요?
           </h2>
           <input
             type="text"
             placeholder="ex) New Jeans 2023 SEASON's GREETINGS"
             value={cardName}
             onChange={(e) => setCardName(e.target.value)}
-            className="mb-8 w-80 border-b-2 border-gray-300 bg-white p-2"
+            className="mx-auto mb-12 w-352pxr border-b-2 border-gray-300 bg-transparent p-2"
           />
         </>
       )}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
         {isSubmitEnabled && (
           <button
             type="submit"
-            className="rounded-lg bg-primary px-4 py-2 text-white hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-300"
+            className="mx-auto rounded-lg bg-primary px-4 py-2 text-white hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-300"
           >
             확인
           </button>
