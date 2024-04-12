@@ -66,7 +66,16 @@ export default function PhotoCardSubmit() {
         포토카드를 등록해 주세요 ✍️
       </h1>
       <div className="mb-8 flex justify-center">
-        <label className="flex h-96 w-64 cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-200 text-center leading-normal">
+        <label
+          className="flex h-96 w-64 cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-200 text-center leading-normal"
+          tabIndex="0" // tabIndex 추가
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault(); // 폼 제출 방지
+              document.getElementById('file-input').click(); // 파일 입력 클릭 이벤트 발동
+            }
+          }}
+        >
           {image ? (
             <img
               src={URL.createObjectURL(image)}
@@ -79,9 +88,15 @@ export default function PhotoCardSubmit() {
               <span className="text-gray400">포토카드 이미지 첨부</span>
             </div>
           )}
-          <input type="file" onChange={handleFileChange} className="hidden" />
+          <input
+            type="file"
+            id="file-input"
+            onChange={handleFileChange}
+            className="hidden"
+          />
         </label>
       </div>
+
       {image && (
         <>
           <div className="mx-auto">
@@ -89,7 +104,7 @@ export default function PhotoCardSubmit() {
               어떤 그룹인가요?
             </h2>
 
-            <div className="mx-auto mb-8 w-352pxr overflow-x-auto  pt-2pxr">
+            <div className="mx-auto mb-8 w-352pxr overflow-x-auto px-1 pt-1">
               <ul className="mx-auto flex gap-6">
                 {groups.map((item, index) => (
                   <li key={index} className="flex flex-col items-center">
@@ -181,9 +196,9 @@ export default function PhotoCardSubmit() {
         {isSubmitEnabled && (
           <button
             type="submit"
-            className="mx-auto rounded-lg bg-primary px-4 py-2 text-white hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-300"
+            className="mx-auto rounded-lg bg-primary px-4 py-2 text-white hover:bg-indigo-800 focus:outline-none focus:ring focus:ring-indigo-300"
           >
-            확인
+            제보하기
           </button>
         )}
       </form>
@@ -194,7 +209,6 @@ export default function PhotoCardSubmit() {
         confirmButtonText="확인"
         onConfirm={() => setIsModalOpen(false)}
         showCancelButton={false}
-        useNotification={modalType === 'confirm'}
       />
     </div>
   );

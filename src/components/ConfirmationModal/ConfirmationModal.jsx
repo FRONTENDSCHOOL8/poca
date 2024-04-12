@@ -5,6 +5,7 @@ export default function ConfirmationModal({
   onClose,
   onConfirm,
   message,
+  title = '확인',
   cancelButtonText = '취소',
   confirmButtonText = '확인',
   showCancelButton = true,
@@ -73,11 +74,11 @@ export default function ConfirmationModal({
     <>
       <dialog
         ref={dialogRef}
-        className={`fixed inset-0 ${modalStyles}  bg-black bg-opacity-75`}
+        className={`fixed inset-0 ${modalStyles} bg-black bg-opacity-75`}
       >
         <div className="flex items-center justify-center bg-white ">
           <div className=" p-6">
-            <h2 className="mb-4 text-lg font-bold">확인</h2>
+            <h2 className="mb-4 text-lg font-bold">{title}</h2>
             <p>{message}</p>
             <div className="mt-6 flex justify-end gap-3">
               {showCancelButton && (
@@ -86,7 +87,7 @@ export default function ConfirmationModal({
                   className={buttonStyles.cancel}
                   onClick={() => {
                     onClose();
-                    dialogRef.current.close(); // dialog를 명시적으로 닫습니다.
+                    dialogRef.current.close();
                     if (useNotification)
                       showTemporaryNotification(cancelNotificationMessage);
                   }}
@@ -100,7 +101,7 @@ export default function ConfirmationModal({
                   className={buttonStyles.confirm}
                   onClick={() => {
                     onConfirm();
-                    dialogRef.current.close(); // dialog를 명시적으로 닫습니다.
+                    dialogRef.current.close();
                     if (useNotification)
                       showTemporaryNotification(confirmNotificationMessage);
                   }}
