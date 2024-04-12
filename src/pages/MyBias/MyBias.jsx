@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import PocketBase from 'pocketbase';
+import pb from '@/api/pocketbase';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import { useLoaderData } from 'react-router';
 import { globalState } from '@/store/store';
 
-const pb = new PocketBase('https://shoong.pockethost.io');
-
 export default function PickMyBias() {
   const group = useLoaderData();
+  console.log('groups ', group);
   const [userId, setUserId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGroupName, setSelectedGroupName] = useState('');

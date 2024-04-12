@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import pb from '@/api/pocketbase';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
+import { useLoaderData } from 'react-router';
 
 export default function PhotoCardSubmit() {
+  const groups = useLoaderData();
+  // console.log('groups ', groups);
   const [image, setImage] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState('');
   const [memberName, setMemberName] = useState('');
@@ -13,30 +16,13 @@ export default function PhotoCardSubmit() {
   const [modalMessage, setModalMessage] = useState('');
   const [modalType, setModalType] = useState('confirm');
 
-  const groups = [
-    '뉴진스',
-    'BTS',
-    '블랙핑크',
-    'SuperM',
-    'ITZY',
-    '샤이니',
-    '에스파',
-    'NCT',
-    'MonstaX',
-    'TXT',
-    '르세라핌',
-    '레드벨벳',
-    '아이유',
-    '(G)I-DLE',
-    '라이즈',
-  ];
-
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
   };
 
-  const handleGroupSelect = (groupName) => {
-    setSelectedGroup(groupName);
+  const handleGroupSelect = (group) => {
+    setSelectedGroup(group.id);
+    // console.log('selected group', group.id);
   };
 
   const handleCardTypeSelect = (type) => {
@@ -59,7 +45,8 @@ export default function PhotoCardSubmit() {
       formData.append('phocaTitle', cardName);
       formData.append('phocaImg', image);
 
-      await pb.collection('informUs').create(formData);
+      const response = await pb.collection('informUs').create(formData);
+      console.log('Response:', response);
 
       setModalMessage('포토카드가 성공적으로 등록되었습니다.');
       setModalType('confirm');
@@ -101,7 +88,32 @@ export default function PhotoCardSubmit() {
             어떤 그룹인가요?
           </h2>
           <div className="mb-8 flex w-80 overflow-x-auto ">
-            <div className="flex flex-nowrap whitespace-nowrap">
+            <div className="mx-auto max-w-6xl">
+              <ul className="mb-16 grid grid-cols-3 gap-12">
+                {groups.map((item, index) => (
+                  <li
+                    key={index}
+                    className="flex flex-col items-center justify-center"
+                  >
+                    <button
+                      // key={groups}
+                      onClick={() => handleGroupSelect(item)}
+                      className={`flex h-[68px] w-[68px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 `}
+                    >
+                      <img
+                        src={`https://shoong.pockethost.io/api/files/groups/${item.id}/${item.logoImage}`}
+                        alt={item.groupName}
+                        className="h-full w-full rounded-full object-cover"
+                      />
+                    </button>
+                    <span className="mt-2 text-sm font-medium text-gray-700">
+                      {item.groupName}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {/* <div className="flex flex-nowrap whitespace-nowrap">
               {groups.map((group) => (
                 <button
                   key={group}
@@ -115,7 +127,7 @@ export default function PhotoCardSubmit() {
                   {group}
                 </button>
               ))}
-            </div>
+            </div> */}
           </div>
         </>
       )}
