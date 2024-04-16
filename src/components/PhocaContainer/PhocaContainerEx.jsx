@@ -33,7 +33,6 @@ export default function PhocaContainerEx({
   const searchResult = searchText
     ? phoca.filter((data) => {
         const lowerdData = JSON.stringify(data).toLowerCase();
-        console.log(lowerdData);
         return lowerdData.includes(searchText);
       })
     : phoca;
@@ -106,7 +105,7 @@ export default function PhocaContainerEx({
         </button>
 
         <span className="inline-block py-1 font-bold  text-gray-500">
-          전체 {phoca.length}장
+          전체 {searchResult.length}장
         </span>
       </div>
     </>

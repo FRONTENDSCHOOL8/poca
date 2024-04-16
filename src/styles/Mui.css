@@ -1,0 +1,8 @@
+.MuiOutlinedInput-notchedOutline{
+  border: none !important;
+  /* padding-top: 0.2rem !important; */
+}
+
+.MuiInputBase-root{
+  font-size: 0.875rem !important;
+}

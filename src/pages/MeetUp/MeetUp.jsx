@@ -1,7 +1,7 @@
-import MeetUpItemContainer from '@/components/MeetUpItemContainer/MeetUpItemContainer';
-import MeetUpMap from '@/components/MeetUpMap/MeetUpMap';
-import SearchBar from '@/components/SearchBar/SearchBar';
 import { useLoaderData } from 'react-router';
+import SearchBar from '@/components/SearchBar/SearchBar';
+import MeetUpMap from '@/components/MeetUpMap/MeetUpMap';
+import MeetUpItemContainer from '@/components/MeetUpItemContainer/MeetUpItemContainer';
 
 export default function MeetUp() {
   const meetUpData = useLoaderData();

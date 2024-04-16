@@ -19,7 +19,7 @@ import userData from './loader/userData';
 import ExchangeDetail from './pages/ExchangeDetail/ExchangeDetail';
 import MeetUpDetail from './components/MeetUpDetail/MeetUpDetail';
 import meetUpData from './loader/meetUpData';
-import { meetUpDetail } from './loader/meetUpDeatailData';
+import { meetUpDetail } from './loader/meetUpDetailData';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import LoginInfo from './pages/ProfileSetting/LoginInfo';
 import MyBias from './pages/MyBias/MyBias';

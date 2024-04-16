@@ -1,10 +1,11 @@
 import pb from '@/api/pocketbase';
-import { isLogin } from '@/store/store';
+import { useStore } from 'zustand';
 import { useState, useEffect } from 'react';
+import { isLogin, slangStore } from '@/store/store';
+import DetailHeader from '../DetailHeader/DetailHeader';
 import ExchangeEdit from '../ExchangeListDetail/ExchangeEdit';
 import PhotoCardInfo from '../ExchangeListDetail/PhotoCardInfo';
 import ExchangeArticle from '../ExchangeListDetail/ExchangeArticle';
-import DetailHeader from '../DetailHeader/DetailHeader';
 import NumberOfExchangeList from '../ExchangeListDetail/NumberOfExchangeList';
 
 export default function ExchangeList({ photoCardData }) {
@@ -15,6 +16,16 @@ export default function ExchangeList({ photoCardData }) {
   const { init } = isLogin();
   const userInfo = localStorage.getItem('auth');
   const loggedInUser = userInfo ? JSON.parse(userInfo) : null;
+  const slang = useStore(slangStore).slang;
+
+  // 비속어 필터링 함수
+  const handleSlangFiltering = (text) => {
+    const containsSlang = slang.some((word) => text.includes(word));
+    if (containsSlang) {
+      return true;
+    }
+    return false;
+  };
 
   useEffect(() => {
     // 교환글에서 작성자들의 id들을 추출
@@ -52,18 +63,22 @@ export default function ExchangeList({ photoCardData }) {
       <NumberOfExchangeList exchangeListData={exchangeListData} />
       <div className="mx-auto mt-4 w-10/12">
         <ExchangeEdit
+          slang={slang}
+          loginStatus={init}
+          loginUser={loggedInUser}
           photoCardData={photoCardData}
           exchangeListData={exchangeListData}
           setExchangeListData={setExchangeListData}
-          loginUser={loggedInUser}
-          loginStatus={init}
+          handleSlangFiltering={handleSlangFiltering}
         />
         <ExchangeArticle
-          exchangeListData={exchangeListData}
+          slang={slang}
           users={users}
-          setExchangeListData={setExchangeListData}
-          loginUser={loggedInUser}
           loginStatus={init}
+          loginUser={loggedInUser}
+          exchangeListData={exchangeListData}
+          setExchangeListData={setExchangeListData}
+          handleSlangFiltering={handleSlangFiltering}
         />
       </div>
     </>

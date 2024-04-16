@@ -1,188 +1,73 @@
-import { useState } from 'react';
-import Input from '@/components/Input/Input';
 import Button from '@/components/Button/Button';
-import pb from '../../api/pocketbase';
-import { useLoaderData, useNavigate } from 'react-router-dom';
+import Input from '@/components/Input/Input';
 import debounce from '@/utils/debounce';
-import { Link } from 'react-router-dom';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import TermsCheckbox from './TermsCheckbox';
+import useCheckbox from './useCheckbox';
+import useSubmit from './useSubmit';
+import useValidation from './useValidation';
+import useVerified from './useVerified';
+// import express from 'express';
+// import phone from 'phone';
+// import Twilio from './Twilio';
+
+// export default function Register() {
+//   return (
+//     <div>
+//       hello<br></br>hello<br></br>hello<br></br>hello<br></br>hello<br></br>
+//       hello<br></br>hello<br></br>
+//     </div>
+//   );
+// }
 
 export default function Register() {
   /* -------------------------------------------------------------------------- */
-  /*                                   텍스트 인풋                                 */
+  /*                                     변수                                    */
   /* -------------------------------------------------------------------------- */
 
-  /* --------------------------------- 인풋 컨트롤 --------------------------------- */
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    pwd: '',
-    pwdConfirm: '',
-    phone: '',
-    birth: '',
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((formData) => ({ ...formData, [name]: value }));
-
-    // activateRegisterButton();
-  };
-
-  //email 인풋은 중복확인 때문에 따로 처리해줘야 함 : 사용자가 중복확인 통과 후(즉 중복확인 버튼 비활성화 후) 다시 이메일 인풋박스에 입력하면 중복확인 버튼 활성화되게.
-  const handleEmailInputChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData((formData) => ({ ...formData, [name]: value }));
-
-    setIsEmailCheckButtonDisabled(false);
-
-    // activateRegisterButton();
-  };
-
-  //phone 인풋은 번호만 입력되게 따로 처리해줘야 함.
-  const handlePhoneInputChange = (e) => {
-    const { name, value } = e.target;
-
-    // setFormData((formData) => ({ ...formData, [name]: value }));
-    setFormData((formData) => ({
-      ...formData,
-      [name]: value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1'),
-    }));
-
-    // activateRegisterButton();
-  };
-
-  /* --------------------------------- 중복확인 버튼 -------------------------------- */
-
-  const [isEmailCheckButtonDisabled, setIsEmailCheckButtonDisabled] =
-    useState(false);
-
-  const users = useLoaderData();
-
-  const handleEmailCheck = (e) => {
-    const userEmails = users.map((user) => user.email); //왜 email 입력돼있는데도 users 데이터 열어보면 각 user에 email 안 들어가있지?
-
-    if (userEmails.includes(formData.email)) {
-      alert('입력하신 이메일이 이미 존재합니다');
-      setIsEmailCheckButtonDisabled(false);
-    } else {
-      alert('사용 가능한 이메일입니다');
-      setIsEmailCheckButtonDisabled(true);
-    }
-
-    // activateRegisterButton();
-  };
-
-  /* -------------------------------------------------------------------------- */
-  /*                                    체크박스                                   */
-  /* -------------------------------------------------------------------------- */
-
-  /* -------------------------------- 체크박스 컨트롤 -------------------------------- */
-
-  const checkList = [
-    'agreeOverFourteen',
-    'agreeService',
-    'agreePersonalInfo',
-    'agreeMarketing',
+  const termsCheckboxList = [
+    '[필수] 만 14세 이상입니다.',
+    '[필수] 서비스 이용약관 동의 > ',
+    '[필수] 개인정보 처리방침 동의 > ',
+    '[선택] 마케팅 수신 동의',
   ];
-  const [checkedList, setCheckedList] = useState([]);
-
-  const handleCheckboxChange = (e) => {
-    // checkedList.includes(e.target.name)와 console.log(e.target.checked)는 반대되는 값임에 주의
-    // 가령 맨 처음 상태에서 아무것도 체크 안했을 때 체크박스 하나를 체크해서 이 handleCheckboxChange 발동하는 순간, 전자는 false인 반면 후자는 true임.
-
-    const newCheckedList = checkedList.includes(e.target.name)
-      ? checkedList.filter((name) => name !== e.target.name)
-      : [...checkedList, e.target.name];
-
-    setCheckedList((checkedList) => newCheckedList);
-
-    newCheckedList.length === checkList.length
-      ? setAgreeAllButtonStyle({
-          bg: 'bg-primary',
-          text: 'text-white',
-        })
-      : setAgreeAllButtonStyle({
-          bg: 'bg-gray-100',
-          text: 'text-contentTertiary',
-        });
-
-    // activateRegisterButton();
-  };
-
-  /* --------------------------------- 모두동의 버튼 -------------------------------- */
-
-  const [agreeAllButtonStyle, setAgreeAllButtonStyle] = useState({
-    bg: 'bg-gray-100',
-    text: 'text-contentTertiary',
-  });
-
-  const handleAgreeAll = (e) => {
-    checkedList.length === checkList.length
-      ? setCheckedList((checkedList) => [])
-      : setCheckedList((checkedList) => checkList);
-
-    checkedList.length === checkList.length
-      ? setAgreeAllButtonStyle({
-          bg: 'bg-gray-100',
-          text: 'text-contentTertiary',
-        })
-      : setAgreeAllButtonStyle({
-          bg: 'bg-primary',
-          text: 'text-white',
-        });
-
-    setIsRegisterButtonDisabled(!isRegisterButtonDisabled);
-
-    // activateRegisterButton();
-  };
 
   /* -------------------------------------------------------------------------- */
-  /*                                     제출                                     */
+  /*                                    커스텀훅                                    */
   /* -------------------------------------------------------------------------- */
 
-  /* --------------------------------- 회원가입 버튼 -------------------------------- */
+  const {
+    formData,
+    isValidatedList,
+    isOnceList,
+    isEmailUnique,
+    handleInputChange,
+    setBirth,
+  } = useValidation();
 
-  const [isRegisterButtonDisabled, setIsRegisterButtonDisabled] =
-    useState(false);
+  const {
+    handleEmailVerification,
+    isVerificationButtonDisabled,
+    isEmailInputFieldReadOnly,
+  } = useVerified(formData.email, isValidatedList.email, isEmailUnique);
 
-  //회원가입 버튼 활성화
-  function activateRegisterButton() {
-    let filled = false;
-    filled = Object.values(formData).reduce((prev, cur) => !!prev && !!cur);
+  const {
+    checkList,
+    checkedList,
+    handleCheckboxChange,
+    agreeAllButtonStyle,
+    handleAgreeAll,
+  } = useCheckbox();
 
-    filled &&
-    isEmailCheckButtonDisabled &&
-    agreeAllButtonStyle.bg === 'bg-primary'
-      ? setIsRegisterButtonDisabled(false)
-      : setIsRegisterButtonDisabled(true);
-  }
-
-  /* ----------------------------------- 제출 ----------------------------------- */
-
-  const handleSubmit = async (e) => {
-    console.log('this is handleSubmit');
-    e.preventDefault();
-
-    const data = {
-      email: formData.email,
-      password: formData.pwd,
-      passwordConfirm: formData.pwdConfirm,
-      birth: formData.birth,
-      phoneNumber: formData.phone,
-      name: formData.name,
-      collectBook: ['9mbahw8twzvbrwr'],
-    };
-
-    try {
-      await pb.collection('users').create(data);
-      console.log('success!!!!!!!');
-    } catch (error) {
-      alert('입력사항을 다시 확인해주세요.');
-    }
-  };
+  const { isRegisterButtonDisabled, handleSubmit } = useSubmit(
+    formData,
+    isValidatedList,
+    isEmailUnique,
+    checkList,
+    checkedList
+  );
 
   /* -------------------------------------------------------------------------- */
   /*                                     마크업                                    */
@@ -194,55 +79,140 @@ export default function Register() {
         onSubmit={handleSubmit}
         className="flex flex-col items-center justify-center gap-6"
       >
-        <Input
-          name="name"
-          defaultValue={formData.name}
-          onChange={debounce(handleInputChange)}
-          type="text"
-          placeholder="이름"
-          customClassNames="h-9 mt-1"
-          bgClassName="bg-gray-100"
-          isLabeled
-          label="이름"
-          mt={16}
-        />
+        {/* -------------------------------------------------------------------------- */
+        /*                                    name                                   */
+        /* -------------------------------------------------------------------------- */}
+        <div className="name flex flex-col">
+          <Input
+            name="name"
+            defaultValue={formData.name}
+            onChange={debounce(handleInputChange)}
+            type="text"
+            placeholder="김슝 / Shoong Kim"
+            customClassNames="h-9 mt-1"
+            bgClassName="bg-gray-100"
+            isLabeled
+            label="이름"
+            mt={16}
+          />
 
-        <div className="flex flex-col gap-2">
+          <p //name 인풋 박스 비워져있는데 한 번이라도 입력한 적 있으면 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.name === '' && isOnceList.current.name ? '' : 'none',
+            }}
+          >
+            이름을 입력해주세요
+          </p>
+
+          <p //name 인풋 박스 채워졌는데 이름 형식 안 지켰으면 형식 지키라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.name !== '' && !isValidatedList.name ? '' : 'none',
+            }}
+          >
+            이름 형식으로 입력해주세요
+          </p>
+        </div>
+        {/* -------------------------------------------------------------------------- */
+        /*                                    email                                   */
+        /* -------------------------------------------------------------------------- */}
+        <div className="email flex flex-col">
           <Input
             name="email"
             defaultValue={formData.email}
-            onChange={handleEmailInputChange}
+            onChange={debounce(handleInputChange)}
             type="text"
-            placeholder="이메일"
+            placeholder="shoong@gmail.com"
             customClassNames="h-9 mt-1"
             bgClassName="bg-gray-100"
             isLabeled
             label="이메일"
+            readOnly={isEmailInputFieldReadOnly}
           />
+
+          <p //email 인풋 박스 비워져있는데 한 번이라도 입력한 적 있으면 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.email === '' && isOnceList.current.email ? '' : 'none',
+            }}
+          >
+            이메일을 입력해주세요
+          </p>
+
+          <p //email 인풋 박스 채워졌는데 이메일 형식 안 지켰으면 형식 지키라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.email !== '' && !isValidatedList.email ? '' : 'none',
+            }}
+          >
+            이메일 형식으로 입력해주세요
+          </p>
+
+          <p //email 이메일 형식 지켜서 잘 입력했는데 이미 가입된 이메일이면 이미 가입된 메일이라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display: isValidatedList.email && !isEmailUnique ? '' : 'none',
+            }}
+          >
+            이미 가입된 이메일입니다.
+          </p>
 
           <Button
             type="button"
             isSmall
-            isDisabled={isEmailCheckButtonDisabled}
-            customClassNames="self-end"
-            onClick={handleEmailCheck}
+            customClassNames="self-end mt-2"
+            onClick={handleEmailVerification}
+            isDisabled={isVerificationButtonDisabled}
           >
-            중복확인
+            인증하기
           </Button>
         </div>
-
-        <div className="flex flex-col">
+        {/* -------------------------------------------------------------------------- */
+        /*                                    pwd                                     */
+        /* -------------------------------------------------------------------------- */}
+        <div className="pwd flex flex-col">
           <Input
             name="pwd"
             defaultValue={formData.pwd}
             onChange={debounce(handleInputChange)}
             type="password"
             customClassNames="h-9 mt-1"
-            placeholder="비밀번호 입력 (영어+숫자 8자 이상)"
+            placeholder="비밀번호 입력"
             bgClassName="bg-gray-100"
             isLabeled
             label="비밀번호"
           />
+
+          <p //pwd 길이 10자 안 되는데 한 번이라도 입력한 적 있으면 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.pwd.length < 10 && isOnceList.current.pwd
+                  ? ''
+                  : 'none',
+            }}
+          >
+            최소 10자 이상 입력해주세요.
+          </p>
+          <p //pwd 길이 10자 넘었는데 패스워드 형식 안 지켰으면 형식 지키라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.pwd.length >= 10 && !isValidatedList.pwd ? '' : 'none',
+            }}
+          >
+            영문/숫자/특수문자(공백 제외)만 허용, 2개 이상 조합
+          </p>
+
+          {/* -------------------------------------------------------------------------- */
+          /*                                    pwdConfirm                               */
+          /* -------------------------------------------------------------------------- */}
+
           <Input
             name="pwdConfirm"
             defaultValue={formData.pwdConfirm}
@@ -252,35 +222,135 @@ export default function Register() {
             customClassNames="h-9 mt-2"
             bgClassName="bg-gray-100"
           />
+
+          <p //pwdConfirm 인풋 박스 비워져있는데 한 번이라도 입력한 적 있으면 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.pwdConfirm === '' && isOnceList.current.pwdConfirm
+                  ? ''
+                  : 'none',
+            }}
+          >
+            비밀번호를 한 번 더 입력해주세요.
+          </p>
+          <p //pwdConfirm 인풋 박스 채워졌는데 pwd랑 안 똑같으면 동일한 비번 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.pwdConfirm !== '' && !isValidatedList.pwdConfirm
+                  ? ''
+                  : 'none',
+            }}
+          >
+            동일한 비밀번호를 입력해주세요.
+          </p>
         </div>
 
-        <Input
-          name="phone"
-          value={formData.phone}
-          //debounce 적용하려면 value 대신 defaultValue 써야 되는데 그렇게 되면 숫자만 입력되게 만들지를 못함..
-          onChange={handlePhoneInputChange}
-          type="text"
-          placeholder="숫자만 입력해주세요"
-          customClassNames="h-9 mt-1"
-          bgClassName="bg-gray-100"
-          isLabeled
-          label="휴대폰 번호"
-          maxLength="11"
-        />
+        {/* -------------------------------------------------------------------------- */
+        /*                                    phone                                   */
+        /* -------------------------------------------------------------------------- */}
+        <div className="phone flex flex-col">
+          <Input
+            name="phone"
+            value={formData.phone}
+            //debounce 적용하려면 value 대신 defaultValue 써야 되는데 그렇게 되면 숫자만 입력되게 만들지를 못함..
+            onChange={handleInputChange}
+            type="text"
+            placeholder="01012345678"
+            customClassNames="h-9 mt-1"
+            bgClassName="bg-gray-100"
+            isLabeled
+            label="휴대폰 번호"
+            maxLength="11"
+          />
 
-        <Input
-          name="birth"
-          defaultValue={formData.birth}
-          onChange={debounce(handleInputChange)}
-          type="text"
-          placeholder="생년월일"
-          customClassNames="h-9 mt-1"
-          bgClassName="bg-gray-100"
-          isLabeled
-          label="생년월일"
-        />
+          <p //phone 인풋 박스 비워져있는데 한 번이라도 입력한 적 있으면 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.phone === '' && isOnceList.current.phone ? '' : 'none',
+            }}
+          >
+            휴대폰번호를 입력해주세요.
+          </p>
 
-        <div className="mb-4 flex w-full flex-col">
+          <p //phone 인풋 박스 채워졌는데 11자리 안 되면 제대로 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.phone !== '' && !isValidatedList.phone ? '' : 'none',
+            }}
+          >
+            휴대폰번호를 올바르게 입력해주세요.
+          </p>
+
+          {/* <Button
+            type="button"
+            isSmall
+            customClassNames="self-end mt-2 w-96pxr"
+          >
+            인증번호 받기
+          </Button> */}
+        </div>
+
+        {/* ---------------------------------- 참고자료 ---------------------------------- */}
+        {/* ---------------------- https://dawonny.tistory.com/403 ------------------- */}
+        {/* ------------ https://mui.com/x/react-date-pickers/date-picker/ ----------- */}
+        {/* ----------- https://mui.com/x/react-date-pickers/custom-field/ ----------- */}
+        {/* ------------- https://mui.com/x/api/date-pickers/date-picker/ ------------ */}
+        <div className="birth flex flex-col gap-1">
+          <div className="text-xs font-semibold text-primary">생년월일</div>
+
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              className="MuiOutlinedInput-notchedOutline MuiInputBase-root"
+              onChange={setBirth}
+              format="YYYY / MM / DD"
+              slotProps={{
+                textField: {
+                  size: 'small',
+                  sx: {
+                    fontSize: '1px',
+                    borderRadius: '0.625rem',
+                    width: '16.56rem',
+                    height: '2.22rem',
+                    backgroundColor: 'rgb(243 244 246)',
+                    contentEditable: 'false',
+                  },
+                },
+              }}
+              style={{ width: '2000px' }}
+            />
+          </LocalizationProvider>
+
+          <p //birth 인풋 박스 비워져있는데 한 번이라도 입력한 적 있으면 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                isOnceList.birth === true && formData.birth === ''
+                  ? ''
+                  : 'none',
+            }}
+          >
+            생년월일을 입력해주세요.
+          </p>
+
+          <p //birth 인풋 박스 채워졌는데 형식이 올바르지 않으면 올바르게 입력하라는 메시지 보여주기
+            className="mt-1 pl-2 text-xs text-red-500"
+            style={{
+              display:
+                formData.birth !== '' && !isValidatedList.birth ? '' : 'none',
+            }}
+          >
+            생년월일을 올바르게 입력해주세요.
+          </p>
+        </div>
+
+        {/* -------------------------------------------------------------------------- */
+        /*                                    이용약관 동의                                */
+        /* -------------------------------------------------------------------------- */}
+        <div className="agree mb-4 flex w-full flex-col">
           <div className="self-start text-xs font-extrabold text-neutral-700">
             이용 약관 동의
           </div>
@@ -290,74 +360,28 @@ export default function Register() {
             onClick={handleAgreeAll}
             bgClassName={agreeAllButtonStyle.bg}
             textColorClassName={agreeAllButtonStyle.text}
-            customClassNames="h-9 mt-1"
+            customClassNames="mt-1"
           >
             네, 모두 동의합니다.
           </Button>
 
           <div className="mt-3 flex flex-col gap-3 px-2">
-            <TermsCheckbox
-              name={checkList[0]}
-              checkedList={checkedList}
-              onChange={handleCheckboxChange}
-            >
-              [필수] 만 14세 이상입니다.
-            </TermsCheckbox>
-
-            <TermsCheckbox
-              name={checkList[1]}
-              checkedList={checkedList}
-              onChange={handleCheckboxChange}
-            >
-              [필수] 서비스 이용약관 동의 {'>'}
-            </TermsCheckbox>
-
-            <TermsCheckbox
-              name={checkList[2]}
-              checkedList={checkedList}
-              onChange={handleCheckboxChange}
-            >
-              [필수] 개인정보 처리방침 동의 {'>'}
-            </TermsCheckbox>
-
-            <TermsCheckbox
-              name={checkList[3]}
-              checkedList={checkedList}
-              onChange={handleCheckboxChange}
-            >
-              [선택] 마케팅 수신 동의
-            </TermsCheckbox>
+            {termsCheckboxList.map((item, index) => (
+              <TermsCheckbox
+                key={index}
+                name={checkList[index]}
+                checkedList={checkedList}
+                onChange={handleCheckboxChange}
+              >
+                {item}
+              </TermsCheckbox>
+            ))}
           </div>
         </div>
-
         <Button type="submit" isDisabled={isRegisterButtonDisabled}>
           가입하기
         </Button>
       </form>
     </div>
-  );
-}
-
-function TermsCheckbox({ name, checkedList, onChange, children }) {
-  const checked = checkedList.includes(name);
-
-  const checkboxStyle = checked
-    ? { background: "url('/checkboxChecked.svg') no-repeat" }
-    : { background: "url('/checkboxUnchecked.svg') no-repeat" };
-
-  return (
-    <label className="relative flex justify-between">
-      <span className="text-xs font-medium leading-none text-zinc-800">
-        {children}
-      </span>
-      <input
-        name={name}
-        checked={checked}
-        onChange={onChange}
-        type="checkbox"
-        className="absolute right-0 h-3 w-3 appearance-none"
-      />
-      <span className="h-3 w-3" style={checkboxStyle}></span>
-    </label>
   );
 }
