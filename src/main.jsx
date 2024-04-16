@@ -32,6 +32,8 @@ import MeetUpSubmit from './pages/MeetUpSubmit/MeetUpSubmit';
 import KakaoRedirect from './pages/Login/KakaoRedirect';
 // import NaverRedirect from './pages/Login/NaverRedirect';
 import InstaRedirect from './pages/Login/InstaRedirect';
+import { register } from 'swiper/element/bundle';
+register();
 
 const router = createBrowserRouter([
   {
