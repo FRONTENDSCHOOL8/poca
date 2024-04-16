@@ -17,7 +17,7 @@ export default function ConfirmationModal({
     cancel: 'rounded bg-gray200 px-4 py-2 hover:bg-gray300',
     confirm: 'rounded bg-primary px-4 py-2 text-white hover:bg-indigo-700',
   },
-  modalStyles = 'rounded-lg shadow-lg bg-black bg-opacity-75',
+  modalStyles = '   ',
 }) {
   const dialogRef = useRef(null);
   const cancelButtonRef = useRef(null);
@@ -72,47 +72,45 @@ export default function ConfirmationModal({
 
   return (
     <>
-      <dialog
-        ref={dialogRef}
-        className={`fixed inset-0 ${modalStyles} bg-black bg-opacity-75`}
-      >
-        <div className="flex items-center justify-center bg-white ">
-          <div className=" p-6">
-            <h2 className="mb-4 text-lg font-bold">{title}</h2>
-            <p>{message}</p>
-            <div className="mt-6 flex justify-end gap-3">
-              {showCancelButton && (
-                <button
-                  ref={cancelButtonRef}
-                  className={buttonStyles.cancel}
-                  onClick={() => {
-                    onClose();
-                    dialogRef.current.close();
-                    if (useNotification)
-                      showTemporaryNotification(cancelNotificationMessage);
-                  }}
-                >
-                  {cancelButtonText}
-                </button>
-              )}
-              {showConfirmButton && (
-                <button
-                  ref={confirmButtonRef}
-                  className={buttonStyles.confirm}
-                  onClick={() => {
-                    onConfirm();
-                    dialogRef.current.close();
-                    if (useNotification)
-                      showTemporaryNotification(confirmNotificationMessage);
-                  }}
-                >
-                  {confirmButtonText}
-                </button>
-              )}
-            </div>
-          </div>
+<dialog ref={dialogRef} className={`fixed inset-0 z-50 overflow-y-auto`}>
+  <div className={`fixed inset-0 bg-black bg-opacity-50 ${modalStyles}`}>
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h2 className="mb-4 text-lg font-bold">{title}</h2>
+        <p>{message}</p>
+        <div className="mt-6 flex justify-end gap-3">
+          {showCancelButton && (
+            <button
+              ref={cancelButtonRef}
+              className={buttonStyles.cancel}
+              onClick={() => {
+                onClose();
+                if (useNotification)
+                  showTemporaryNotification(cancelNotificationMessage);
+              }}
+            >
+              {cancelButtonText}
+            </button>
+          )}
+          {showConfirmButton && (
+            <button
+              ref={confirmButtonRef}
+              className={buttonStyles.confirm}
+              onClick={() => {
+                onConfirm();
+                if (useNotification)
+                  showTemporaryNotification(confirmNotificationMessage);
+              }}
+            >
+              {confirmButtonText}
+            </button>
+          )}
         </div>
-      </dialog>
+      </div>
+    </div>
+  </div>
+</dialog>
+
 
       {notification && (
         <div className="fixed inset-0 flex items-center justify-center">
