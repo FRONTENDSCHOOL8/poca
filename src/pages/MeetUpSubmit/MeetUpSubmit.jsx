@@ -12,7 +12,9 @@ export default function MeetUpSubmit() {
   const [memberName, setMemberName] = useState('');
   const [cafeName, setCafeName] = useState('');
   const [cafeAddress, setCafeAddress] = useState('');
+  const [cafeAddressDetail, setCafeAddressDetail] = useState(''); // 추가된 세부 주소 상태
   const [cafeDuration, setCafeDuration] = useState('');
+  const [sourceURL, setSourceURL] = useState('');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -20,7 +22,6 @@ export default function MeetUpSubmit() {
   const navigate = useNavigate();
 
   const elementWrap = useRef(null);
-
   const memberNameInputRef = useRef(null);
   const cafeNameInputRef = useRef(null);
 
@@ -45,15 +46,15 @@ export default function MeetUpSubmit() {
     setSelectedGroup(group.id);
   };
 
+  const handleFocus = (e) => {
+    e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
   const handleAddressSearch = () => {
     new window.daum.Postcode({
       oncomplete: function (data) {
-        let fullAddress = '';
-        if (data.userSelectedType === 'R') {
-          fullAddress = data.roadAddress;
-        } else {
-          fullAddress = data.jibunAddress;
-        }
+        let fullAddress =
+          data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
         setCafeAddress(fullAddress);
         elementWrap.current.style.display = 'none';
       },
@@ -64,16 +65,9 @@ export default function MeetUpSubmit() {
     elementWrap.current.style.display = 'block';
   };
 
-  const isSubmitEnabled =
-    image &&
-    selectedGroup &&
-    memberName &&
-    cafeName &&
-    cafeAddress &&
-    cafeDuration;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const fullAddress = `${cafeAddress} ${cafeAddressDetail}`.trim();
     try {
       const userInfo = JSON.parse(localStorage.getItem('auth')).user;
       const formData = new FormData();
@@ -83,8 +77,9 @@ export default function MeetUpSubmit() {
       formData.append('artistName', memberName);
       formData.append('meetUpImg', image);
       formData.append('cafeName', cafeName);
-      formData.append('cafeAddress', cafeAddress);
+      formData.append('cafeAddress', fullAddress);
       formData.append('meetUpDuration', cafeDuration);
+      formData.append('SourceURL_', sourceURL);
 
       const response = await pb.collection('informUs').create(formData);
       console.log('Response:', response);
@@ -95,7 +90,7 @@ export default function MeetUpSubmit() {
     } catch (error) {
       console.error('밋업 제출 중 오류가 발생했습니다:', error);
       setModalMessage('밋업 제출 중 오류가 발생했습니다.');
-      setModalType('error');
+      setModalType('error'); // 설정 변경
       setIsModalOpen(true);
     }
   };
@@ -105,6 +100,15 @@ export default function MeetUpSubmit() {
       navigate('/informUs');
     }, 50);
   };
+
+  const isSubmitEnabled =
+    image &&
+    selectedGroup &&
+    memberName &&
+    cafeName &&
+    cafeAddress &&
+    cafeDuration &&
+    sourceURL;
 
   return (
     <div className="flex w-full flex-col pb-24 pt-6">
@@ -139,6 +143,7 @@ export default function MeetUpSubmit() {
             type="file"
             id="file-input"
             onChange={handleFileChange}
+            onFocus={handleFocus}
             className="hidden"
           />
         </label>
@@ -155,6 +160,7 @@ export default function MeetUpSubmit() {
               placeholder="멤버 이름"
               value={memberName}
               onChange={(e) => setMemberName(e.target.value)}
+              onFocus={handleFocus}
               className="mx-auto mb-12 w-352pxr border-b-2 border-gray-300 bg-transparent p-1 text-lg"
             />
           </div>
@@ -173,6 +179,7 @@ export default function MeetUpSubmit() {
                   <li key={index} className="flex flex-col items-center">
                     <button
                       onClick={() => handleGroupSelect(item)}
+                      onFocus={handleFocus}
                       className={`flex h-[52px] w-[52px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 ${
                         selectedGroup === item.id
                           ? 'bg-gradient-to-b from-red-400 to-indigo-500 p-1'
@@ -210,6 +217,7 @@ export default function MeetUpSubmit() {
               placeholder="카페 이름"
               value={cafeName}
               onChange={(e) => setCafeName(e.target.value)}
+              onFocus={handleFocus}
               className="mx-auto mb-12 w-352pxr border-b-2 border-gray-300 bg-transparent p-1 text-lg"
             />
           </div>
@@ -218,11 +226,12 @@ export default function MeetUpSubmit() {
       {cafeName && (
         <>
           <div className="mx-auto mb-4 flex w-352pxr items-center justify-between pb-3 pt-4">
-            <h2 className=" text-start text-2xl font-b02 text-gray600 ">
+            <h2 className="text-start text-2xl font-b02 text-gray600">
               카페 주소가 어디인가요?
             </h2>
             <button
               onClick={handleAddressSearch}
+              onFocus={handleFocus}
               className="button rounded border-2 px-2 py-2 text-start text-sm hover:border-primary focus:border-primary focus:outline-none"
             >
               🔍 주소 찾기
@@ -244,6 +253,7 @@ export default function MeetUpSubmit() {
               onClick={() => {
                 elementWrap.current.style.display = 'none';
               }}
+              onFocus={handleFocus}
               style={{
                 cursor: 'pointer',
                 position: 'absolute',
@@ -258,8 +268,17 @@ export default function MeetUpSubmit() {
           <input
             type="text"
             value={cafeAddress}
+            onFocus={handleFocus}
             readOnly
             placeholder="생일 카페 주소"
+            className="input text-md mx-auto mb-4 w-352pxr border-b-2 border-gray-300 bg-transparent p-1 text-start"
+          />
+          <input
+            type="text"
+            value={cafeAddressDetail}
+            onChange={(e) => setCafeAddressDetail(e.target.value)}
+            onFocus={handleFocus}
+            placeholder="세부 주소 입력 (선택 사항)"
             className="input text-md mx-auto mb-12 w-352pxr border-b-2 border-gray-300 bg-transparent p-1 text-start"
           />
         </>
@@ -275,7 +294,21 @@ export default function MeetUpSubmit() {
               placeholder="예: 2024년 4월 20일 - 2024년 4월 27일"
               value={cafeDuration}
               onChange={(e) => setCafeDuration(e.target.value)}
+              onFocus={handleFocus}
               className="mx-auto mb-12 w-352pxr border-b-2 border-gray-300 bg-transparent p-1"
+            />
+          </div>
+          <div className="mx-auto">
+            <h2 className="mb-4 pb-3 pt-4 text-start text-2xl font-b02 text-gray600">
+              관련 링크를 추가해주세요
+            </h2>
+            <input
+              type="url"
+              placeholder="예: https://example.com"
+              value={sourceURL}
+              onChange={(e) => setSourceURL(e.target.value)}
+              onFocus={handleFocus}
+              className="mx-auto mb-12 w-352pxr border-b-2 border-gray-300 bg-transparent p-1 text-lg"
             />
           </div>
         </>
@@ -284,6 +317,7 @@ export default function MeetUpSubmit() {
         {isSubmitEnabled && (
           <button
             type="submit"
+            onFocus={handleFocus}
             className="mx-auto rounded-lg bg-primary px-6 py-2 text-lg text-white hover:bg-indigo-800 focus:outline-none focus:ring focus:ring-indigo-300"
           >
             제보하기
@@ -295,11 +329,14 @@ export default function MeetUpSubmit() {
         onClose={() => setIsModalOpen(false)}
         message={modalMessage}
         onConfirm={() => {
-          setIsModalOpen(false);
-          redirectToInformUs();
+          if (modalType === 'error') {
+            setIsModalOpen(false); // 오류 시 모달만 닫기
+          } else {
+            redirectToInformUs(); // 성공 시 리디렉션
+          }
         }}
-        showCancelButton={false}
-        title="✔️"
+        confirmButtonText={modalType === 'confirm' ? 'Continue' : 'OK'}
+        cancelButtonText="Cancel"
       />
     </div>
   );
