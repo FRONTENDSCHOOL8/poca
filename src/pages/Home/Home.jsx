@@ -1,5 +1,5 @@
 import Carousel from '@/components/Carousel/Carousel';
-import VerticalCarousel from '@/components/Carousel/VerticalCarousel';
+// import VerticalCarousel from '@/components/Carousel/VerticalCarousel';
 import FloatingButton from '@/components/FloatingButton/FloatingButton';
 import ImageLink from '@/components/ImageLink/ImageLink';
 import MainCardContainer from '@/components/MainCardContainer/MainCardContainer';
@@ -17,10 +17,10 @@ export default function Home() {
   const phocaDataByLikeCount = usePhocaDataByLikeCount();
 
   return (
-    <div className="mt-55pxr flex flex-col">
+    <div className="mt-55pxr min-w-0 ">
       <FloatingButton isAuth={init} />
       <Carousel />
-      <VerticalCarousel />
+      {/* <VerticalCarousel /> */}
       <MainCardContainer
         title="최신 업데이트 포카"
         subTitle="두근두근 오늘의 신상 포카는...!"
