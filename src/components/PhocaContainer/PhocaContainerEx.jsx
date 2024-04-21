@@ -23,6 +23,7 @@ export default function PhocaContainerEx({
   logoImgClass = 'w-8 h-8 rounded-full object-cover mt-0.5',
   biasData,
 }) {
+  const scrollRef = useRef(null);
   const moreRef = useRef(null);
   const [phoca, SetPhoca] = useState(biasData);
   const [phocaNumber, setPhocaNumber] = useState(12);
@@ -39,8 +40,14 @@ export default function PhocaContainerEx({
     if (phocaNumber >= phoca.length) {
       moreRef.current.style.display = 'none';
       toast.error('더 이상 없습니다');
-    } else toast.success('더 보기');
-    setPhocaNumber((num) => num + 12);
+    } else {
+      toast.success('더 보기');
+      setPhocaNumber((num) => num + 12);
+
+      setTimeout(() => {
+        scrollRef.current.scrollTop = scrollRef.current.scrollTop + 320;
+      }, 700);
+    }
   };
 
   useEffect(() => {
@@ -54,8 +61,11 @@ export default function PhocaContainerEx({
     <>
       <SortingBar phoca={phoca} SetPhoca={SetPhoca} biasData={biasData} />
 
-      <div className="mb-7 mt-1 flex justify-center">
-        <ul className="col-gap-8 grid h-400pxr grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-6">
+      <div className="mb-7 flex justify-center">
+        <ul
+          ref={scrollRef}
+          className="col-gap-8 grid h-700pxr grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-6"
+        >
           {searchResult.map((group, index) => {
             if (index < phocaNumber) {
               return (

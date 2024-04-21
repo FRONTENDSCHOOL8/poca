@@ -32,7 +32,7 @@ export default function SortingBar({ phoca, SetPhoca, biasData }) {
         handleLow={handleLow}
       />
 
-      <div className="flex justify-end py-20pxr pr-15pxr">
+      <div className="flex justify-end py-10pxr pr-15pxr">
         <button
           ref={button}
           type="button"

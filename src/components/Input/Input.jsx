@@ -11,7 +11,7 @@ export default function Input({
   mt = 0,
   ...restProps
 }) {
-  const defaultClassNames = `h-44pxr w-265pxr rounded-[0.625rem] pl-20pxr text-sm font-medium text-contentTertiary outline-none focus:outline-primary`;
+  const defaultClassNames = `h-44pxr w-265pxr rounded-[0.625rem] pl-20pxr text-sm font-medium text-contentPrimary placeholder-contentTertiary outline-none focus:outline-primary`;
   const classNames =
     `${bgClassName} ${customClassNames} ${defaultClassNames}`.trim();
 

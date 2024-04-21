@@ -12,14 +12,6 @@
   );
 }
 
-.biasContainer {
-  /* IE, Edge */
-  -ms-overflow-style: none;
-  /* Firefox */
-  scrollbar-width: none;
-  overflow-y: scroll;
-}
-
 ::-webkit-scrollbar {
   /* Chrome, Safari, Opera */
   display: none;
@@ -28,7 +20,8 @@
 /* 스크롤바의 전체 모양 설정 */
 .showScrollbar::-webkit-scrollbar {
   display: block;
-  width: 10px; /* 스크롤바의 너비 */
+  width: 15px; /* 스크롤바의 너비 */
+  height: 15px;
 }
 
 /* 스크롤바의 Track(배경) 설정 */
@@ -40,6 +33,7 @@
 .showScrollbar::-webkit-scrollbar-thumb {
   background: rgba(101, 98, 201, 0.747); /* 민트 그린 색상 */
   border-radius: 8px; /* 버튼의 모서리를 둥글게 */
+  cursor: pointer;
 }
 
 .draggable {
@@ -52,10 +46,4 @@
 .button-focus-visible:focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px white;
-}
-
-.collectBookThumbNail:checked + label {
-  border: 4px solid rgba(102, 98, 201, 1);
-  border-radius: 15px;
-  line-height: 0px;
 }

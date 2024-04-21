@@ -49,7 +49,7 @@ const Next = (props) => {
 
 export default function MeetupCarousel() {
   const imgkey = useId();
-  const { cafeImg, eventTitle, collectionId, id } = useLoaderData();
+  const { eventImg, eventTitle, collectionId, id } = useLoaderData();
   const record = useLoaderData();
   console.log(record);
   const settings = {
@@ -70,7 +70,7 @@ export default function MeetupCarousel() {
   return (
     <div className="mx-auto -mb-4 h-400pxr w-full">
       <Slider {...settings}>
-        {cafeImg.map((fileName) => (
+        {eventImg.map((fileName) => (
           <div key={imgkey}>
             <img
               src={`https://shoong.pockethost.io/api/files/${collectionId}/${id}/${fileName}`}

@@ -4,6 +4,7 @@ import { FaSquareArrowUpRight } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 
 export default function MeetUpItem({ info }) {
+  // 카페 이름 저장 함수
   const selectedCafe = useMeetUpStore((state) => state.selectedCafe);
 
   useEffect(() => {
@@ -11,6 +12,7 @@ export default function MeetUpItem({ info }) {
       document.getElementById(info.id).scrollIntoView({
         behavior: 'smooth',
         block: 'center',
+        inline: 'center',
       });
     }
   }, [selectedCafe, info.cafeName, info.id]);
@@ -24,6 +26,10 @@ export default function MeetUpItem({ info }) {
     <li
       id={info.id}
       className={`min-h-120pxr min-w-300pxr max-w-full rounded-xl ${bgColor} snap-center px-20pxr py-15pxr shadow-meetUp`}
+      onClick={() => {
+        // 선택된 마커의 위치를 상태에 저장
+        useMeetUpStore.setState({ selectedCafe: info.cafeName });
+      }}
     >
       <Link to={`/meetupDetail/${info.id}`}>
         <div
