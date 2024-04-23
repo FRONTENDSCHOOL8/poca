@@ -15,7 +15,7 @@ export default function Exchange() {
   return (
     <div className="pt-75pxr text-center">
       <SearchBar name="Exchange" placeholder="포카찾기" bgStyle="bg-white" />
-      <div className="mt-20pxr">
+      <div className="mt-20pxr mx-auto bg-blue-200 w-fit">
         <BiasContainer photoCardsData={photoCardsData} />
       </div>
       <PhocaContainerEx biasData={biasData} />

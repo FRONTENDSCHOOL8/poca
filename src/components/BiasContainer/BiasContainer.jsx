@@ -49,7 +49,7 @@ export default function BiasContainer({ photoCardsData }) {
 
   return (
     <>
-      <div className="draggable flex items-center text-center">
+      <div className="draggable flex items-center text-center w-fit">
         <Bias
           fakeRef={biasGroup}
           src={
