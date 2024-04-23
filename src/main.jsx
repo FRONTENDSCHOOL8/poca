@@ -19,7 +19,7 @@ import userData from './loader/userData';
 import ExchangeDetail from './pages/ExchangeDetail/ExchangeDetail';
 import MeetUpDetail from './components/MeetUpDetail/MeetUpDetail';
 import meetUpData from './loader/meetUpData';
-import { meetUpDetail } from './loader/meetUpDeatailData';
+import { meetUpDetail } from './loader/meetUpDetailData';
 import ProfileSetting from './pages/ProfileSetting/ProfileSetting';
 import LoginInfo from './pages/ProfileSetting/LoginInfo';
 import MyBias from './pages/MyBias/MyBias';
@@ -32,6 +32,8 @@ import MeetUpSubmit from './pages/MeetUpSubmit/MeetUpSubmit';
 import KakaoRedirect from './pages/Login/KakaoRedirect';
 // import NaverRedirect from './pages/Login/NaverRedirect';
 import InstaRedirect from './pages/Login/InstaRedirect';
+import { register } from 'swiper/element/bundle';
+register();
 
 const router = createBrowserRouter([
   {

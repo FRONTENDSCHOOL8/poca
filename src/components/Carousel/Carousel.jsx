@@ -1,98 +1,87 @@
-import Slider from 'react-slick';
-// import './slick-theme.css';
-// import 'slick-carousel/slick/slick.css';
-import { GrPrevious, GrNext } from 'react-icons/gr';
-
-const Prev = (props) => {
-  const { className, onClick } = props;
-  return (
-    <button
-      type="button"
-      className={className}
-      style={{
-        display: 'block',
-        position: 'absolute',
-        left: '2px',
-        zIndex: 10,
-        fontSize: '40px',
-        color: 'white',
-      }}
-      onClick={onClick}
-    >
-      <GrPrevious />
-    </button>
-  );
-};
-
-const Next = (props) => {
-  const { className, onClick } = props;
-  return (
-    <button
-      type="button"
-      className={className}
-      style={{
-        display: 'block',
-        position: 'absolute',
-        right: '2px',
-        zIndex: 10,
-        fontSize: '40px',
-        color: 'white',
-      }}
-      onClick={onClick}
-    >
-      <GrNext />
-    </button>
-  );
-};
+import { useRef, useEffect } from 'react';
 
 export default function Carousel() {
-  const settings = {
-    arrows: true,
-    nextArrow: <Next />,
-    prevArrow: <Prev />,
-    dots: true,
-    infinite: true,
-    speed: 1000,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    cssEase: 'linear',
-    pauseOnHover: true,
-  };
-
+  const swiperRef = useRef(null);
+  useEffect(() => {
+    const swiper = swiperRef.current;
+    const swiperParams = {
+      ally: {
+        prevSlideMessage: '이전',
+        nextSlideMessage: '다음',
+      },
+      effect: 'slide',
+      navigation: 'true',
+      pagination: 'true',
+      keyboard: {
+        enabled: 'true',
+      },
+      loop: 'true',
+      autoplay: {
+        delay: '3000',
+        pauseOnMouseEnter: 'true',
+      },
+      injectStyles: [
+        `
+        .swiper-button-next,
+        .swiper-button-prev {
+          color: rgba(102, 98, 201, 1);
+        }
+        .swiper-pagination-bullet{
+          background-color: rgba(102, 98, 201, 1)
+        }
+    `,
+      ],
+    };
+    Object.assign(swiper, swiperParams);
+    swiper.initialize();
+  }, []);
   return (
-    <div className="mx-auto h-360pxr w-full outline">
-      <Slider {...settings}>
-        {slides.map(({ order, alt }) => (
-          <div key={order}>
+    <>
+      <swiper-container
+        ref={swiperRef}
+        init="false"
+        className="swiper size-min h-200pxr overflow-hidden"
+      >
+        {slides.map(({ order, alt, bgColor }) => (
+          <SwiperSlide key={order} lazy="true" bgColor={bgColor}>
             <img
               src={`/carousel/carousel_${order}.jpeg`}
               alt={alt}
-              className="mx-auto size-full max-h-360pxr object-cover"
+              className="mx-auto block max-w-full object-cover"
+              loading="lazy"
             />
-          </div>
+          </SwiperSlide>
         ))}
-      </Slider>
-    </div>
+      </swiper-container>
+    </>
   );
 }
+
+const SwiperSlide = ({ children, bgColor }) => {
+  return (
+    <swiper-slide style={{ backgroundColor: bgColor }}>{children}</swiper-slide>
+  );
+};
 
 const slides = [
   {
     order: '1',
     alt: '블랙핑크 럭키드로우',
+    bgColor: '#F8B7B6',
   },
   {
     order: '2',
     alt: '2023 아이유 시즌그리팅',
+    bgColor: 'white',
   },
   {
     order: '3',
     alt: '뉴진스 신상 카드',
+    bgColor: '#BED9E2',
   },
   {
     order: '4',
     alt: 'BTS 썸머 포토카드',
+    bgColor: '#A3E1FD',
   },
 ];

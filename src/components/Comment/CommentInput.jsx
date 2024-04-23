@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router';
 
 export default function CommentInput({ id }) {
   const { init } = isLogin();
+  const navigate = useNavigate();
   if (!init) {
-    const navigate = useNavigate();
-    return navigate('/Login');
+    navigate('/Login');
   }
   const [profileImage, setProfileImage] = useState(
     '/icons/floatingDefault.jpg'
@@ -71,7 +71,7 @@ export default function CommentInput({ id }) {
       className="flex h-14 flex-row items-center gap-x-2 rounded-lg bg-white px-2 py-2.5 shadow-meetUp"
       onSubmit={handleSubmit}
     >
-      <img src={profileImage} alt="" className="h-10 rounded-full" />
+      <img src={profileImage} alt="" className="size-10 rounded-full" />
       <input
         type="text"
         name="comment"

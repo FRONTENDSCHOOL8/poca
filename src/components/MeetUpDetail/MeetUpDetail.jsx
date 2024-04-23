@@ -1,33 +1,30 @@
-// @ts-ignore
 import { useLoaderData } from 'react-router';
-import { useLocation } from 'react-router-dom';
-import { meetUpDataStore } from '@/store/store';
+import MeetupCarousel from '../Carousel/ MeetupCarousel';
+import CommentContainer from '../Comment/CommentContainer';
+import DetailHeader from '../DetailHeader/DetailHeader';
+import HashTagItem from '../HashTagItem/HashTagItem';
 import MeetUpDetailItem from '../MeetUpDetailItem/MeetUpDetailItem';
 import MeetUpDetailItemContainer from '../MeetUpDetailItemContainer/MeetUpDetailItemContainer';
-import HashTagItem from '../HashTagItem/HashTagItem';
-import CommentContainer from '../Comment/CommentContainer';
 import MeetUpDetailMap from '../MeetUpDetailMap/MeetUpDetailMap';
-import { useEffect } from 'react';
-import { data } from 'autoprefixer';
-import MeetUpItem from '../MeetUpItem/MeetUpItem';
-import DetailHeader from '../DetailHeader/DetailHeader';
-import MeetupCarousel from '../Carousel/ MeetupCarousel';
 
 export default function MeetUpDetail() {
   const {
-    eventTitle,
-    cafeName,
-    address,
+    id,
+    lat,
+    lng,
     date,
+    source,
+    address,
+    comments,
+    cafeName,
+    eventImg,
     basicGift,
-    event,
+    desertGift,
+    eventTitle,
+    firstHashtag,
     priorityGift,
+    secondHashtag,
   } = useLoaderData();
-  const { pathname } = useLocation();
-
-  const cafeId = pathname.split('/meetupDetail/')[1];
-  const getMeetUpData = JSON.parse(localStorage.getItem('meetupData'));
-  const MeetUpData = getMeetUpData.find((data) => data.id === cafeId);
 
   return (
     <div className="pb-10 pt-50pxr">
@@ -54,10 +51,8 @@ export default function MeetUpDetail() {
           content={
             <>
               <MeetUpDetailItem title="기본특전" content={basicGift} />
-              <MeetUpDetailItem
-                title="선착특전"
-                content="슬로건 10개, 키링 3명"
-              />
+              <MeetUpDetailItem title="선착특전" content={priorityGift} />
+              <MeetUpDetailItem title="디저트특전" content={desertGift} />
             </>
           }
         />
@@ -65,14 +60,12 @@ export default function MeetUpDetail() {
           title="EVENT"
           content={
             <>
-              <MeetUpDetailItem title="선착특전" content={priorityGift} />
               <MeetUpDetailItem
                 title="해쉬태그"
                 content={
                   <ul className="flex flex-col">
-                    <HashTagItem data={eventTitle} />
-                    <HashTagItem data={event} />
-                    <HashTagItem data={cafeName} />
+                    <HashTagItem data={firstHashtag} />
+                    <HashTagItem data={secondHashtag} />
                   </ul>
                 }
               />
@@ -81,9 +74,9 @@ export default function MeetUpDetail() {
         />
       </div>
       <div className="mx-20pxr mt-6 flex h-300pxr flex-col rounded-xl shadow">
-        <MeetUpDetailMap meetUpData={MeetUpData} />
+        <MeetUpDetailMap lat={lat} lng={lng} cafeName={cafeName} />
       </div>
-      <CommentContainer />
+      <CommentContainer id={id} commentList={comments} />
     </div>
   );
 }

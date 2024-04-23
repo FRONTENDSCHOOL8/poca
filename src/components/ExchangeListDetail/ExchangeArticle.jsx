@@ -1,18 +1,33 @@
-import pb from '@/api/pocketbase';
 import { useState } from 'react';
+import pb from '@/api/pocketbase';
+import Button from '../Button/Button';
 import { GoTrash, GoPencil } from 'react-icons/go';
+import ConfirmationModal from '../ConfirmationModal/ConfirmationModal';
 
 export default function ExchangeArticle({
-  exchangeListData,
-  setExchangeListData,
   users,
   loginUser,
   loginStatus,
+  exchangeListData,
+  setExchangeListData,
+  handleSlangFiltering,
 }) {
   const [isEditing, setIsEditing] = useState(null);
+  const [modalMessage, setModalMessage] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingContent, setEditingContent] = useState('');
   let loggedInUserId = '';
   if (loginStatus === true) loggedInUserId = loginUser.user.id || null;
+
+  const showModal = (message) => {
+    setModalMessage(message);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   // 수정
   const handleEdit = (exchangeData) => {
     setIsEditing(exchangeData.id);
@@ -42,6 +57,10 @@ export default function ExchangeArticle({
 
   // 수정 저장
   const handleEditSubmit = async (exchangeId) => {
+    if (handleSlangFiltering(editingContent)) {
+      showModal('비속어가 포홤된 글은 작성할 수 없습니다');
+      return;
+    }
     try {
       if (editingContent)
         await pb
@@ -102,98 +121,110 @@ export default function ExchangeArticle({
   }
 
   return (
-    <ul className="mt-5">
-      {exchangeListData.map((exchangeData) => {
-        let isUserTheWriter = '';
-        const user = usersById[exchangeData.writer];
-        const timeSinceUpdated = timeSince(exchangeData.updated);
-        if (
-          exchangeData.writer === loggedInUserId ||
-          loginUser.user.username === 'admin'
-        )
-          isUserTheWriter = exchangeData.writer;
-        if (!user) {
-          return null;
-        }
-        return (
-          <li
-            key={exchangeData.id}
-            className="mx-auto mb-3 overflow-hidden rounded-lg bg-white p-5 shadow-lg"
-          >
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <div className="h-11 w-10  ">
-                  <img
-                    className="h-full w-full rounded-full border-2 object-cover"
-                    src={`https://shoong.pockethost.io/api/files/users/${user.id}/${user.avatar}`}
-                    alt={`${user.username} 프로필 사진`}
-                    aria-hidden="true"
-                  />
+    <>
+      <ul className="mt-5">
+        {[...exchangeListData].reverse().map((exchangeData) => {
+          let isUserTheWriter = '';
+          const user = usersById[exchangeData.writer];
+          const timeSinceUpdated = timeSince(exchangeData.updated);
+          if (
+            exchangeData.writer === loggedInUserId ||
+            loginUser?.user.username === 'admin'
+          )
+            isUserTheWriter = exchangeData.writer;
+          if (!user) {
+            return null;
+          }
+          return (
+            <li
+              key={exchangeData.id}
+              className="mx-auto mb-3 overflow-hidden rounded-lg bg-white p-5 shadow-lg"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="h-11 w-10  ">
+                    <img
+                      className="h-full w-full rounded-full border-2 object-cover"
+                      src={`https://shoong.pockethost.io/api/files/users/${user.id}/${user.avatar}`}
+                      alt={`${user.username} 프로필 사진`}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-semibold">{user.username}</p>
+                    <time
+                      dateTime={exchangeData.updated}
+                      className="text-sm text-gray-500"
+                    >
+                      {timeSinceUpdated}
+                    </time>
+                  </div>
                 </div>
-                <div className="ml-3">
-                  <p className="font-semibold">{user.username}</p>
-                  <time
-                    dateTime={exchangeData.updated}
-                    className="text-sm text-gray-500"
-                  >
-                    {timeSinceUpdated}
-                  </time>
-                </div>
+                {isUserTheWriter && (
+                  <div className="flex gap-1">
+                    <GoPencil
+                      className="mr-1 h-6 w-6 cursor-pointer text-primary"
+                      onClick={() => handleEdit(exchangeData)}
+                    />
+                    <GoTrash
+                      className="mr-1 h-6 w-6 cursor-pointer text-primary"
+                      onClick={() => handleDelete(exchangeData.id)}
+                    />
+                  </div>
+                )}
               </div>
-              {isUserTheWriter && (
-                <div className="flex gap-1">
-                  <GoPencil
-                    className="mr-1 h-6 w-6 cursor-pointer text-primary"
-                    onClick={() => handleEdit(exchangeData)}
+              {isEditing === exchangeData.id ? (
+                <div className="mt-3">
+                  <textarea
+                    className="w-full rounded border px-2 py-1 text-gray-700"
+                    value={editingContent}
+                    onChange={(e) => setEditingContent(e.target.value)}
                   />
-                  <GoTrash
-                    className="mr-1 h-6 w-6 cursor-pointer text-primary"
-                    onClick={() => handleDelete(exchangeData.id)}
-                  />
+                  <div className="mt-2 flex justify-end gap-2">
+                    <Button
+                      type="submit"
+                      bgClassName="bg-primary"
+                      onClick={() => handleEditSubmit(exchangeData.id)}
+                    >
+                      저장
+                    </Button>
+                    <Button
+                      type="button"
+                      bgClassName="bg-gray-400"
+                      onClick={handleEditCancel}
+                    >
+                      취소
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-3">
+                  <p className="text-gray-700">{exchangeData.description}</p>
                 </div>
               )}
-            </div>
-            {isEditing === exchangeData.id ? (
-              <div className="mt-3">
-                <textarea
-                  className="w-full rounded border px-2 py-1 text-gray-700"
-                  value={editingContent}
-                  onChange={(e) => setEditingContent(e.target.value)}
-                />
-                <div className="mt-2 flex justify-end gap-2">
-                  <button
-                    className="rounded bg-primary px-4 py-2 text-sm text-white"
-                    onClick={() => handleEditSubmit(exchangeData.id)}
-                  >
-                    저장
-                  </button>
-                  <button
-                    className="rounded bg-primary px-4 py-2 text-sm text-white"
-                    onClick={handleEditCancel}
-                  >
-                    취소
-                  </button>
+              <div className="mt-4 flex items-center justify-between">
+                <div className="rounded-3xl border border-gray-700 px-2 py-1 text-xs text-gray-700">
+                  {exchangeData.status}
                 </div>
+                <Button
+                  type="button"
+                  bgClassName="bg-primary"
+                  customClassNames="hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none"
+                >
+                  대화하기
+                </Button>
               </div>
-            ) : (
-              <div className="mt-3">
-                <p className="text-gray-700">{exchangeData.description}</p>
-              </div>
-            )}
-            <div className="mt-4 flex items-center justify-between">
-              <div className="rounded-3xl border border-gray-700 px-2 py-1 text-xs text-gray-700">
-                {exchangeData.status}
-              </div>
-              <button
-                type="button"
-                className="rounded bg-primary px-4 py-1 text-white hover:bg-indigo-700 focus:bg-indigo-700 focus:outline-none"
-              >
-                대화하기
-              </button>
-            </div>
-          </li>
-        );
-      })}
-    </ul>
+            </li>
+          );
+        })}
+      </ul>
+      <ConfirmationModal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        message={modalMessage}
+        cancelButtonText="취소"
+        confirmButtonText="확인"
+      />
+    </>
   );
 }
