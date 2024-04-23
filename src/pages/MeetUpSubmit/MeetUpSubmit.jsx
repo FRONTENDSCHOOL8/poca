@@ -49,7 +49,7 @@ export default function MeetUpSubmit() {
   const handleFocus = (e) => {
     e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
-
+  // onFocus={handleFocus}
   const handleAddressSearch = () => {
     new window.daum.Postcode({
       oncomplete: function (data) {
@@ -335,8 +335,8 @@ export default function MeetUpSubmit() {
             redirectToInformUs(); // 성공 시 리디렉션
           }
         }}
-        confirmButtonText={modalType === 'confirm' ? 'Continue' : 'OK'}
-        cancelButtonText="Cancel"
+        confirmButtonText={modalType === 'confirm' ? '확인' : 'OK'}
+        // cancelButtonText="Cancel"
       />
     </div>
   );
