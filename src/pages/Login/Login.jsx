@@ -54,6 +54,10 @@ export default function Login() {
     }
   };
 
+  const handleRegisterButton = () => {
+    navigate('/register');
+  };
+
   return (
     <div className="flex h-screen flex-col items-center justify-center bg-tertiary">
       <Link to="/" className="mb-72pxr">
@@ -85,9 +89,9 @@ export default function Login() {
       </form>
 
       <div className="mt-18pxr text-xs font-medium text-neutral-800">
-        <span>계정찾기</span>
+        <button>계정찾기</button>
         <span className="mx-10pxr">ㅣ</span>
-        <span>회원가입</span>
+        <button onClick={handleRegisterButton}>회원가입</button>
       </div>
 
       <div className="mt-44pxr flex items-center">

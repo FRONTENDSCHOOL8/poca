@@ -28,7 +28,7 @@ export default function CollectBook() {
                     <img
                       className="h-full w-full rounded object-contain"
                       src={`https://shoong.pockethost.io/api/files/collectBook/${item.id}/${item.thumbNail}`}
-                      alt="콜렉트북 커버 사진"
+                      alt={`제목이 ${item.title}인 콜렉트북 커버 사진`}
                       title={item.title}
                     />
                   </Link>

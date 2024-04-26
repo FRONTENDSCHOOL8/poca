@@ -1,6 +1,6 @@
 // 버튼 컴포넌트
 export default function Button({
-  type,
+  type = 'button',
   isSmall,
   isDisabled,
   bgClassName = '',
@@ -8,6 +8,7 @@ export default function Button({
   customClassNames = '',
   children,
   onClick,
+  ...restProps
 }) {
   let width, height, fontWeight, backgroundColor, textColor;
   if (isSmall) {
@@ -29,7 +30,13 @@ export default function Button({
     `${textColor} ${backgroundColor} ${customClassNames} ${defaultClassNames}`.trim();
 
   return (
-    <button type={type} className={classNames} onClick={onClick}>
+    <button
+      type={type}
+      className={classNames}
+      onClick={onClick}
+      disabled={isDisabled}
+      {...restProps}
+    >
       {children}
     </button>
   );

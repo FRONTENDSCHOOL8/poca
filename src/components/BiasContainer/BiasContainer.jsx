@@ -1,26 +1,72 @@
-import { globalState } from '@/store/store';
+import { globalState, isLogin } from '@/store/store';
 import Bias from '../Bias/Bias';
 import { useRef } from 'react';
+import { useState } from 'react';
 
 export default function BiasContainer({ photoCardsData }) {
   const { change } = globalState();
+  const { init } = isLogin();
   const biasGroup = useRef(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const isGroup =
+    init && JSON.parse(localStorage.getItem('auth')).user.biasGroup !== '';
+  const bias = isGroup
+    ? JSON.parse(localStorage.getItem('auth')).user.biasGroup
+    : null;
+
+  // console.log('bias: ', bias);
+
+  const filterData = isGroup
+    ? photoCardsData.filter((item) => {
+        if (item.groupName === bias) return true;
+      })
+    : null;
+  // console.log('filterData: ', filterData);
+
+  const [groupId, setGroupId] = useState(isGroup ? filterData[0].id : null);
+  const [groupLogoImage, setGroupLogoImage] = useState(
+    isGroup ? filterData[0].logoImage : null
+  );
+
   const handleSelect = (e) => {
-    if (e.target.value) {
-      biasGroup.current.src = e.target.value;
-      change(e.target.id);
-    } else {
-      biasGroup.current.src = e.target.src;
-      change(e.target.title);
+    // 클릭과 키보드를 모두 사용가능하게 하기 위해 삼항식 사용
+    biasGroup.current.src = e.target.value ? e.target.value : e.target.src;
+    change(e.target.value ? e.target.id : e.target.title);
+
+    // localStorage에 있는 유저의 최애그룹 수정 (실제 DB에 반영 X)
+    if (isGroup) {
+      const authUser = {
+        ...JSON.parse(localStorage.getItem('auth')).user,
+        biasGroup: e.target.value ? e.target.id : e.target.title,
+      };
+      const auth = {
+        ...JSON.parse(localStorage.getItem('auth')),
+        user: authUser,
+      };
+      localStorage.setItem('auth', JSON.stringify(auth));
     }
   };
 
   return (
     <>
       <div className="draggable flex items-center text-center">
-        <Bias fakeRef={biasGroup}>그룹</Bias>
+        <Bias
+          fakeRef={biasGroup}
+          src={
+            groupId
+              ? `https://shoong.pockethost.io/api/files/groups/${groupId}/${groupLogoImage}`
+              : '/myBias.jpg'
+          }
+        >
+          그룹
+        </Bias>
 
-        <ul className="biasContainer flex h-100pxr items-center overflow-x-scroll">
+        {/* <ul className=" flex h-100pxr items-center overflow-x-scroll"> */}
+        <ul
+          className={`flex h-100pxr items-center overflow-y-hidden overflow-x-scroll ${isHovered ? 'showScrollbar' : ''}`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           {photoCardsData.map((item) => {
             return (
               <li key={item.id}>

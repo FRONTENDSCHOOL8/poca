@@ -1,6 +1,6 @@
+import pb from '@/api/pocketbase';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import pb from '@/api/pocketbase';
 
 export default function FloatingButton({ isAuth }) {
   const defaultImage = '/icons/floatingDefault.jpg';
