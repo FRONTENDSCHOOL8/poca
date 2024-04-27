@@ -16,7 +16,7 @@ export default function Home() {
   const phocaDataByLikeCount = usePhocaDataByLikeCount();
 
   return (
-    <div className="mt-55pxr min-w-0 ">
+    <div className="desktop:mt-0 mt-55pxr min-w-0">
       <FloatingButton isAuth={init} />
       <Carousel />
       <VerticalCarousel />
