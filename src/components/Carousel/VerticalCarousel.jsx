@@ -41,7 +41,6 @@ export default function VerticalCarousel() {
     swiper.initialize();
   }, [meetUps]);
 
-  console.log(meetUps);
   return (
     <section className="mx-auto mt-10 w-5/6 rounded-3xl  border border-primary  bg-white py-2 pt-1 text-center text-contentPrimary shadow-md">
       <swiper-container ref={swiperRef} init="false">
