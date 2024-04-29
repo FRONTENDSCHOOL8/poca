@@ -12,7 +12,7 @@ export default function MeetUpSubmit() {
   const [memberName, setMemberName] = useState('');
   const [cafeName, setCafeName] = useState('');
   const [cafeAddress, setCafeAddress] = useState('');
-  const [cafeAddressDetail, setCafeAddressDetail] = useState(''); // 추가된 세부 주소 상태
+  const [cafeAddressDetail, setCafeAddressDetail] = useState('');
   const [cafeDuration, setCafeDuration] = useState('');
   const [sourceURL, setSourceURL] = useState('');
 
@@ -90,15 +90,12 @@ export default function MeetUpSubmit() {
     } catch (error) {
       console.error('밋업 제출 중 오류가 발생했습니다:', error);
       setModalMessage('밋업 제출 중 오류가 발생했습니다.');
-      setModalType('error'); // 설정 변경
+      setModalType('error');
       setIsModalOpen(true);
     }
   };
-
   const redirectToInformUs = () => {
-    setTimeout(() => {
-      navigate('/informUs');
-    }, 50);
+    navigate('/informUs');
   };
 
   const isSubmitEnabled =
@@ -330,13 +327,12 @@ export default function MeetUpSubmit() {
         message={modalMessage}
         onConfirm={() => {
           if (modalType === 'error') {
-            setIsModalOpen(false); // 오류 시 모달만 닫기
+            setIsModalOpen(false);
           } else {
-            redirectToInformUs(); // 성공 시 리디렉션
+            redirectToInformUs();
           }
         }}
         confirmButtonText={modalType === 'confirm' ? '확인' : 'OK'}
-        // cancelButtonText="Cancel"
       />
     </div>
   );

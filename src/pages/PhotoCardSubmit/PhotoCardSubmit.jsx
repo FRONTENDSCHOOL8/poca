@@ -1,12 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLoaderData } from 'react-router';
 import pb from '@/api/pocketbase';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
-import { useLoaderData } from 'react-router';
+import ImageUploader from '@/components/ImageUploader/ImageUploader';
+import GroupSelector from '@/components/GroupSelector/GroupSelector';
+import SubmitInput from '@/components/SubmitInput/SubmitInput';
 
 export default function PhotoCardSubmit() {
   const groups = useLoaderData();
+  // console.log('groups', groups);
   const [image, setImage] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState('');
   const [memberName, setMemberName] = useState('');
@@ -15,17 +19,19 @@ export default function PhotoCardSubmit() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
   const [modalType, setModalType] = useState('confirm');
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   const memberNameInputRef = useRef(null);
   const cardNameInputRef = useRef(null);
 
+  //그룹 선택에 따른 포커스 관리
   useEffect(() => {
     if (selectedGroup) {
       memberNameInputRef.current.focus();
     }
   }, [selectedGroup]);
 
+  //카드 타입 선택에 따른 포커스 관리
   useEffect(() => {
     if (cardType) {
       cardNameInputRef.current.focus();
@@ -40,10 +46,11 @@ export default function PhotoCardSubmit() {
     setSelectedGroup(group.id);
   };
 
-  const handleCardTypeSelect = (type, e) => {
+  const handleCardTypeSelect = (type) => {
     setCardType(type);
   };
 
+  //제출 버튼 활성화
   const isSubmitEnabled =
     image && selectedGroup && memberName && cardType && cardName;
 
@@ -75,9 +82,7 @@ export default function PhotoCardSubmit() {
   };
 
   const redirectToInformUs = () => {
-    setTimeout(() => {
-      navigate('/informUs');
-    }, 50);
+    navigate('/informUs');
   };
 
   return (
@@ -87,35 +92,7 @@ export default function PhotoCardSubmit() {
         포토카드를 등록해 주세요 ✍️
       </h1>
       <div className="mb-8 flex justify-center">
-        <label
-          className="flex h-96 w-64 cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-200 text-center leading-normal"
-          tabIndex="0"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              document.getElementById('file-input').click();
-            }
-          }}
-        >
-          {image ? (
-            <img
-              src={URL.createObjectURL(image)}
-              alt="Uploaded"
-              className="h-full w-full rounded-lg object-cover object-center"
-            />
-          ) : (
-            <div className="flex flex-col">
-              <span className="text-xl text-gray400">+</span>
-              <span className="text-gray400">포토카드 이미지 첨부</span>
-            </div>
-          )}
-          <input
-            type="file"
-            id="file-input"
-            onChange={handleFileChange}
-            className="hidden"
-          />
-        </label>
+        <ImageUploader image={image} setImage={setImage} />
       </div>
 
       {image && (
@@ -125,33 +102,11 @@ export default function PhotoCardSubmit() {
               어떤 그룹인가요?
             </h2>
 
-            <div className="mx-auto mb-8 w-352pxr overflow-x-auto px-1 pt-1">
-              <ul className="mx-auto flex gap-6">
-                {groups.map((item, index) => (
-                  <li key={index} className="flex flex-col items-center">
-                    <button
-                      onClick={() => handleGroupSelect(item)}
-                      className={`flex h-[54px] w-[54px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 ${
-                        selectedGroup === item.id
-                          ? 'bg-gradient-to-b from-red-400 to-indigo-500 p-1'
-                          : 'bg-gray-200 p-0.5'
-                      }`}
-                    >
-                      <img
-                        src={`https://shoong.pockethost.io/api/files/groups/${item.id}/${item.logoImage}`}
-                        alt={item.groupName}
-                        className="h-full w-full rounded-full object-cover"
-                      />
-                    </button>
-                    <span
-                      className={`${selectedGroup === item.id ? 'font-black' : 'font-semibold'} mt-2 whitespace-nowrap text-sm text-gray-700`}
-                    >
-                      {item.groupName}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <GroupSelector
+              groups={groups}
+              selectedGroup={selectedGroup}
+              onSelect={handleGroupSelect}
+            />
           </div>
         </>
       )}
@@ -178,11 +133,11 @@ export default function PhotoCardSubmit() {
             <h2 className="mb-4 pb-2 pt-8 text-start text-2xl font-b02 text-gray600">
               카드 종류를 알려주세요!
             </h2>
-            <div className="card-type-container mb-6 flex w-352pxr space-x-4 overflow-x-auto whitespace-nowrap">
+            <div className=" mb-6 flex w-352pxr space-x-4 overflow-x-auto whitespace-nowrap">
               {['앨범', '특전', '팬싸', '시즌그리팅', '기타'].map((type) => (
                 <button
                   key={type}
-                  onClick={(e) => handleCardTypeSelect(type, e)}
+                  onClick={(e) => handleCardTypeSelect(type)}
                   className={`rounded-full border hover:bg-secondary hover:text-white ${
                     cardType === type
                       ? 'bg-secondary text-white'

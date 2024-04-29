@@ -64,12 +64,13 @@ export default function BiasContainer({ photoCardsData }) {
         {/* <ul className=" flex h-100pxr items-center overflow-x-scroll"> */}
         <ul
           className={`flex h-100pxr items-center overflow-y-hidden overflow-x-scroll ${isHovered ? 'showScrollbar' : ''}`}
+          style={{ maxWidth: '1200px' }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           {photoCardsData.map((item) => {
             return (
-              <li key={item.id}>
+              <li key={item.id} >
                 <Bias
                   alt={`${item.groupName} 로고`}
                   style={`hover:translate-y-1 duration-200 h-58pxr rounded-full border m-auto cursor-pointer `}
