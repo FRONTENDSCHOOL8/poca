@@ -6,6 +6,7 @@ import SortingBar from '../SortingBar/SortingBar';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 import { searchStore, sorting } from '@/store/store';
+import './Responsive.css';
 
 export default function PhocaContainerEx({
   phocaImgSrc,
@@ -59,13 +60,12 @@ export default function PhocaContainerEx({
 
   return (
     <>
-
-      <div className="mb-7 flex flex-col justify-center mx-auto" style={{ maxWidth: '1280px' }} >
-      <SortingBar phoca={phoca} SetPhoca={SetPhoca} biasData={biasData} />
-      <ul
-  ref={scrollRef}
-  className="grid-container"
->
+      <div
+        className="mx-auto mb-7 flex flex-col justify-center"
+        style={{ maxWidth: '1280px' }}
+      >
+        <SortingBar phoca={phoca} SetPhoca={SetPhoca} biasData={biasData} />
+        <ul ref={scrollRef} className="grid-container">
           {searchResult.map((group, index) => {
             if (index < phocaNumber) {
               return (
@@ -95,7 +95,10 @@ export default function PhocaContainerEx({
 
       <Toaster />
 
-      <div className="relative flex justify-end px-20pxr pb-25pxr mx-auto " style={{ maxWidth: '1280px' }}>
+      <div
+        className="relative mx-auto flex justify-end px-20pxr pb-25pxr "
+        style={{ maxWidth: '1280px' }}
+      >
         <button
           ref={moreRef}
           onClick={handleMore}

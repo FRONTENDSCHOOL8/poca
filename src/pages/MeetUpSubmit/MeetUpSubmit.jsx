@@ -10,6 +10,7 @@ import { useAddressSearch } from './useAddressSearch';
 
 export default function MeetUpSubmit() {
   const groups = useLoaderData();
+
   const [image, setImage] = useState(null);
   const [selectedGroup, setSelectedGroup] = useState('');
   const [memberName, setMemberName] = useState('');
@@ -141,34 +142,6 @@ export default function MeetUpSubmit() {
               selectedGroup={selectedGroup}
               onSelect={handleGroupSelect}
             />
-            {/* <div className="mx-auto mb-12 w-352pxr overflow-x-auto px-0.5 pt-1">
-              <ul className="mx-auto flex gap-6">
-                {groups.map((item, index) => (
-                  <li key={index} className="flex flex-col items-center">
-                    <button
-                      onClick={() => handleGroupSelect(item)}
-                      onFocus={handleFocus}
-                      className={`flex h-[52px] w-[52px] items-center justify-center overflow-hidden rounded-full transition-transform duration-300 hover:scale-90 ${
-                        selectedGroup === item.id
-                          ? 'bg-gradient-to-b from-red-400 to-indigo-500 p-1'
-                          : 'bg-gray-200 p-0.5'
-                      }`}
-                    >
-                      <img
-                        src={`https://shoong.pockethost.io/api/files/groups/${item.id}/${item.logoImage}`}
-                        alt={item.groupName}
-                        className="h-full w-full rounded-full object-cover"
-                      />
-                    </button>
-                    <span
-                      className={`${selectedGroup === item.id ? 'font-black' : 'font-semibold'} mt-2 whitespace-nowrap text-sm text-gray-700`}
-                    >
-                      {item.groupName}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div> */}
           </div>
         </>
       )}

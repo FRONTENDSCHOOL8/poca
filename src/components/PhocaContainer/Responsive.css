@@ -1,0 +1,45 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 4px;
+  overflow-y: scroll;
+  height: 700px;
+}
+
+@media (min-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+@media (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .exchange-page {
+    padding-top: 75px;
+    padding-left: 40px; 
+    padding-right: 40px; 
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid-container {
+    grid-template-columns: repeat(7, 1fr);
+  }
+}
+
+.exchange-page {
+  text-align: center;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
