@@ -91,7 +91,11 @@ export default function PhotoCardSubmit() {
         포토카드를 등록해 주세요 ✍️
       </h1>
       <div className="mb-8 flex justify-center">
-        <ImageUploader image={image} setImage={setImage} />
+        <ImageUploader
+          image={image}
+          setImage={setImage}
+          uploadText={'포토카드 이미지 첨부'}
+        />
       </div>
 
       {image && (

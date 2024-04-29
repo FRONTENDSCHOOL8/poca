@@ -4,6 +4,8 @@ import pb from '@/api/pocketbase';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import { useLoaderData } from 'react-router';
+import ImageUploader from '@/components/ImageUploader/ImageUploader';
+import GroupSelector from '@/components/GroupSelector/GroupSelector';
 
 export default function MeetUpSubmit() {
   const groups = useLoaderData();
@@ -114,36 +116,11 @@ export default function MeetUpSubmit() {
         생일카페를 추가해 주세요! 🥳
       </h1>
       <div className="mb-8 flex justify-center">
-        <label
-          className="flex h-96 w-64 cursor-pointer flex-col items-center justify-center rounded-lg bg-gray-200 text-center leading-normal"
-          tabIndex="0"
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              document.getElementById('file-input').click();
-            }
-          }}
-        >
-          {image ? (
-            <img
-              src={URL.createObjectURL(image)}
-              alt="Uploaded"
-              className="h-full w-full rounded-lg object-cover object-center"
-            />
-          ) : (
-            <div className="flex flex-col">
-              <span className="text-xl text-gray400">+</span>
-              <span className="text-gray400">생일카페 관련 이미지 첨부</span>
-            </div>
-          )}
-          <input
-            type="file"
-            id="file-input"
-            onChange={handleFileChange}
-            onFocus={handleFocus}
-            className="hidden"
-          />
-        </label>
+        <ImageUploader
+          image={image}
+          setImage={setImage}
+          uploadText={'생일카페 관련 이미지 첨부'}
+        />
       </div>
       {image && (
         <>
@@ -169,8 +146,12 @@ export default function MeetUpSubmit() {
             <h2 className="mb-4 pb-2 pt-6 text-start text-2xl font-b02 text-gray600">
               어떤 그룹인가요?
             </h2>
-
-            <div className="mx-auto mb-12 w-352pxr overflow-x-auto px-0.5 pt-1">
+            <GroupSelector
+              groups={groups}
+              selectedGroup={selectedGroup}
+              onSelect={handleGroupSelect}
+            />
+            {/* <div className="mx-auto mb-12 w-352pxr overflow-x-auto px-0.5 pt-1">
               <ul className="mx-auto flex gap-6">
                 {groups.map((item, index) => (
                   <li key={index} className="flex flex-col items-center">
@@ -197,7 +178,7 @@ export default function MeetUpSubmit() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
           </div>
         </>
       )}
