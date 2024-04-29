@@ -6,6 +6,7 @@ import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal'
 import { useLoaderData } from 'react-router';
 import ImageUploader from '@/components/ImageUploader/ImageUploader';
 import GroupSelector from '@/components/GroupSelector/GroupSelector';
+import { useAddressSearch } from './useAddressSearch';
 
 export default function MeetUpSubmit() {
   const groups = useLoaderData();
@@ -24,6 +25,10 @@ export default function MeetUpSubmit() {
   const navigate = useNavigate();
 
   const elementWrap = useRef(null);
+  const [address, setAddress, handleAddressSearch] = useAddressSearch(
+    elementWrap,
+    setCafeAddress
+  );
   const memberNameInputRef = useRef(null);
   const cafeNameInputRef = useRef(null);
 
@@ -50,21 +55,6 @@ export default function MeetUpSubmit() {
 
   const handleFocus = (e) => {
     e.target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
-  // onFocus={handleFocus}
-  const handleAddressSearch = () => {
-    new window.daum.Postcode({
-      oncomplete: function (data) {
-        let fullAddress =
-          data.userSelectedType === 'R' ? data.roadAddress : data.jibunAddress;
-        setCafeAddress(fullAddress);
-        elementWrap.current.style.display = 'none';
-      },
-      width: '100%',
-      height: '100%',
-    }).embed(elementWrap.current);
-
-    elementWrap.current.style.display = 'block';
   };
 
   const handleSubmit = async (e) => {
