@@ -6,7 +6,6 @@ import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import ImageUploader from '@/components/ImageUploader/ImageUploader';
 import GroupSelector from '@/components/GroupSelector/GroupSelector';
-import SubmitInput from '@/components/SubmitInput/SubmitInput';
 
 export default function PhotoCardSubmit() {
   const groups = useLoaderData();

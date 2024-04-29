@@ -1,4 +1,8 @@
-export default function ImageUploader({ image, setImage }) {
+export default function ImageUploader({
+  image,
+  setImage,
+  uploadText = '이미지 첨부',
+}) {
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
   };
@@ -22,8 +26,8 @@ export default function ImageUploader({ image, setImage }) {
         />
       ) : (
         <div className="flex flex-col">
-          <span className="text-xl text-gray400">+</span>
-          <span className="text-gray400">포토카드 이미지 첨부</span>
+          <span className="text-xl text-gray-400">+</span>
+          <span className="text-gray-400">{uploadText}</span>
         </div>
       )}
       <input
