@@ -96,18 +96,18 @@ export default function PhocaContainerEx({
       <Toaster />
 
       <div
-        className="relative mx-auto flex justify-end px-20pxr pb-25pxr "
+        className="relative mx-auto flex w-full justify-end px-20pxr pb-25pxr"
         style={{ maxWidth: '1280px' }}
       >
         <button
           ref={moreRef}
           onClick={handleMore}
-          className="absolute left-[50%] mb-5 -translate-x-[50%] rounded-full border-2 border-primary bg-white px-4  py-1 text-primary duration-200 hover:bg-primary hover:text-white"
+          className="absolute left-[50%] mb-5 -translate-x-[50%] rounded-full border-2 border-primary bg-white px-4 py-1 text-primary duration-200 hover:bg-primary hover:text-white"
         >
           더 보기
         </button>
 
-        <span className="inline-block py-1 font-bold  text-gray-500">
+        <span className="inline-block py-1 font-bold text-gray-500">
           전체 {searchResult.length}장
         </span>
       </div>
