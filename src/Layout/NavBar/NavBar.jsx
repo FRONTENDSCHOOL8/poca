@@ -18,7 +18,7 @@ export default function NavBar() {
     },
   ];
   return (
-    <div className="fixed bottom-0 z-10 w-full bg-white shadow-navShadow">
+    <div className="fixed bottom-0 z-10 w-full bg-white shadow-navShadow desktop:hidden">
       <ul className="flex items-center justify-between py-1">
         {navItems.map((item) => (
           <NavBarItem

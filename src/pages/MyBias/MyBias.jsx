@@ -56,15 +56,16 @@ export default function PickMyBias() {
   };
 
   return (
-    <div className="flex flex-col items-center px-6 pt-8">
-      <DetailHeader title="내 최애" />
+    <div className="flex flex-col items-center px-6 pt-8 desktop:m-auto desktop:h-800pxr desktop:bg-white">
+      <DetailHeader title="내 최애" desktop="desktop:hidden" />
+
       <SearchBar
         name="search"
         placeholder="최애 그룹을 검색해 보세요!"
-        bgStyle="bg-white mt-16 mb-10"
+        bgStyle="bg-white mt-16 mb-10 desktop:bg-gray-200 desktop:w-[30%] desktop:mb-16 desktop:h-[40px] desktop:leading-7 desktop:flex desktop:"
       />
-      <div className="mx-auto max-w-6xl">
-        <ul className="mb-16 grid grid-cols-3 gap-12">
+      <div className="mx-auto max-w-6xl desktop:w-[80%]">
+        <ul className="mb-16 grid grid-cols-3 gap-12 desktop:grid-cols-5 desktop:gap-70pxr">
           {group.map((item, index) => (
             <li
               key={index}

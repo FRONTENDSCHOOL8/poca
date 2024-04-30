@@ -11,7 +11,7 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="flex h-11 w-full items-center justify-between bg-gray100 px-6 text-b01 font-m02 text-gray500 lg:px-10">
+      <div className="lg:px-10 flex h-11 w-full items-center justify-between bg-gray100 px-6 text-b01 font-m02 text-gray500">
         <div className="flex flex-grow items-center justify-center">
           <Link to="https://github.com/FRONTENDSCHOOL8/shoong?tab=readme-ov-file#readme">
             프로젝트 소개
@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="mb-2 flex flex-col items-start bg-gray500 px-6 pb-20 text-white lg:px-10">
+      <div className="lg:px-10 mb-2 flex flex-col items-start bg-gray500 px-6 pb-20 text-white">
         <div className="flex flex-col items-start justify-center pb-4 pt-5 ">
           <p className=" pt-4 text-b04 font-b03">SHOONG</p>
           <p className="mt-1 text-b01 font-b02">
@@ -39,7 +39,7 @@ export default function Footer() {
           </p>
         </div>
         <div className="w-full border-t border-white border-opacity-50"></div>
-        <div className="grid grid-cols-1 gap-4 pb-5 pt-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="md:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-4 pb-5 pt-5">
           <h3 className="col-span-full text-sb02 font-sb02">팀원 소개</h3>
           {teamMembers.map((member) => (
             <div key={member.name} className="mt-2 text-b02 font-b02">

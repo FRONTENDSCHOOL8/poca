@@ -7,7 +7,7 @@ export default function NavigationTile({ to, text, className }) {
   return (
     <Link to={to} className={customStyle}>
       <span>{text}</span>
-      <RightArrow className="ml-2" />
+      <RightArrow className="ml-2 desktop:hidden" />
     </Link>
   );
 }

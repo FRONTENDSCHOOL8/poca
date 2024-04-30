@@ -4,26 +4,46 @@ import { useRef } from 'react';
 import { useState } from 'react';
 
 export default function BiasContainer({ photoCardsData }) {
-  const { change } = globalState();
-  const { init } = isLogin();
+  const { change } = globalState(); // localStorage에 bias(key)를 변경하는 함수
+  const { init } = isLogin(); // 로그인 여부
   const biasGroup = useRef(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false); // hover 시 스크롤 여부
+
+  /**
+   * 로그인 상태 → isGroup = true
+   * 비로그인 상태 → isGroup = false
+   */
   const isGroup =
     init && JSON.parse(localStorage.getItem('auth')).user.biasGroup !== '';
+
+  /**
+   * 로그인 상태 → bias = 최애 그룹명
+   * 비로그인 상태 → bias = null
+   */
   const bias = isGroup
     ? JSON.parse(localStorage.getItem('auth')).user.biasGroup
     : null;
 
-  // console.log('bias: ', bias);
-
+  /**
+   * 로그인 상태 → filterData = 최애 그룹 정보 (배열 데이터)
+   * 비로그인 상태 → filterData = null
+   */
   const filterData = isGroup
     ? photoCardsData.filter((item) => {
         if (item.groupName === bias) return true;
       })
     : null;
-  // console.log('filterData: ', filterData);
 
+  /**
+   * 로그인 상태 → groupId = 최애 그룹 id값
+   * 비로그인 상태 → groupId = null
+   */
   const [groupId, setGroupId] = useState(isGroup ? filterData[0].id : null);
+
+  /**
+   * 로그인 상태 → groupLogoImage = 최애 그룹 로고 이미지 값
+   * 비로그인 상태 → groupLogoImage = null
+   */
   const [groupLogoImage, setGroupLogoImage] = useState(
     isGroup ? filterData[0].logoImage : null
   );
@@ -31,7 +51,7 @@ export default function BiasContainer({ photoCardsData }) {
   const handleSelect = (e) => {
     // 클릭과 키보드를 모두 사용가능하게 하기 위해 삼항식 사용
     biasGroup.current.src = e.target.value ? e.target.value : e.target.src;
-    change(e.target.value ? e.target.id : e.target.title);
+    change(e.target.value ? e.target.id : e.target.title); // 선택한 그룹명
 
     // localStorage에 있는 유저의 최애그룹 수정 (실제 DB에 반영 X)
     if (isGroup) {
@@ -61,7 +81,6 @@ export default function BiasContainer({ photoCardsData }) {
           그룹
         </Bias>
 
-        {/* <ul className=" flex h-100pxr items-center overflow-x-scroll"> */}
         <ul
           className={`flex h-100pxr items-center overflow-y-hidden overflow-x-scroll ${isHovered ? 'showScrollbar' : ''}`}
           style={{ maxWidth: '1200px' }}

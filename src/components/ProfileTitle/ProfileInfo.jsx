@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import MyBias from '../MyBias/MyBias';
 import pb from '@/api/pocketbase';
 
-export default function ProfileInfo() {
+export default function ProfileInfo({ user, bias, container }) {
   const [profileImage, setProfileImage] = useState(
     '/icons/floatingDefault.jpg'
   );
   const [userName, setUserName] = useState('');
   useEffect(() => {
+    pb.autoCancellation(false);
     const fetchProfileImage = async () => {
       try {
         const userId = JSON.parse(localStorage.getItem('auth')).user.id;
@@ -24,8 +25,8 @@ export default function ProfileInfo() {
     fetchProfileImage();
   }, []);
   return (
-    <div className="flex w-full items-center justify-between">
-      <div className="flex items-center gap-x-2">
+    <div className={`flex w-full items-center justify-between ${container}`}>
+      <div className={`flex items-center gap-x-2 ${user}`}>
         <img
           className="h-54pxr w-54pxr rounded-full border-2"
           src={profileImage}
@@ -33,7 +34,7 @@ export default function ProfileInfo() {
         />
         <p className="text-b04 font-sb01 text-contentPrimary">{userName}</p>
       </div>
-      <MyBias />
+      <MyBias hide={bias} />
     </div>
   );
 }

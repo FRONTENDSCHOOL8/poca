@@ -26,8 +26,8 @@ export default function PhocaContainerEx({
 }) {
   const scrollRef = useRef(null);
   const moreRef = useRef(null);
-  const [phoca, SetPhoca] = useState(biasData);
-  const [phocaNumber, setPhocaNumber] = useState(12);
+  const [phoca, SetPhoca] = useState(biasData); // 최애 그룹 포카 정보
+  const [phocaNumber, setPhocaNumber] = useState(12); // 포카를 12개만 렌더링
   const { change } = sorting();
   const { search } = searchStore();
   const searchText = search?.toLowerCase();
