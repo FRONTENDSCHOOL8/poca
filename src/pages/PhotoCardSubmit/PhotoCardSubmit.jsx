@@ -191,6 +191,7 @@ export default function PhotoCardSubmit() {
         }}
         showCancelButton={false}
         title="✔️"
+        useNotification={true}
       />
     </div>
   );
