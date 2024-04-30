@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useLoaderData } from 'react-router';
 import { globalState } from '@/store/store';
 
-export default function MyBias() {
+export default function MyBias({ hide }) {
   const groups = useLoaderData();
   const [biasImage, setBiasImage] = useState('/myBias.jpg');
   const { init } = globalState();
@@ -19,7 +19,7 @@ export default function MyBias() {
   }, [groups, init]);
 
   return (
-    <div>
+    <div className={hide}>
       <Link
         to="/myBias"
         className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-full"
