@@ -12,7 +12,7 @@ const pxToRemFunc = (start, end) =>
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
-    screen: {
+    screens: {
       desktop: '1080px',
     },
     extend: {
