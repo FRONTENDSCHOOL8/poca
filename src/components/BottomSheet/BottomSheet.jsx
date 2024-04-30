@@ -50,7 +50,7 @@ export default function BottomSheet({
 
   return (
     // 왜 rounded에는 pxr 적용이 안 되지?
-    <div className="upSensor bg-transparent">
+    <div className="upSensor bg-transparent desktop:hidden">
       <div
         id={'bottomSheet'}
         className={`${layout} fixed z-40 flex w-full flex-col items-center rounded-tl-[30px] rounded-tr-[30px] bg-indigo-200 duration-1000`}

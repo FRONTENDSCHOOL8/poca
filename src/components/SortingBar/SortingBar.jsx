@@ -32,16 +32,28 @@ export default function SortingBar({ phoca, SetPhoca, biasData }) {
         handleLow={handleLow}
       />
 
-      <div className="flex justify-end py-10pxr pr-15pxr">
+      <div className="flex justify-end py-10pxr pr-15pxr desktop:hidden">
         <button
           ref={button}
           type="button"
           className="flex h-30pxr w-100pxr items-center justify-evenly rounded border border-zinc-500 bg-white bg-opacity-40 "
         >
           <FaSort />
-          <span className="text-sm font-medium  leading-tight">{init}</span>
+          <span className="text-sm font-medium leading-tight">{init}</span>
           <FaAngleDown />
         </button>
+      </div>
+
+      <div className="hidden justify-end py-10pxr pr-15pxr desktop:flex">
+        <select
+          id="sortOptions"
+          name="sortOptions"
+          className="flex h-30pxr w-100pxr items-center justify-evenly rounded border border-zinc-500 bg-white bg-opacity-40 "
+        >
+          <option value="newest">최신순</option>
+          <option value="popular">인기순</option>
+          <option value="oldest">오래된순</option>
+        </select>
       </div>
     </>
   );
