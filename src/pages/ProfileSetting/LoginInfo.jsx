@@ -22,16 +22,13 @@ export default function LoginInfo() {
         id: auth.user.id,
       });
     } catch (error) {
-      // console.error('Parsing authData error:', error);
+      console.error('Parsing authData error:', error);
     }
   }, []);
 
   const handleLogout = () => {
     setIsLogoutModalOpen(false);
-    localStorage.setItem(
-      '로그인',
-      JSON.stringify({ init: false, collectBook: [] })
-    );
+    localStorage.setItem('로그인', JSON.stringify({ init: false }));
     localStorage.removeItem('auth');
     pb.authStore.clear();
     window.location.href = '/login';
@@ -46,9 +43,9 @@ export default function LoginInfo() {
 
     try {
       await pb.collection('users').delete(user.id);
-      handleLogout(); // 로그아웃 처리
+      handleLogout();
     } catch (error) {
-      // console.error('Error deleting user account:', error);
+      console.error('Error deleting user account:', error);
     }
   };
 
@@ -106,6 +103,7 @@ export default function LoginInfo() {
           cancelButtonText="아니오"
           confirmButtonText="예"
           useNotification={true}
+          confirmNotificationMessage="계정이 삭제되었습니다."
         />
       </div>
     </div>

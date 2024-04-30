@@ -2474,3 +2474,8 @@ export const slangStore = create((set) => ({
       slang: [...state, newSlang],
     })),
 }));
+
+export const selectedCardStore = create((set) => ({
+  selectedCard: null,
+  setSelectedCard: (card) => set({ selectedCard: card }),
+}));
