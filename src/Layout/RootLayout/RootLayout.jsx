@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
-import NavBar from '../NavBar/NavBar';
 import { useLocation } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import DesktopHeader from '../Header/DesktopHeader';
+import Header from '../Header/Header';
+import NavBar from '../NavBar/NavBar';
 import ScrollToTop from '../ScrollToTop/ScrollToTop';
 
 export default function RootLayout() {
@@ -12,6 +13,7 @@ export default function RootLayout() {
   return (
     <>
       <Header />
+      <DesktopHeader />
       <ScrollToTop />
       <Outlet />
       {isHiddenFooter ? null : <Footer />}
