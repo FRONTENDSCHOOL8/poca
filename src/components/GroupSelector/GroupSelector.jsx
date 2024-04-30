@@ -1,6 +1,13 @@
-export default function GroupSelector({ groups, selectedGroup, onSelect }) {
+export default function GroupSelector({
+  groups,
+  selectedGroup,
+  onSelect,
+  desktop,
+}) {
   return (
-    <div className="mx-auto mb-8 w-352pxr overflow-x-auto px-1 pt-1">
+    <div
+      className={`mx-auto mb-8 w-352pxr overflow-x-auto px-1 pt-1 ${desktop}`}
+    >
       <ul className="mx-auto flex gap-6">
         {groups.map((group, index) => (
           <li key={index} className="flex flex-col items-center">
