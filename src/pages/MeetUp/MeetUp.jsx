@@ -1,25 +1,18 @@
+import MeetUpMobile from './MeetUpMobile';
+import MeetUpDesktop from './MeetUpDesktop';
 import { useLoaderData } from 'react-router';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import MeetUpMap from '@/components/MeetUpMap/MeetUpMap';
-import MeetUpItemContainer from '@/components/MeetUpItemContainer/MeetUpItemContainer';
 
 export default function MeetUp() {
   const meetUpData = useLoaderData();
 
   return (
-    <div className="relative top-55pxr h-screen-nav w-full">
-      <SearchBar
-        name={'mapSearch'}
-        placeholder={'장소,아티스트 이름'}
-        bgStyle={'absolute top-2 left-5 z-20 bg-white py-3 shadow-meetUp '}
-      />
-      <MeetUpMap meetUpData={meetUpData} />
-      <MeetUpItemContainer
-        meetUpData={meetUpData}
-        mapStyle={'overflow-auto touch-pan-x draggable'}
-      />
+    <div className="relative top-56pxr h-screen-nav @container desktop:top-0">
+      <div className="block h-full w-full @desktop:hidden">
+        <MeetUpMobile meetUpData={meetUpData} />
+      </div>
+      <div className="hidden  @desktop:block @desktop:h-screen-meetUp @desktop:w-full">
+        <MeetUpDesktop meetUpData={meetUpData} />
+      </div>
     </div>
   );
 }
-
-// 지도의 마커 클릭 시 해당 밋업 아이템으로 focus

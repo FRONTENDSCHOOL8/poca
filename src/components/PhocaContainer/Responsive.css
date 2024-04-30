@@ -1,4 +1,4 @@
-.grid-container {
+ .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
   gap: 4px;
@@ -32,7 +32,7 @@
 
 @media (min-width: 1280px) {
   .grid-container {
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(6, 1fr);
   }
 }
 
@@ -40,6 +40,7 @@
   text-align: center;
 }
 
-.dropdown:hover .dropdown-menu {
+ .dropdown:hover .dropdown-menu {
   display: block;
-}
+} 
+

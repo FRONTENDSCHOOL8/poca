@@ -23,3 +23,7 @@
   pointer-events: none;
   filter: drop-shadow(rgb(137, 137, 137) 1px 2px 5px);
 }
+
+.headerDesktop {
+  @apply desktop:px-4 desktop:py-2 desktop:shadow-md;
+}

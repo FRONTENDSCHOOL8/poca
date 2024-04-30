@@ -1,17 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { TbCurrentLocation } from 'react-icons/tb';
+import { useMap } from 'react-kakao-maps-sdk';
 
 export default function UserLocation({
   setMapCenter,
   userLocation,
   setUserLocation,
 }) {
-  useEffect(() => {
-    if (userLocation) {
-      // 사용자의 현재 위치로 지도 중심을 이동합니다.
-      setMapCenter(userLocation);
-    }
-  }, [setMapCenter, userLocation]);
+  const map = useMap();
 
   const handleCurrentLocation = () => {
     if (navigator.geolocation) {

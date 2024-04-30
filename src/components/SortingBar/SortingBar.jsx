@@ -3,6 +3,7 @@ import { FaAngleDown, FaSort, FaCircleXmark } from 'react-icons/fa6';
 import useBottomSheet from '../BottomSheet/useBottomSheet';
 import BottomSheet from '../BottomSheet/BottomSheet';
 import { sorting } from '@/store/store';
+import Dropdown from './Dropdown';
 
 export default function SortingBar({ phoca, SetPhoca, biasData }) {
   const categoryRef = useRef(null);
@@ -18,7 +19,7 @@ export default function SortingBar({ phoca, SetPhoca, biasData }) {
   };
 
   const { button, linkedBottomSheet, isOpen, setIsOpen } = useBottomSheet();
-  const { init } = sorting();
+  const { init, change } = sorting();
 
   return (
     <>
@@ -45,15 +46,12 @@ export default function SortingBar({ phoca, SetPhoca, biasData }) {
       </div>
 
       <div className="hidden justify-end py-10pxr pr-15pxr desktop:flex">
-        <select
-          id="sortOptions"
-          name="sortOptions"
-          className="flex h-30pxr w-100pxr items-center justify-evenly rounded border border-zinc-500 bg-white bg-opacity-40 "
-        >
-          <option value="newest">최신순</option>
-          <option value="popular">인기순</option>
-          <option value="oldest">오래된순</option>
-        </select>
+        <Dropdown
+          handleLatest={handleLatest}
+          handleHigh={handleHigh}
+          handleLow={handleLow}
+          change={change}
+        />
       </div>
     </>
   );

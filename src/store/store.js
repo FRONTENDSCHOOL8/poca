@@ -84,8 +84,10 @@ export const isLogin = create(
 );
 
 export const useMeetUpStore = create((set) => ({
-  selectedCafe: '',
+  selectedCafe: '', // 선택된 카드의 카페이름을 저장
   setSelectedCafe: (cafeName) => set({ selectedCafe: cafeName }),
+  selectedLocation: null, // 선택된 위치를 저장
+  setSelectedLocation: (location) => set({ selectedLocation: location }), // 위치 업데이트 메소드
 }));
 
 export const meetUpDataStore = create((set) => ({

@@ -107,7 +107,7 @@ export default function ExchangeEdit({
       >
         <fieldset>
           <legend className="sr-only">교환글 작성 폼</legend>
-          <div className="flex items-start space-x-4">
+          <div className="flex w-full items-start space-x-4">
             <div className="relative flex-1">
               <label htmlFor="exchangeArticle" className="sr-only">
                 교환 글을 입력하세요

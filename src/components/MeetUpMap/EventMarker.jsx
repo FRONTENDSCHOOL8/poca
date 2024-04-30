@@ -2,10 +2,10 @@ import { MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 
 export default function EventMarker({ meetUpData, useMeetUpStore }) {
   const handleClickMarker = (title) => {
-    localStorage.setItem('selectedCafe', title);
     useMeetUpStore.setState({ selectedCafe: title });
+    // useMeetUpStore.getState((state) => state.selectedLocation);
   };
-  console.log(meetUpData);
+
   return (
     <>
       {meetUpData.map((data) => {
@@ -22,7 +22,7 @@ export default function EventMarker({ meetUpData, useMeetUpStore }) {
                   lat: data.lat,
                   lng: data.lng,
                 }}
-                onClick={() => handleClickMarker(data.lat, data.lng)}
+                // onClick={() => handleClickMarker(data.lat, data.lng)}
               />
               <CustomOverlayMap
                 position={{ lat: data.lat, lng: data.lng }}

@@ -82,7 +82,7 @@ export default function BiasContainer({ photoCardsData }) {
         </Bias>
 
         <ul
-          className={`flex h-100pxr max-w-[1100px] items-center overflow-y-hidden overflow-x-scroll bg-pink-100 ${isHovered ? 'showScrollbar' : ''}`}
+          className={` flex h-100pxr max-w-[1100px] items-center overflow-y-hidden overflow-x-scroll ${isHovered ? 'showScrollbar' : ''}`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
