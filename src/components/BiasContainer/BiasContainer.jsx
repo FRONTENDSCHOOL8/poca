@@ -69,7 +69,7 @@ export default function BiasContainer({ photoCardsData }) {
 
   return (
     <>
-      <div className="draggable flex items-center text-center w-fit">
+      <div className="draggable flex w-fit items-center text-center">
         <Bias
           fakeRef={biasGroup}
           src={
@@ -82,14 +82,13 @@ export default function BiasContainer({ photoCardsData }) {
         </Bias>
 
         <ul
-          className={`flex h-100pxr items-center overflow-y-hidden overflow-x-scroll ${isHovered ? 'showScrollbar' : ''}`}
-          style={{ maxWidth: '1200px' }}
+          className={`flex h-100pxr max-w-[1100px] items-center overflow-y-hidden overflow-x-scroll bg-pink-100 ${isHovered ? 'showScrollbar' : ''}`}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           {photoCardsData.map((item) => {
             return (
-              <li key={item.id} >
+              <li key={item.id}>
                 <Bias
                   alt={`${item.groupName} 로고`}
                   style={`hover:translate-y-1 duration-200 h-58pxr rounded-full border m-auto cursor-pointer `}

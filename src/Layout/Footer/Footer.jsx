@@ -31,7 +31,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="lg:px-10 mb-2 flex flex-col items-start bg-gray500 px-6 pb-20 text-white">
+      <div className="lg:px-10 flex flex-col items-start bg-gray500 px-6 pb-20 text-white">
         <div className="flex flex-col items-start justify-center pb-4 pt-5 ">
           <p className=" pt-4 text-b04 font-b03">SHOONG</p>
           <p className="mt-1 text-b01 font-b02">
