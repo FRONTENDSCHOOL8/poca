@@ -1,10 +1,8 @@
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import { useEffect, useState } from 'react';
-import PocketBase from 'pocketbase';
+import pb from '@/api/pocketbase';
 import ConfirmationModal from '../../components/ConfirmationModal/ConfirmationModal';
 import ProfileSetting from './ProfileSetting';
-
-const pb = new PocketBase('https://shoong.pockethost.io');
 
 export default function LoginInfo() {
   const [user, setUser] = useState({ email: '', username: '', id: '' });
