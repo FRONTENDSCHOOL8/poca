@@ -101,7 +101,6 @@ export default function MeetUpSubmit() {
     sourceURL;
 
   return (
-    // <div className="flex w-full flex-col pb-24 pt-6">
     <div className="flex w-full flex-col pb-24 pt-6 desktop:flex-row desktop:items-center desktop:bg-white desktop:pb-20">
       <DetailHeader title="제보하기" desktop="desktop:hidden" />
       <h1 className="mx-auto mb-8 pb-4 pl-20pxr pt-16 text-2xl font-b02 text-indigo-800 desktop:hidden">
