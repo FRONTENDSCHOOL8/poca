@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 
-export default function ProfileFooter() {
+export default function ProfileFooter({ desktop }) {
   return (
     <div>
-      <div className=" flex flex-col space-y-1 bg-white bg-opacity-50 p-6">
+      <div
+        className={`flex flex-col space-y-1 bg-white bg-opacity-50 p-6 ${desktop}`}
+      >
         <div className="pb-1 text-b03 font-sb03 text-gray500">고객센터</div>
         <div className="text-m03 font-m03 text-gray400">
           평일 9:00 - 16:00 (주말, 공휴일 제외)

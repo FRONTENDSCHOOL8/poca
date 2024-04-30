@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 export default function CollectBook() {
   const [book, setBook] = useState([]);
-  const { collectBook } = isLogin();
+  const { collectBook } = isLogin(); // 유저의 콜렉트북 정보
 
   useEffect(() => {
     setBook(collectBook);

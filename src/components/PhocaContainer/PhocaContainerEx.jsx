@@ -6,6 +6,7 @@ import SortingBar from '../SortingBar/SortingBar';
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
 import { searchStore, sorting } from '@/store/store';
+import './Responsive.css';
 
 export default function PhocaContainerEx({
   phocaImgSrc,
@@ -25,8 +26,8 @@ export default function PhocaContainerEx({
 }) {
   const scrollRef = useRef(null);
   const moreRef = useRef(null);
-  const [phoca, SetPhoca] = useState(biasData);
-  const [phocaNumber, setPhocaNumber] = useState(12);
+  const [phoca, SetPhoca] = useState(biasData); // 최애 그룹 포카 정보
+  const [phocaNumber, setPhocaNumber] = useState(12); // 포카를 12개만 렌더링
   const { change } = sorting();
   const { search } = searchStore();
   const searchText = search?.toLowerCase();
@@ -53,19 +54,18 @@ export default function PhocaContainerEx({
   useEffect(() => {
     SetPhoca(biasData);
     change('최신순');
-    setPhocaNumber(12);
+    setPhocaNumber(18);
     moreRef.current.style.display = 'block';
   }, [biasData, change]);
 
   return (
     <>
-      <SortingBar phoca={phoca} SetPhoca={SetPhoca} biasData={biasData} />
-
-      <div className="mb-7 flex justify-center">
-        <ul
-          ref={scrollRef}
-          className="col-gap-8 grid h-700pxr grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-6"
-        >
+      <div
+        className="mx-auto mb-7 flex flex-col justify-center"
+        style={{ maxWidth: '1280px' }}
+      >
+        <SortingBar phoca={phoca} SetPhoca={SetPhoca} biasData={biasData} />
+        <ul ref={scrollRef} className="grid-container">
           {searchResult.map((group, index) => {
             if (index < phocaNumber) {
               return (
@@ -95,7 +95,10 @@ export default function PhocaContainerEx({
 
       <Toaster />
 
-      <div className="relative flex justify-end px-20pxr pb-25pxr">
+      <div
+        className="relative mx-auto flex justify-end px-20pxr pb-25pxr "
+        style={{ maxWidth: '1280px' }}
+      >
         <button
           ref={moreRef}
           onClick={handleMore}

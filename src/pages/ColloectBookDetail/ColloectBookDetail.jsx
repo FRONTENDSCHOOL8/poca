@@ -1,24 +1,20 @@
 // @ts-nocheck
 
 import pb from '@/api/pocketbase';
+import { useState, useRef, useEffect } from 'react';
+import { useParams, useLoaderData } from 'react-router';
 import CollectBookItemContainer from '@/components/CollectBookItemContainer/CollectBookItemContainer';
 import ConfirmationModal from '@/components/ConfirmationModal/ConfirmationModal';
 import DetailHeader from '@/components/DetailHeader/DetailHeader';
 import DragonSphere from '@/components/DragonSphere/DragonSphere';
-import ToastAlert from '@/components/ToastAlert/ToastAlert';
 import ToggleButton from '@/components/ToggleButton/ToggleButton';
-import { useState } from 'react';
-import { useRef } from 'react';
-import { useEffect } from 'react';
-import toast, { Toaster } from 'react-hot-toast';
-import { useParams } from 'react-router';
-import { useLoaderData } from 'react-router';
+import ProfileSetting from '../ProfileSetting/ProfileSetting';
 
 export default function ColloectBookDetail() {
-  const data = useLoaderData();
-  const { group, id, title } = useParams();
+  const data = useLoaderData(); // group 정보를 가져옴 (포카정보 포함)
+  const { group, id, title } = useParams(); // url에서 그룹명, id값, 콜렉트북 제목 가져옴
   const editButton = useRef(null);
-  const [phocaInfo, setPhocaInfo] = useState([]);
+  const [ownedPhotoCards, setOwnedPhotoCards] = useState([]);
   const [phocaId, setPhocaId] = useState([]);
   const [editId, setEditId] = useState([]);
   const userName = JSON.parse(localStorage.getItem('auth')).user.name;
@@ -83,10 +79,10 @@ export default function ColloectBookDetail() {
     }
   };
 
-  const collectBook = data.filter((item) => {
+  const groupInfo = data.filter((item) => {
     if (item.groupName === group) return true;
   });
-  const phocaData = collectBook[0].expand.photoCards;
+  const phocaData = groupInfo[0].expand.photoCards;
 
   useEffect(() => {
     // 업데이트 발생 시 실시간으로 보유한 포카 정보 렌더링
@@ -97,7 +93,7 @@ export default function ColloectBookDetail() {
           const secondPocaInfo = e.record.expand.cardInfo.map((item) => {
             return item;
           });
-          setPhocaInfo(secondPocaInfo);
+          setOwnedPhotoCards(secondPocaInfo);
 
           const secondPocaID = secondPocaInfo.map((item) => {
             return item.id;
@@ -105,7 +101,7 @@ export default function ColloectBookDetail() {
           setPhocaId(secondPocaID);
           setEditId(secondPocaID);
         } else {
-          setPhocaInfo('');
+          setOwnedPhotoCards('');
           setPhocaId('');
           setEditId('');
         }
@@ -121,12 +117,12 @@ export default function ColloectBookDetail() {
 
     pbData
       .then((res) => {
-        const firstPocaInfo = res.expand.cardInfo.map((item) => {
+        const firstOwnedPhotoCards = res.expand.cardInfo.map((item) => {
           return item;
         });
-        setPhocaInfo(firstPocaInfo);
+        setOwnedPhotoCards(firstOwnedPhotoCards);
 
-        const firstPocaID = firstPocaInfo.map((item) => {
+        const firstPocaID = firstOwnedPhotoCards.map((item) => {
           return item.id;
         });
         setPhocaId(firstPocaID);
@@ -141,7 +137,71 @@ export default function ColloectBookDetail() {
 
   return (
     <>
-      <div className="draggable relative h-[100%]">
+      {/* 데스크톱 화면 */}
+      <div className="max-w-1280pxr mx-auto hidden justify-center bg-white desktop:flex desktop:gap-30pxr">
+        {/* <div className="mt-100pxr w-370pxr"> */}
+        <div className="w-310pxr border-r border-neutral-300 pt-100pxr">
+          <ProfileSetting />
+        </div>
+        <div className="draggable relative h-[100%] w-970pxr">
+          <ConfirmationModal
+            isOpen={isSaveModalOpen}
+            onClose={() => setIsSaveModalOpen(false)}
+            onConfirm={handleSave}
+            message="저장하시겠습니까?"
+            cancelButtonText="취소"
+            confirmButtonText="저장"
+            modalStyles="rounded-lg bg-white p-6 shadow-lg w-300pxr"
+          />
+
+          <div className="mt-130pxr flex flex-col pl-20pxr">
+            <div className="leading-r33pxr mb-8pxr h-33pxr w-95pxr text-2xl font-extrabold text-zinc-800">
+              콜렉트북
+            </div>
+            <div className="flex justify-between">
+              <div className="text-32pxr font-bold leading-44pxr text-primary">
+                {title}
+              </div>
+              <ToggleButton style="h-28pxr w-144pxr mr-80pxr" />
+            </div>
+          </div>
+
+          <DragonSphere
+            group={group}
+            phocaData={phocaData}
+            ownedPhotoCards={ownedPhotoCards}
+            handleOpenModal={handleOpenModal}
+            fakeRef={editButton}
+            logoImage={logoImage[0].logoImage}
+            groupId={logoImage[0].id}
+            style="mx-0pxr mt-16pxr mb-18pxr ml-20pxr"
+          />
+
+          <CollectBookItemContainer
+            title={`${userName}님이 보유 중인 포카️❣️`}
+            state={true}
+            phocaData={phocaData}
+            phocaId={phocaId}
+            handleClickCard={handleClickCard}
+            handlePressCard={handlePressCard}
+            imgFilter="h-full w-full object-cover rounded-xl"
+            pb="pb-50pxr"
+          />
+          <CollectBookItemContainer
+            title="갖고 있는 포카를 선택하세요!"
+            state={false}
+            phocaData={phocaData}
+            phocaId={phocaId}
+            handleClickCard={handleClickCard}
+            handlePressCard={handlePressCard}
+            imgFilter="h-full w-full object-cover rounded-xl grayscale"
+            pb="pb-60pxr"
+          />
+        </div>
+      </div>
+
+      {/* 모바일 화면 */}
+      <div className="draggable relative h-[100%] desktop:hidden">
         <ConfirmationModal
           isOpen={isSaveModalOpen}
           onClose={() => setIsSaveModalOpen(false)}
@@ -149,9 +209,8 @@ export default function ColloectBookDetail() {
           message="저장하시겠습니까?"
           cancelButtonText="취소"
           confirmButtonText="저장"
+          modalStyles="rounded-lg bg-white p-6 shadow-lg w-250pxr"
         />
-
-        <Toaster />
 
         <DetailHeader title={title} />
         <ToggleButton />
@@ -159,7 +218,7 @@ export default function ColloectBookDetail() {
         <DragonSphere
           group={group}
           phocaData={phocaData}
-          phocaInfo={phocaInfo}
+          ownedPhotoCards={ownedPhotoCards}
           handleOpenModal={handleOpenModal}
           fakeRef={editButton}
           logoImage={logoImage[0].logoImage}

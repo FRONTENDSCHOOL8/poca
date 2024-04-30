@@ -13,6 +13,7 @@ export default function DetailHeader({
   isRadio = false,
   itemList = [],
   text = '',
+  desktop,
 }) {
   const navigate = useNavigate();
   const { button, linkedBottomSheet, isOpen, setIsOpen } = useBottomSheet();
@@ -23,7 +24,7 @@ export default function DetailHeader({
   return (
     <>
       <div
-        className={`fixed top-0 flex h-12 w-full items-center shadow ${flexLayout} z-10 bg-white px-5`}
+        className={`fixed top-0 flex h-12 w-full items-center shadow ${flexLayout} z-10 bg-white px-5 ${desktop}`}
       >
         <button className={`w-16pxr ${absolute}`}>
           <LeftArrow onClick={() => navigate(-1)} className="cursor-pointer" />

@@ -20,6 +20,7 @@ export default function Home() {
       <FloatingButton isAuth={init} />
       <Carousel />
       <VerticalCarousel />
+
       <MainCardContainer
         title="최신 업데이트 포카"
         subTitle="두근두근 오늘의 신상 포카는...!"

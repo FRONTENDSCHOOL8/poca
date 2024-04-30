@@ -15,8 +15,7 @@ export default function CollectBookItemContainer({
       <div className="mb-17pxr pl-20pxr text-xl font-bold leading-7 text-zinc-800">
         {title}
       </div>
-      <ul className="mx-20pxr flex h-280pxr flex-wrap justify-start gap-10pxr overflow-y-scroll">
-        {/* <ul className="mx-20pxr flex h-280pxr flex-wrap justify-center gap-10pxr overflow-y-scroll"> */}
+      <ul className="mx-20pxr flex h-280pxr flex-wrap justify-start gap-10pxr overflow-y-scroll desktop:h-auto">
         {phocaData.map((item) => {
           if (phocaId.includes(item.id) === state) {
             return (

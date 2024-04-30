@@ -33,8 +33,12 @@ import KakaoRedirect from './pages/Login/KakaoRedirect';
 // import NaverRedirect from './pages/Login/NaverRedirect';
 import InstaRedirect from './pages/Login/InstaRedirect';
 import { register } from 'swiper/element/bundle';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 register();
 
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: '/',
@@ -148,7 +152,10 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <RouterProvider router={router} />
-  </StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>
+    <ReactQueryDevtools initialIsOpen={false} buttonPosition="bottom-right" />
+  </QueryClientProvider>
 );
