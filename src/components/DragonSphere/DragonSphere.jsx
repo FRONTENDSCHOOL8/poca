@@ -1,20 +1,25 @@
 import { Circle } from 'rc-progress';
 
 export default function DragonSphere({
-  phocaInfo,
+  ownedPhotoCards,
   phocaData,
   group,
   handleOpenModal,
   fakeRef,
   logoImage,
   groupId,
+  style,
 }) {
   return (
     <>
-      <div className="m-auto mb-27pxr flex h-100pxr w-340pxr rounded-xl border-2 border-slate-300 bg-white">
+      <div
+        className={`m-auto mb-27pxr flex h-100pxr w-340pxr rounded-xl border-2 border-slate-300 bg-white ${style}`}
+      >
         <div className="relative flex items-center pl-15pxr">
           <Circle
-            percent={Math.round((phocaInfo.length / phocaData.length) * 100)}
+            percent={Math.round(
+              (ownedPhotoCards.length / phocaData.length) * 100
+            )}
             strokeWidth={10}
             trailColor="#DCD6FA"
             trailWidth={10}
@@ -32,11 +37,11 @@ export default function DragonSphere({
           <div className="flex flex-col gap-8pxr">
             <div className="text-base font-extrabold leading-snug text-indigo-500">
               {group} 드볼{' '}
-              {Math.round((phocaInfo.length / phocaData.length) * 100)}%
+              {Math.round((ownedPhotoCards.length / phocaData.length) * 100)}%
             </div>
 
             <div className="text-sm font-bold leading-tight text-neutral-800">
-              {phocaInfo.length}/{phocaData.length} 개
+              {ownedPhotoCards.length}/{phocaData.length} 개
             </div>
           </div>
 
@@ -44,8 +49,6 @@ export default function DragonSphere({
             ref={fakeRef}
             onClick={handleOpenModal}
             className="'flex duration-200'; h-7 w-64pxr items-center justify-center rounded-md bg-zinc-400 text-sm font-semibold text-white hover:bg-primary hover:text-white"
-            // className="flex h-7 w-64pxr items-center justify-center rounded-md bg-zinc-400 text-sm font-semibold text-white"
-            // disabled
           >
             완료
           </button>

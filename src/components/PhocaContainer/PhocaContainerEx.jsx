@@ -25,8 +25,8 @@ export default function PhocaContainerEx({
 }) {
   const scrollRef = useRef(null);
   const moreRef = useRef(null);
-  const [phoca, SetPhoca] = useState(biasData);
-  const [phocaNumber, setPhocaNumber] = useState(12);
+  const [phoca, SetPhoca] = useState(biasData); // 최애 그룹 포카 정보
+  const [phocaNumber, setPhocaNumber] = useState(12); // 포카를 12개만 렌더링
   const { change } = sorting();
   const { search } = searchStore();
   const searchText = search?.toLowerCase();
@@ -64,7 +64,7 @@ export default function PhocaContainerEx({
       <div className="mb-7 flex justify-center">
         <ul
           ref={scrollRef}
-          className="col-gap-8 grid h-700pxr grid-cols-2 gap-4 overflow-y-scroll md:grid-cols-3 lg:grid-cols-6"
+          className="col-gap-8 md:grid-cols-3 lg:grid-cols-6 grid h-700pxr grid-cols-2 gap-4 overflow-y-scroll"
         >
           {searchResult.map((group, index) => {
             if (index < phocaNumber) {
