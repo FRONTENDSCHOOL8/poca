@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useMeetUpStore } from '@/store/store';
 import { FaSquareArrowUpRight } from 'react-icons/fa6';
-import { useRef } from 'react';
 
 export default function MeetUpItem({ info }) {
   // 카페 이름 저장 함수
