@@ -6,10 +6,7 @@ export default function ExchangeDetail() {
   const { photoCardData } = useLoaderData();
   return (
     <>
-      <div className=" desktop:hidden">
-        <ExchangeList photoCardData={photoCardData} />
-      </div>
-      <div className="bg-blue-400 ">
+      <div>
         <ExchangeList photoCardData={photoCardData} />
       </div>
     </>

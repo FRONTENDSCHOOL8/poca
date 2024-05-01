@@ -27,9 +27,9 @@ export default function Exchange() {
   const biasData = filterData[0].expand.photoCards;
 
   return (
-    <div className="exchange-page pt-75pxr text-center desktop:bg-white">
+    <div className="exchange-page pt-75pxr text-center desktop:bg-white ">
       <SearchBar name="Exchange" placeholder="포카찾기" bgStyle="bg-gray-100" />
-      <div className="mx-auto mt-20pxr ">
+      <div className="mx-auto mt-20pxr desktop:my-20pxr ">
         <BiasContainer photoCardsData={photoCardsData} />
       </div>
       <PhocaContainerEx biasData={biasData} />

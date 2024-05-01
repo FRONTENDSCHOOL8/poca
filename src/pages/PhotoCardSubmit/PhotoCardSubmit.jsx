@@ -70,12 +70,10 @@ export default function PhotoCardSubmit() {
       console.log('Response:', response);
 
       setModalMessage('포토카드 제보가 성공적으로 등록되었습니다.');
-      setModalType('confirm');
       setIsModalOpen(true);
     } catch (error) {
       console.error('포토카드 제출 중 오류가 발생했습니다:', error);
       setModalMessage('포토카드 제출 중 오류가 발생했습니다.');
-      setModalType('error');
       setIsModalOpen(true);
     }
   };
@@ -172,7 +170,7 @@ export default function PhotoCardSubmit() {
           </div>
         </>
       )}
-      <form onSubmit={handleSubmit} style={{ textAlign: 'center' }}>
+      <form onSubmit={handleSubmit} className="text-center">
         {isSubmitEnabled && (
           <button
             type="submit"
@@ -182,7 +180,6 @@ export default function PhotoCardSubmit() {
           </button>
         )}
       </form>
-
       {/* 데스크톱 화면  */}
       <div className="hidden desktop:flex">
         <div className="w-500pxr">
@@ -286,8 +283,8 @@ export default function PhotoCardSubmit() {
           redirectToInformUs();
         }}
         showCancelButton={false}
-        title="✔️"
         useNotification={true}
+        title="✔️"
       />
     </div>
   );

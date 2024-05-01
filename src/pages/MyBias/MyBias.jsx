@@ -90,19 +90,10 @@ export default function PickMyBias() {
       </div>
       {isModalOpen && (
         <ConfirmationModal
-          // modalStyles="bg-black rounded-lg" 
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onConfirm={handleConfirm}
           message={`'${selectedGroupName}'(을)를 최애 그룹으로 선택하시겠습니까?`}
-          cancelButtonText="취소"
-          confirmButtonText="확인"
-          useNotification={false}
-          buttonStyles={{
-            cancel: 'rounded bg-gray-200 px-4 py-2 hover:bg-gray-300',
-            confirm:
-              'rounded bg-primary px-4 py-2 text-white hover:bg-indigo-700',
-          }}
         />
       )}
     </div>

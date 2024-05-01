@@ -112,7 +112,7 @@ export default function ConfirmationModal({
 
       {notification && (
         <div className="fixed inset-0 flex items-center justify-center">
-          <div className="rounded bg-gray-900 bg-opacity-75 px-4 py-2 text-white">
+          <div className="rounded bg-gray-800 bg-opacity-75 px-4 py-2 text-white">
             {notification}
           </div>
         </div>

@@ -107,6 +107,8 @@ export default function LoginInfo() {
               message="정말로 로그아웃하시겠습니까?"
               cancelButtonText="아니오"
               confirmButtonText="예"
+              useNotification={true}
+              confirmNotificationMessage="로그아웃되었습니다."
             />
             <ConfirmationModal
               isOpen={isDeleteModalOpen}
@@ -115,6 +117,8 @@ export default function LoginInfo() {
               message="정말로 계정을 삭제하시겠습니까? 🥲"
               cancelButtonText="아니오"
               confirmButtonText="예"
+              useNotification={true}
+              confirmNotificationMessage="계정이 삭제되었습니다."
             />
           </div>
         </div>

@@ -32,7 +32,7 @@ export default function Dropdown({
     <select
       id="sortOptions"
       name="sortOptions"
-      className="h-30px w-100px flex items-center justify-evenly rounded border border-zinc-500 bg-white bg-opacity-40"
+      className="h-30px w-100px mb-3 flex items-center justify-evenly rounded border border-zinc-500 bg-white bg-opacity-40 p-1"
       value={selectedOption}
       onChange={handleChange}
     >
