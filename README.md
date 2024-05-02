@@ -8,24 +8,30 @@
 
 ## 📚 목차
 - [👀 프로젝트 소개](#프로젝트-소개)
+- [👨‍👩‍👧‍👦프로젝트 구성원](#프로젝트-구성원)
 - [🛠 기술 스택](#기술-스택)
-- [유저 플로우](#유저-플로우)
-- [프로젝트 구성원](#프로젝트-구성원)
+- [🔀 flow](#flow)
 - [디렉토리 구조](#디렉토리-구조)
 - [구현 기능 & 화면 구성](#구현-기능--화면-구성)
 - [개인회고](#개인회고)
-
-
 
 <br />
 
 ## 👀 프로젝트 소개
 <a name="프로젝트-소개"></a>
 - 주제: SHOONG은 좋아하는 그룹의 포토카드를 모으고 관리할 수 있는 콜렉트북과 아이돌 생일 카페 정보를 제공하여 건전한 팬 문화를 지향하는 플랫폼입니다.
-- 진행 기간: 2024/02/17 - 2024/03/14 
+- 진행 기간: 2024/02/17 - 2024/03/14
 - 리팩토링: 2024/03/19 - 2024/04/30
 - notion [바로가기](https://www.notion.so/3-Hook-1982ce8ee5cb4442b9804a187fa11221?pvs=4)
 - figma [바로가기](https://www.figma.com/file/S1cdmuXvrpZECUEdaO7OJD/SHOONG?type=design&node-id=7194%3A1527&mode=design&t=EINQ54Awfbm5u9fD-1)
+
+<br />
+
+## 👨‍👩‍👧‍👦프로젝트 구성원
+|  [김경민](https://github.com/highballplz) | [김충만](https://github.com/fullkeem)   | [송현규](https://github.com/song0331) |  [이슬기나](https://github.com/roben31380)  | [이현서](https://github.com/pistapixie) |
+|----------|--------------------|-------------------|------------|------------|
+|<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/71eeacde-4474-4f26-9a70-2b7009154f3a" alt="" width="150px" height="150px">|<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/c0a686a6-2eac-44c3-82b1-16674ee18d14" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/9096245a-7643-45f3-af16-45bad5fd0cb1" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fb809caf-8007-414a-abb3-9feffd04f312" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/6908d5e1-ad19-47ca-84ba-9ad7e6be2803" alt="" width="150px" height="150px"> |
+| <div style="text-align:center">발표</div> | <div style="text-align:center">조장</div> | <div style="text-align:center">스크럼마스터</div> | <div style="text-align:center">기록</div> | <div style="text-align:center">디자인</div> |
 
 <br />
 
@@ -41,6 +47,15 @@
 | API        | ![Kakao Map](https://img.shields.io/badge/Kakao_Map-FFCD00?style=flat-square&logo=kakao&logoColor=black) ![Twilio](https://img.shields.io/badge/Twilio-F22F46?style=flat-square&logo=twilio&logoColor=white)                             |
 | 라이브러리    | ![Swiper](https://img.shields.io/badge/Swiper-6332F6?style=flat-square&logo=swiper&logoColor=white)  ![React Hot Toast](https://img.shields.io/badge/React_Hot_Toast-58A6FF?style=flat-square&logo=react-hot-toast&logoColor=white)                                                                    |
 | 협업 도구     | ![Notion](https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=white)           |
+
+<br />
+
+## 🔀 flow
+<a name="flow"></a>
+
+| User Flow | Page Flow |
+|-----------|-----------|
+| <img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/331b4860-207f-40d1-aa7d-9819129abe8e" alt="User Flow" height="300px" width="100%"> | <img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/ef2a4467-978f-4dc9-a003-0a7ab2fc9a69" alt="Page Flow" height="300px" width="100%"> |
 
 
 
