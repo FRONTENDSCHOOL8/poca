@@ -27,11 +27,12 @@
 
 <br />
 
-## 👨‍👩‍👧‍👦프로젝트 구성원
+## 👨‍👩‍👧‍👦 프로젝트 구성원
 |  [김경민](https://github.com/highballplz) | [김충만](https://github.com/fullkeem)   | [송현규](https://github.com/song0331) |  [이슬기나](https://github.com/roben31380)  | [이현서](https://github.com/pistapixie) |
 |----------|--------------------|-------------------|------------|------------|
 |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/71eeacde-4474-4f26-9a70-2b7009154f3a" alt="" width="150px" height="150px">|<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/c0a686a6-2eac-44c3-82b1-16674ee18d14" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/9096245a-7643-45f3-af16-45bad5fd0cb1" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fb809caf-8007-414a-abb3-9feffd04f312" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/6908d5e1-ad19-47ca-84ba-9ad7e6be2803" alt="" width="150px" height="150px"> |
-| <div style="text-align:center">발표</div> | <div style="text-align:center">조장</div> | <div style="text-align:center">스크럼마스터</div> | <div style="text-align:center">기록</div> | <div style="text-align:center">디자인</div> |
+| 발표 |스크럼마스터 | 조장 | 기록 | 디자인 |
+|리액트 능력 끌어올리기 | React 상태 관리 및 성능 최적화에 대한 이해 | 코드 품질을 높이기 (최적화, 리팩토링) | 클린하게 리액트다운 작업을 하기 | 컴포넌트 중심 설계에 익숙해지기 |
 
 <br />
 
