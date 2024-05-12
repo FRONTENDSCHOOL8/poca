@@ -61,25 +61,56 @@
 
 ## 화면 구성 & 구현 기능
 
-### 홈
+<details>
+  <summary>홈</summary>
+  
+</details>
 
-### 회원가입
+<details>
+  <summary>회원가입</summary>
+  여기에 '회원가입' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 로그인 
+<details>
+  <summary>로그인</summary>
+  여기에 '로그인' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 교환
+<details>
+  <summary>교환</summary>
+  여기에 '교환' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 교환 디테일
+<details>
+  <summary>교환 디테일</summary>
+  여기에 '교환 디테일' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 밋업
+<details>
+  <summary>밋업</summary>
+  여기에 '밋업' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 밋업 디테일
+<details>
+  <summary>밋업 디테일</summary>
+  여기에 '밋업 디테일' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 프로필
+<details>
+  <summary>프로필</summary>
+  여기에 '프로필' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 콜렉트북
+<details>
+  <summary>콜렉트북</summary>
+  여기에 '콜렉트북' 화면에 대한 세부 내용을 작성합니다.
+</details>
 
-### 제보하기
+<details>
+  <summary>제보하기</summary>
+  여기에 '제보하기' 화면에 대한 세부 내용을 작성합니다.
+</details>
+
 
 <br />
 
