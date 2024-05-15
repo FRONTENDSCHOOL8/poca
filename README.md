@@ -72,47 +72,78 @@
 
 <details>
   <summary>회원가입</summary>
-  여기에 '회원가입' 화면에 대한 세부 내용을 작성합니다.
+  
+  ![회원가입](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fd765ce3-0a05-4aba-9214-00723510475f)
+
 </details>
 
 <details>
   <summary>로그인</summary>
-  여기에 '로그인' 화면에 대한 세부 내용을 작성합니다.
+  
+  ![로그인 찜목록](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/9bd93378-346a-4b59-a594-9fcb0fc883d4)
+  
 </details>
 
 <details>
   <summary>교환</summary>
-  여기에 '교환' 화면에 대한 세부 내용을 작성합니다.
+  
+![교환](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/5452590e-de11-4972-8fd5-b9c42b0b8131)
+
+
 </details>
 
 <details>
   <summary>교환 디테일</summary>
-  여기에 '교환 디테일' 화면에 대한 세부 내용을 작성합니다.
+
+![교환 디테일](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/db89ab35-7b8c-4c0f-a162-2489d8ed0b22)
+
+  
 </details>
 
 <details>
   <summary>밋업</summary>
-  여기에 '밋업' 화면에 대한 세부 내용을 작성합니다.
+
+![밋업](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fea75cf2-9234-4690-8772-2539d45171fb)
+
+  
 </details>
 
 <details>
   <summary>밋업 디테일</summary>
-  여기에 '밋업 디테일' 화면에 대한 세부 내용을 작성합니다.
+
+![밋업 디테일](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/7810c68b-3029-4809-8841-253c63408b59)
+
+  
 </details>
 
 <details>
   <summary>프로필</summary>
-  여기에 '프로필' 화면에 대한 세부 내용을 작성합니다.
+
+![프로필](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/a8936bd6-cbac-4b42-990d-b7bb5e543dd1)
+
+![최애 그룹](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/0cc552e4-3eb5-4043-8c1c-beae047b6e6c)
+
+
+  
 </details>
 
 <details>
   <summary>콜렉트북</summary>
-  여기에 '콜렉트북' 화면에 대한 세부 내용을 작성합니다.
+
+  ![컬랙트북 생성](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/4dfe34cc-d463-4212-a231-6d48e3edb83e)
+
+![포카 드볼](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/cd51b78d-d0e6-433a-8947-0564efb9e1d2)
+
+  
 </details>
 
 <details>
   <summary>제보하기</summary>
-  여기에 '제보하기' 화면에 대한 세부 내용을 작성합니다.
+
+![포토카드 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/f7074aa7-46b1-4f33-b3f1-2d67f6bdb502)
+
+![밋업 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/03af0eb4-27fb-4736-b97d-421c853dd443)
+
 </details>
 
 
