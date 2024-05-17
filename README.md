@@ -66,7 +66,7 @@
   
 ![홈](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/1ac4d860-5ccc-4bf5-a8ad-4ac8f8c406c7)
 
-- Swiper 라이브러리를 사용해 배너 구현
+- Swiper 라이브러리를 사용해 배너 구현 [이슬기나]
 - 
 </details>
 
