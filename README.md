@@ -84,7 +84,7 @@
   
 ![홈](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/1ac4d860-5ccc-4bf5-a8ad-4ac8f8c406c7)
 
-- Swiper 라이브러리를 사용해 캐러 구현 [이슬기나]
+- Swiper 라이브러리를 사용해 캐러셀 구현 [이슬기나]
 - 최신/많이 찜한 포카 필터링 구현 [이현서]
 - 포토카드 찜목록으로 이동가능한 아이콘 구현 [이현서]
 </details>
@@ -128,9 +128,10 @@
 
 ![교환 디테일](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/db89ab35-7b8c-4c0f-a162-2489d8ed0b22)
 
-- 
+- 포토카드 id로 포토카드 데이터 렌더링 [김충만]
+- 교환글 CRUD 구현 [김충만]
+- 교환글 작성 시 비속어 필터링 구현 [김충만]
 
-  
 </details>
 
 <details>
@@ -138,6 +139,9 @@
 
 ![밋업](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fea75cf2-9234-4690-8772-2539d45171fb)
 
+- Kakao map api 기반 라이브러리를 사용 [김충만]
+- 밋업 데이터 렌더링 [김충만]
+- 마커와 셍일 카페 리스트 연결 [김충만]
   
 </details>
 
@@ -146,6 +150,10 @@
 
 ![밋업 디테일](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/7810c68b-3029-4809-8841-253c63408b59)
 
+- 밋업 id로 밋업 데이터 렌더링 [송현규]
+- swiper 라이브러리를 사용해 슬라이드 구현 [이슬기나]
+- kakao map api를 이용해 정적 지도 구현 [김충만]
+- 댓글 작성 기능 구현 [이슬기나]
   
 </details>
 
@@ -156,7 +164,8 @@
 
 ![최애 그룹](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/0cc552e4-3eb5-4043-8c1c-beae047b6e6c)
 
-
+- 나의 최애 그룹 설정하기 [송현규]
+- 유저의 콜렉트북 데이터 렌더링 [송현규]
   
 </details>
 
@@ -167,6 +176,9 @@
 
 ![포카 드볼](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/cd51b78d-d0e6-433a-8947-0564efb9e1d2)
 
+- 나만의 콜렉트북 추 [송현규]
+- 콜렉트북에 해당되는 그룹의 포토카드 보유/미보유 상태 구현 [송현규]
+- rc-progress 라이브러리를 이용해 보유 중인 포토카드 수량 시각적 효과 구현 [송현규]
   
 </details>
 
@@ -176,6 +188,8 @@
 ![포토카드 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/f7074aa7-46b1-4f33-b3f1-2d67f6bdb502)
 
 ![밋업 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/03af0eb4-27fb-4736-b97d-421c853dd443)
+
+- 
 
 </details>
 
