@@ -66,12 +66,12 @@
    - 원하는 아이돌의 포토카드 찾기
    - 포토카드 교환글 등록하기
    - 좋아하는 포토카드 찜하기
-   - 서비스에 없는 포토카드 제보하기
+   - 포토카드 제보하기
 2. 밋업
    - 아이돌의 생일 카페 찾기
    - 생일 카페 정보
    - 카페 후기 작성
-   - 서비스에 없는 생일 카페 제보하기
+   - 생일 카페 제보하기
 3. 프로필
    - 자신만의 콜렉트북 생성
    - 보유하고 있는 포토카드 등록/수정
@@ -84,8 +84,9 @@
   
 ![홈](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/1ac4d860-5ccc-4bf5-a8ad-4ac8f8c406c7)
 
-- Swiper 라이브러리를 사용해 배너 구현 [이슬기나]
-- 포토카드 
+- Swiper 라이브러리를 사용해 캐러 구현 [이슬기나]
+- 최신/많이 찜한 포카 필터링 구현 [이현서]
+- 포토카드 찜목록으로 이동가능한 아이콘 구현 [이현서]
 </details>
 
 <details>
@@ -93,12 +94,20 @@
   
   ![회원가입](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fd765ce3-0a05-4aba-9214-00723510475f)
 
+  - 이메일 중복 검사 및 인증번호 전송 [김경민]
+  - 이메일/비밀번호 유효성 검사 [김경민]
+  - date-picker 라이브러리를 사용해 생년월일 구현 [김경민]
+  - 이용 약관 동의 필수/선택 기능 구현 [김경민]
+
 </details>
 
 <details>
   <summary>로그인</summary>
   
   ![로그인 찜목록](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/9bd93378-346a-4b59-a594-9fcb0fc883d4)
+
+  - 아이디/비밀번호 입력 값과 데이터베이스의 유저의 정보와 비교를 통해 로그인 성공/실패 구현 [김경민]
+  - 로그인 성공 시 유저의 token 로컬스토리지에 저장 [김경민]
   
 </details>
 
@@ -107,6 +116,10 @@
   
 ![교환](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/5452590e-de11-4972-8fd5-b9c42b0b8131)
 
+- 이름/포카명 검색 기능 구현 [이슬기나]
+- 그룹별 포토카드 tab 구현 [송현규]
+- 최신/찜 높은 순, 낮은 순 필러팅 구현 [송현규]
+- pagination 구현 [송현규]
 
 </details>
 
@@ -114,6 +127,8 @@
   <summary>교환 디테일</summary>
 
 ![교환 디테일](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/db89ab35-7b8c-4c0f-a162-2489d8ed0b22)
+
+- 
 
   
 </details>
