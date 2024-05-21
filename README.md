@@ -32,6 +32,7 @@
 |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/71eeacde-4474-4f26-9a70-2b7009154f3a" alt="" width="150px" height="150px">|<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/c0a686a6-2eac-44c3-82b1-16674ee18d14" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/9096245a-7643-45f3-af16-45bad5fd0cb1" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fb809caf-8007-414a-abb3-9feffd04f312" alt="" width="150px" height="150px"> |<img src="https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/6908d5e1-ad19-47ca-84ba-9ad7e6be2803" alt="" width="150px" height="150px"> |
 | 발표 |스크럼마스터 | 조장 | 기록 | 디자인 |
 |리액트 능력 끌어올리기 | React 상태 관리 및 성능 최적화에 대한 이해 | 코드 품질을 높이기 (최적화, 리팩토링) | 클린하게 리액트다운 작업을 하기 | 컴포넌트 중심 설계에 익숙해지기 |
+| 1. 회원가입 <br /> 2. 로그인 <br /> 3. 헤더/디테일 헤더 | 1. 교환 디테일 <br /> 2. 밋업 페이지 - 지도 <br /> 3. 네비게이션 바 | 1. 교환 페이지 - 그룹 선택 <br /> 2. 교환 페이지 - 필터링 <br /> 3. 밋업 페이지 - 밋업 리스트 <br /> 4. 프로필 페이지 - 콜렉트 북 | 1. 캐러셀 <br /> 2. 검색 <br /> 3. 밋업 디테일 - 코멘트 |  1. 홈/교환 페이지 - 포토카드 리스트 <br /> 2. 찜 목록 <br /> 3. 푸터 <br /> 4. 제보하기 |
 
 <br />
 
