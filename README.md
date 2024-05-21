@@ -63,25 +63,12 @@
 
 ### ☝️주요 서비스 소개
 
-#### 1. 교환: 금전적인 거래/교환이 아닌 유저들간의 소유한 포토카드를 교환글을 통해 교환할 수 있습니다.
-#### 2. 밋업: 아이돌들의 생일이 맞춰 진횅하는 "생일 카페"들의 정보를 제공하고, 후기를 작성할 수 있습니다.
-#### 3. 콜렉트북: 소유중인 포토카드들을 콜렉트북에 등록할 수 있습니다.
+#### 1. 교환: 금전적인 거래/교환이 아닌 유저들 간의 소유한 포토카드를 교환 글을 통해 교환할 수 있습니다.
+#### 2. 밋업: 아티스트들의 생일이 맞춰 진행하는 "생일 카페"들의 정보를 제공하고, 후기를 작성할 수 있습니다.
+#### 3. 콜렉트북: 소유 중인 포토카드들을 콜렉트북에 등록할 수 있습니다.
 #### 4. 제보하기: 서비스에 없는 포토카드/생일 카페를 제보할 수 있습니다.
 
-1. 교환
-   - 원하는 아이돌의 포토카드 찾기
-   - 포토카드 교환글 등록하기
-   - 좋아하는 포토카드 찜하기
-   - 포토카드 제보하기
-2. 밋업
-   - 아이돌의 생일 카페 찾기
-   - 생일 카페 정보
-   - 카페 후기 작성
-   - 생일 카페 제보하기
-3. 프로필
-   - 자신만의 콜렉트북 생성
-   - 보유하고 있는 포토카드 등록/수정
-   - 최애 그룹 설정
+<br />
 
 ### 페이지별 시연 및 구현 사항
 
@@ -93,7 +80,7 @@
 ![홈](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/1ac4d860-5ccc-4bf5-a8ad-4ac8f8c406c7)
 
 - 업데이트된 포토카드/생일 카페를 캐러셀을 통해 보여줍니다.
-- 최신/ 찜 많은 순으로 포토카드를 확인 할 수 있습니다.
+- 최신/ 찜 많은 순으로 포토카드를 확인할 수 있습니다.
 - 좋아하는 포토카드를 찜할 수 있습니다.
 - 오른쪽 하단의 아이콘을 눌러 찜 목록으로 이동할 수 있습니다.
 
@@ -113,83 +100,79 @@
 
 <details>
   <summary>교환</summary>
+
+<br />
   
 ![교환](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/5452590e-de11-4972-8fd5-b9c42b0b8131)
 
-- 이름/포카명 검색 기능 구현 [이슬기나]
-- 그룹별 포토카드 tab 구현 [송현규]
-- 최신/찜 높은 순, 낮은 순 필러팅 구현 [송현규]
-- pagination 구현 [송현규]
+- 검색을 통해 원하는 포토카드를 찾을 수 있습니다.
+- 그룹별로 포토카드를 필터링해서 볼 수 있습니다.
+- 최신/ 찜 높은, 낮은 순으로 포토카드를 정렬할 수 있습니다.
+- 좋아하는 포토카드를 찜할 수 있습니다.
 
 </details>
 
 <details>
   <summary>교환 디테일</summary>
 
+  <br />
+
 ![교환 디테일](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/db89ab35-7b8c-4c0f-a162-2489d8ed0b22)
 
-- 포토카드 id로 포토카드 데이터 렌더링 [김충만]
-- 교환글 CRUD 구현 [김충만]
-- 교환글 작성 시 비속어 필터링 구현 [김충만]
+- 교환하고 싶은 포토카드에 교환글을 작성할 수 있습니다.
+- 내가 작성한 글의 내용을 수정/삭제할 수 있습니다.
 
 </details>
 
 <details>
   <summary>밋업</summary>
 
+  <br />
+
 ![밋업](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/fea75cf2-9234-4690-8772-2539d45171fb)
 
-- Kakao map api 기반 라이브러리를 사용 [김충만]
-- 밋업 데이터 렌더링 [김충만]
-- 마커와 셍일 카페 리스트 연결 [김충만]
+- 검색으로 가고 싶은 생일 카페를 찾을 수 있습니다.
+- 지도를 통해 아티스트의 생일 카페 위치/카페 이름/기간을 확인 할 수 있습니다.
   
 </details>
 
 <details>
   <summary>밋업 디테일</summary>
 
+  <br />
+
 ![밋업 디테일](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/7810c68b-3029-4809-8841-253c63408b59)
 
-- 밋업 id로 밋업 데이터 렌더링 [송현규]
-- swiper 라이브러리를 사용해 슬라이드 구현 [이슬기나]
-- kakao map api를 이용해 정적 지도 구현 [김충만]
-- 댓글 작성 기능 구현 [이슬기나]
+- 생일 카페의 자세한 정보를 확인할 수 있습니다.
+- 후기를 작성할 수 있습니다.
   
 </details>
 
 <details>
   <summary>프로필</summary>
 
-![프로필](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/a8936bd6-cbac-4b42-990d-b7bb5e543dd1)
+  <br />
 
-![최애 그룹](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/0cc552e4-3eb5-4043-8c1c-beae047b6e6c)
+  | 최애 그룹 | 콜렉트북 만들기 | 포카 드볼 | 
+  | ------------ | ---------- | --------- |
+  | ![최애 그룹](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/0cc552e4-3eb5-4043-8c1c-beae047b6e6c) | ![컬랙트북 생성](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/4dfe34cc-d463-4212-a231-6d48e3edb83e) | ![포카 드볼](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/cd51b78d-d0e6-433a-8947-0564efb9e1d2) |
+  | - 나의 최애 그룹을 설정할 수 있습니다. | - 나만의 포토카드 콜렉트 북을 만들 수 있습니다. | - 서비스에 등록되어 있는 포토카드들 중 소유 중인 포토카드를 추가/수정할 수 있습니다. |
 
-- 나의 최애 그룹 설정하기 [송현규]
-- 유저의 콜렉트북 데이터 렌더링 [송현규]
+
   
 </details>
 
-<details>
-  <summary>콜렉트북</summary>
-
-  ![컬랙트북 생성](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/4dfe34cc-d463-4212-a231-6d48e3edb83e)
-
-![포카 드볼](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/cd51b78d-d0e6-433a-8947-0564efb9e1d2)
-
-- 나만의 콜렉트북 추 [송현규]
-- 콜렉트북에 해당되는 그룹의 포토카드 보유/미보유 상태 구현 [송현규]
-- rc-progress 라이브러리를 이용해 보유 중인 포토카드 수량 시각적 효과 구현 [송현규]
-  
-</details>
 
 <details>
   <summary>제보하기</summary>
 
-![포토카드 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/f7074aa7-46b1-4f33-b3f1-2d67f6bdb502)
+  <br />
 
-![밋업 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/03af0eb4-27fb-4736-b97d-421c853dd443)
-
-- 
+  | 포토카드 제보 | 밋업 제보 |
+  | ------------ | --------- |
+  | ![포토카드 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/f7074aa7-46b1-4f33-b3f1-2d67f6bdb502) | ![밋업 제보](https://github.com/FRONTENDSCHOOL8/shoong/assets/103557910/03af0eb4-27fb-4736-b97d-421c853dd443) |
+  | - 찾는 포토카드가 없을 때 제보를 할 수 있습니다. | - 서비스에 없는 생일 카페를 제보할 수 있습니다 |
+ 
 
 </details>
 
